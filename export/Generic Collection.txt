@@ -1,0 +1,43 @@
+COLLECTION DETAILS:
+Collection Title: Generic Collection
+Collection Maker: Abc
+Collection Description: John Doe
+Collection Date: 2024
+
+
+Collection Entry 1:
+Title: Beginning of john
+Type: Document
+Author: John Doe
+Description: Abc
+Location: china
+Date: 1885
+Link: abc
+
+Collection Entry 2:
+Title: WHy did john die?
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1966
+Link: abc
+
+Collection Entry 3:
+Title: Adolf Hitler FBI Record
+Type: Document
+Author: FBI
+Description: Adolf Hitler FBI PART 1
+Location: USA
+Date: 8/8/1945
+Link: https://vault.fbi.gov/@@dvpdffiles/8/0/8086869f9e84bf0cea1580d75584e36d/normal/dump_1.gif
+
+Collection Entry 4:
+Title: Adolf Hitler 1939
+Type: Document
+Author: Adolf Hitler
+Description: Abc
+Location: Germany
+Date: 1939
+Link: google.com
+

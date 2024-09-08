@@ -17,9 +17,12 @@
     <Label text="Welcome to the Local History Archive Application." wrapText="true"/>
 
     <HBox alignment="BASELINE_CENTER" spacing="10.0">
-        <Button fx:id="uploadPageButton" text="Upload Page" onAction="#onUploadPageButtonClick"/>
+        <Button fx:id="uploadPageButton" text="Upload" onAction="#onUploadPageButtonClick"/>
     </HBox>
     <HBox alignment="BASELINE_CENTER" spacing="10.0">
-        <Button fx:id="searchPageButton" text="Search Page" onAction="#onSearchPageButtonClick"/>
+        <Button fx:id="searchPageButton" text="Search" onAction="#onSearchPageButtonClick"/>
+    </HBox>
+    <HBox alignment="BASELINE_CENTER" spacing="10.0">
+        <Button fx:id="collectionsPageButton" text="Your Collections" onAction="#onCollectionsPageButtonClick"/>
     </HBox>
 </VBox>

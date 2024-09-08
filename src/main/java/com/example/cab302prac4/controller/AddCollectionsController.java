@@ -1,24 +1,28 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
-import com.example.cab302prac4.model.Contact;
-import com.example.cab302prac4.model.IContactDAO;
+import com.example.cab302prac4.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import com.example.cab302prac4.model.SqliteContactDAO;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainController {
+public class AddCollectionsController {
     @FXML
     private ListView<Contact> contactsListView;
     private IContactDAO contactDAO;
+    private ICollectionItemDAO collectionItemDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -32,13 +36,18 @@ public class MainController {
     @FXML
     private TextField dateTextField;
     @FXML
-    private TextField linkTextField;
+    private Hyperlink linkTextField;
     @FXML
     private VBox contactContainer;
     @FXML
     private Button returnButton;
-    public MainController() {
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private Button searchButton;
+    public AddCollectionsController() {
         contactDAO = new SqliteContactDAO();
+        collectionItemDAO = new SqliteCollectionItemDAO();
     }
 
     /**
@@ -100,9 +109,24 @@ public class MainController {
     private void syncContacts() {
         contactsListView.getItems().clear();
         List<Contact> contacts = contactDAO.getAllContacts();
-        boolean hasContact = !contacts.isEmpty();
+        List<Contact> contactscollection = collectionItemDAO.getContactsCollectionID(HelloApplication.currentcollectionid);
+        List<Integer> contactscollectionsids = new ArrayList<Integer>();
+        List<Contact> filtercontacts = new ArrayList<Contact>();
+        for (Contact contact : contactscollection)
+        {
+            contactscollectionsids.add(contact.getId());
+        }
+        for (Contact contact : contacts)
+        {
+            int id = contact.getId();
+            if (!contactscollectionsids.contains(id))
+            {
+                filtercontacts.add(contact);
+            }
+        }
+        boolean hasContact = !filtercontacts.isEmpty();
         if (hasContact) {
-            contactsListView.getItems().addAll(contacts);
+            contactsListView.getItems().addAll(filtercontacts);
         }
         // Show / hide based on whether there are contacts
         contactContainer.setVisible(hasContact);
@@ -121,69 +145,34 @@ public class MainController {
     }
 
     @FXML
-    private void onEditConfirm() {
+    private void onSearch() {
         // Get the selected contact from the list view
-        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
-        if (selectedContact != null) {
-            selectedContact.setTitle(titleTextField.getText());
-            selectedContact.setType(typeTextField.getText());
-            selectedContact.setAuthor(authorTextField.getText());
-            selectedContact.setDescription(descriptionTextField.getText());
-            selectedContact.setLocation(locationTextField.getText());
-            selectedContact.setDate(dateTextField.getText());
-            selectedContact.setLink(linkTextField.getText());
-            contactDAO.updateContact(selectedContact);
-            syncContacts();
+        String search = searchTextField.getText();
+        contactsListView.getItems().clear();
+        List<Contact> contacts = contactDAO.getAllContactsSearch(search);
+        boolean hasContact = !contacts.isEmpty();
+        if (hasContact) {
+            contactsListView.getItems().addAll(contacts);
         }
-    }
-
-    @FXML
-    private void onDelete() {
-        // Get the selected contact from the list view
-        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
-        if (selectedContact != null) {
-            contactDAO.deleteContact(selectedContact);
-            syncContacts();
-        }
-        initialize();
+        // Show / hide based on whether there are contacts
+        contactContainer.setVisible(hasContact);
     }
 
     @FXML
     private void onAdd() {
-        // Default values for a new contact
-        final String DEFAULT_title = "New Document";
-        final String DEFAULT_type = "Document";
-        final String DEFAULT_author = "John Doe";
-        final String DEFAULT_description = "Abc";
-        final String DEFAULT_location = "Abc";
-        final String DEFAULT_date = "1998";
-        final String DEFAULT_link = "abc";
-        Contact newContact = new Contact(DEFAULT_title, DEFAULT_type, DEFAULT_author, DEFAULT_description, DEFAULT_location, DEFAULT_date, DEFAULT_link, 1);
-        // Add the new contact to the database
-        contactDAO.addContact(newContact);
-        syncContacts();
-        // Select the new contact in the list view
-        // and focus the first name text field
-        selectContact(newContact);
-        titleTextField.requestFocus();
-    }
-
-    @FXML
-    private void onCancel() {
-        // Find the selected contact
         Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
-        if (selectedContact != null) {
-            // Since the contact hasn't been modified,
-            // we can just re-select it to refresh the text fields
-            selectContact(selectedContact);
-        }
+        int documentid = selectedContact.getId();
+        collectionItemDAO.addCollectionItem(HelloApplication.currentcollectionid,documentid);
+        syncContacts();
+        titleTextField.requestFocus();
+        initialize();
     }
 
     @FXML
-    protected void onReturnButtonClick() throws IOException {
-        Stage stage = (Stage) returnButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        stage.setScene(scene);
+    private void onHyperlinkCLick(){
+        String link = linkTextField.getText();
+        try {
+            Desktop.getDesktop().browse(new URL(link).toURI());
+        } catch (Exception e) {}
     }
 }

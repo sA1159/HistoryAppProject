@@ -9,9 +9,10 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     // Constants defining the window title and size
-    public static final String TITLE = "Address Book";
+    public static final String TITLE = "Local History Archive";
     public static final int WIDTH = 800;
     public static final int HEIGHT = 500;
+    public static int currentcollectionid;
 
     @Override
     public void start(Stage stage) throws IOException {

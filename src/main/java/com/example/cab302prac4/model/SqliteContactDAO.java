@@ -97,8 +97,11 @@ public class SqliteContactDAO implements IContactDAO {
     public void deleteContact(Contact contact) {
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM contacts WHERE id = ?");
+            PreparedStatement statement2 = connection.prepareStatement("DELETE FROM collectionitems WHERE documentid = ?");
             statement.setInt(1, contact.getId());
+            statement2.setInt(1, contact.getId());
             statement.executeUpdate();
+            statement2.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
