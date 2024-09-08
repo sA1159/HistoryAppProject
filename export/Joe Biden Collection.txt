@@ -1,0 +1,52 @@
+COLLECTION DETAILS:
+Collection Title: Joe Biden Collection
+Collection Maker: Abc
+Collection Description: Joe Dough
+Collection Date: 2006
+
+
+Collection Entry 1:
+Title: Joe Biden
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1998
+Link: abc
+
+Collection Entry 2:
+Title: Joe Biden 1988
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1988
+Link: abc
+
+Collection Entry 3:
+Title: Joe Biden & Donald Trump
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1996
+Link: abc
+
+Collection Entry 4:
+Title: Joe Biden USA
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 2004
+Link: abc
+
+Collection Entry 5:
+Title: Joe Biden VS Donald Trump 
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 2024
+Link: abc
+

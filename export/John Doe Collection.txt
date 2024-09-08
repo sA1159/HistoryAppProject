@@ -1,5 +1,5 @@
 COLLECTION DETAILS:
-Collection Title: Generic Collection
+Collection Title: John Doe Collection
 Collection Maker: Abc
 Collection Description: John Doe
 Collection Date: 2024
@@ -24,20 +24,20 @@ Date: 1966
 Link: abc
 
 Collection Entry 3:
-Title: Adolf Hitler FBI Record
+Title: John doe 3
 Type: Document
-Author: FBI
-Description: Adolf Hitler FBI PART 1
-Location: USA
-Date: 8/8/1945
-Link: https://vault.fbi.gov/@@dvpdffiles/8/0/8086869f9e84bf0cea1580d75584e36d/normal/dump_1.gif
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1998
+Link: abc
 
 Collection Entry 4:
-Title: Adolf Hitler 1939
+Title: John DOE 1000 
 Type: Document
-Author: Adolf Hitler
+Author: John Doe
 Description: Abc
-Location: Germany
-Date: 1939
-Link: google.com
+Location: Abc
+Date: 1998
+Link: abc
 

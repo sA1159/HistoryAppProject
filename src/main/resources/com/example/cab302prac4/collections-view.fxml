@@ -55,6 +55,9 @@
                 <Button text="View" onAction="#onView"/>
                 <Button text="Export" onAction="#onExport"/>
             </HBox>
+            <HBox spacing="10.0" alignment="CENTER">
+                <Label fx:id="exportSuccessLabel"/>
+            </HBox>
         </VBox>
     </HBox>
 </VBox>

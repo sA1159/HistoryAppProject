@@ -2,13 +2,16 @@ package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
 import com.example.cab302prac4.model.*;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -31,6 +34,8 @@ public class CollectionsController {
     private TextField dateTextField;
     @FXML
     private VBox collectionContainer;
+    @FXML
+    Label exportSuccessLabel;
     @FXML
     private Button returnButton;
     public CollectionsController() {
@@ -224,7 +229,11 @@ public class CollectionsController {
             bw.write(content); // write method is used to write the given content into the file
             bw.close(); // Closes the stream, flushing it first. Once the stream has been closed, further write() or flush() invocations will cause an IOException to be thrown. Closing a previously closed stream has no effect.
 
-            System.out.println("Done");
+            exportSuccessLabel.setTextFill(Color.color(0, 0.75, 0));
+            exportSuccessLabel.setText("Export Successful");
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(b -> exportSuccessLabel.setText(null));
+            pause.play();
 
         } catch (IOException e) { // if any exception occurs it will catch
             e.printStackTrace();
