@@ -1,0 +1,20 @@
+.button {
+    -fx-font-family : "serief";
+    -fx-padding : 10;
+    -fx-background-color : #000000;
+    -fx-text-fill: white;
+}
+
+#root {
+    -fx-base:  #a9a9a9;
+}
+
+#TopBar {
+  -fx-background-color : #A1812E;
+   -fx-padding: 19;
+}
+
+#MainBar {
+  -fx-background-color : #A1812E;
+   -fx-padding: 9;
+}

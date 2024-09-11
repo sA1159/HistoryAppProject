@@ -19,7 +19,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class CollectionsController {
+public class YourCollectionsController {
     @FXML
     private ListView<Collection> collectionsListView;
     private ICollectionDAO collectionDAO;
@@ -38,7 +38,7 @@ public class CollectionsController {
     Label exportSuccessLabel;
     @FXML
     private Button returnButton;
-    public CollectionsController() {
+    public YourCollectionsController() {
         collectionDAO = new SqliteCollectionDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
     }
@@ -120,6 +120,58 @@ public class CollectionsController {
     }
 
     @FXML
+    private void onEditConfirm() {
+        // Get the selected contact from the list view
+        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
+        if (selectedCollection != null) {
+            selectedCollection.setTitle(titleTextField.getText());
+            selectedCollection.setMaker(makerTextField.getText());
+            selectedCollection.setDescription(descriptionTextField.getText());
+            selectedCollection.setDate(dateTextField.getText());
+            collectionDAO.updateCollection(selectedCollection);
+            syncContacts();
+        }
+    }
+
+    @FXML
+    private void onDelete() {
+        // Get the selected contact from the list view
+        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
+        if (selectedCollection != null) {
+            collectionDAO.deleteCollection(selectedCollection);
+            syncContacts();
+        }
+    }
+
+    @FXML
+    private void onAdd() {
+        // Default values for a new contact
+        final String DEFAULT_title = "New Collection";
+        final String DEFAULT_maker = "John Doe";
+        final String DEFAULT_description = "Abc";
+        final String DEFAULT_date = "2024";
+        Collection newCollection = new Collection(DEFAULT_title, DEFAULT_description, DEFAULT_maker, DEFAULT_date, 1);
+        // Add the new contact to the database
+        collectionDAO.addCollection(newCollection);
+        syncContacts();
+        // Select the new contact in the list view
+        // and focus the first name text field
+        selectCollection(newCollection);
+        titleTextField.requestFocus();
+    }
+
+    @FXML
+    private void onCancel() {
+        // Find the selected contact
+        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
+        if (selectedCollection != null) {
+            // Since the contact hasn't been modified,
+            // we can just re-select it to refresh the text fields
+            selectCollection(selectedCollection);
+        }
+    }
+
+    @FXML
     protected void onReturnButtonClick() throws IOException {
         Stage stage = (Stage) returnButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-view.fxml"));
@@ -134,7 +186,7 @@ public class CollectionsController {
         Stage stage = (Stage) returnButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collectionview-view.fxml"));
         HelloApplication.currentcollectionid = selectedCollection.getId();
-        HelloApplication.collectionedit = false;
+        HelloApplication.collectionedit = true;
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);

@@ -36,7 +36,9 @@ public class CollectionsViewController {
     @FXML
     private Button returnButton;
     @FXML
-    private Button refreshButton;
+    private Button addButton;
+    @FXML
+    private Button deleteButton;
     public int currentid = HelloApplication.currentcollectionid;
     public CollectionsViewController() {
         collectionitemDAO = new SqliteCollectionItemDAO();
@@ -111,6 +113,13 @@ public class CollectionsViewController {
 
     @FXML
     public void initialize() {
+        addButton.setVisible(false);
+        deleteButton.setVisible(false);
+        if (HelloApplication.collectionedit)
+        {
+            addButton.setVisible(true);
+            deleteButton.setVisible(true);
+        }
         collectionItemListView.setCellFactory(this::renderCell);
         syncContacts();
         // Select the first contact and display its information
@@ -137,21 +146,30 @@ public class CollectionsViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collectionsadd-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         Stage stage = new Stage();
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setTitle("Add to Collection");
         stage.setScene(scene);
         stage.show();
+        stage.setOnHidden(e -> {
+            syncContacts();
+            initialize();
+        });
     }
 
     @FXML
     protected void onReturnButtonClick() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        if (HelloApplication.collectionedit)
+        {
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("yourcollections-view.fxml"));
+        }
+        else
+        {
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collections-view.fxml"));
+        }
         Stage stage = (Stage) returnButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collections-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
-    }
-
-    @FXML
-    protected void onRefreshButtonClick() throws IOException {
-        initialize();
     }
 }

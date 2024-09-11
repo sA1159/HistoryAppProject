@@ -10,19 +10,28 @@
 <?import javafx.scene.layout.HBox?>
 <VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.cab302prac4.controller.HomeController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+    <HBox id="TopBar" alignment="TOP_CENTER" spacing="10.0">
+       <Label text="Home Page"></Label>
+    </HBox>
+    <VBox>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
+        </padding>
 
-    <Label text="Welcome to the Local History Archive Application." wrapText="true"/>
-
-    <HBox alignment="BASELINE_CENTER" spacing="10.0">
+    <Label text="Welcome to the Vault Application." wrapText="true"/>
+    <VBox spacing="30.0">
+    <HBox alignment="BASELINE_CENTER">
         <Button fx:id="uploadPageButton" text="Upload" onAction="#onUploadPageButtonClick"/>
     </HBox>
-    <HBox alignment="BASELINE_CENTER" spacing="10.0">
+    <HBox alignment="BASELINE_CENTER">
         <Button fx:id="searchPageButton" text="Search" onAction="#onSearchPageButtonClick"/>
     </HBox>
-    <HBox alignment="BASELINE_CENTER" spacing="10.0">
-        <Button fx:id="collectionsPageButton" text="Your Collections" onAction="#onCollectionsPageButtonClick"/>
+    <HBox alignment="BASELINE_CENTER">
+        <Button fx:id="collectionsPageButton" text="View Collections" onAction="#onCollectionsPageButtonClick"/>
     </HBox>
+    <HBox alignment="BASELINE_CENTER">
+        <Button fx:id="yourCollectionsPageButton" text="Your Collections" onAction="#onYourCollectionsPageButtonClick"/>
+    </HBox>
+    </VBox>
+    </VBox>
 </VBox>
