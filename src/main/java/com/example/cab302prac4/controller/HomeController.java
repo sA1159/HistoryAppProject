@@ -1,6 +1,7 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ public class HomeController {
     private Button uploadPageButton;
     @FXML
     private Button searchPageButton;
+    @FXML
+    private Button accountPageButton;
 
     @FXML
     protected void onUploadPageButtonClick() throws IOException {
