@@ -141,6 +141,7 @@ public class YourCollectionsController {
             collectionDAO.deleteCollection(selectedCollection);
             syncContacts();
         }
+        initialize();
     }
 
     @FXML
