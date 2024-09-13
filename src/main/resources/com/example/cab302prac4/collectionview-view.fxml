@@ -51,7 +51,7 @@
                 <TextField fx:id="descriptionTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="locationTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <TextField fx:id="dateTextField" editable="false"  GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Hyperlink fx:id="linkHyperLink" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Hyperlink fx:id="linkHyperLink" GridPane.columnIndex="1" GridPane.rowIndex="6"  onAction="#onHyperlinkCLick"/>
             </GridPane>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button fx:id="deleteButton" text="Delete" onAction="#onDelete"/>

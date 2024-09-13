@@ -6,11 +6,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class CollectionsViewController {
@@ -171,5 +175,13 @@ public class CollectionsViewController {
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
+    }
+
+    @FXML
+    private void onHyperlinkCLick(){
+        String link = linkHyperLink.getText();
+        try {
+            Desktop.getDesktop().browse(new URL(link).toURI());
+        } catch (Exception e) {}
     }
 }
