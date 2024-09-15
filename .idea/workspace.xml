@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/forgot-password.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/forgot-password.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "LoginPage",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Stuff/Gamer-Guard",
     "project.structure.last.edited": "Libraries",
