@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cab302prac4.controller.LoginController">
+   <center>
+        <AnchorPane prefHeight="552.0" prefWidth="713.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+            <children>
+                <!-- Logo ImageView -->
+                <ImageView fx:id="logoView" fitHeight="218.0" fitWidth="179.0" layoutX="453.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../Images/THE VAULT LOGO.jpg" /> <!-- Adjust path to your image -->
+                    </image>
+                </ImageView>
+
+
+
+                <!-- Email Label and TextField -->
+                <Label layoutX="312.0" layoutY="390.0" prefHeight="40.0" prefWidth="130.0" text="Email address">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="emailField" layoutX="440.0" layoutY="390.0" prefHeight="40.0" prefWidth="200.0" promptText="Enter your email" />
+
+                <!-- Password Label and PasswordField -->
+                <Label layoutX="312.0" layoutY="447.0" prefHeight="40.0" prefWidth="130.0" text="Password">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <PasswordField fx:id="passwordField" layoutX="440.0" layoutY="447.0" prefHeight="40.0" prefWidth="200.0" promptText="Enter your password" />
+
+                <!-- Forgot Password Hyperlink -->
+                <Hyperlink fx:id="forgotPasswordLink" layoutX="440.0" layoutY="487.0" onAction="#forgotPasswordAction" text="Forgot your password?" underline="true">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Hyperlink>
+
+                <!-- Login Message Label -->
+                <Label fx:id="loginMessageLabel" layoutX="417.0" layoutY="514.0" prefHeight="30.0" prefWidth="250.0" text="" textFill="#801f27" />
+
+
+                <!-- Login Button -->
+                <Button fx:id="loginButton" layoutX="417.0" layoutY="544.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #908001;" text="Login" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Button>
+
+                <!-- Sign Up Hyperlink and Label -->
+                <Label layoutX="417.0" layoutY="593.0" prefHeight="30.0" text="Don't have an account?">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Hyperlink fx:id="signupLink" layoutX="562.0" layoutY="594.0" onAction="#signupAction" text="Sign up" underline="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Hyperlink>
+
+                <!-- Cancel Button -->
+                <Button fx:id="cancelButton" layoutX="712.0" layoutY="554.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="30.0" prefWidth="100.0" text="Cancel" />
+              <AnchorPane prefHeight="131.0" prefWidth="1080.0" style="-fx-background-color: #908001;">
+                  <children>
+                      <Label layoutX="227.0" layoutY="4.0" prefHeight="130.0" prefWidth="626.0" text="Unlock the Past, Preserve the Future." textFill="WHITE" wrapText="true">
+                          <font>
+                              <Font name="System Bold" size="36.0" />
+                          </font>
+                      </Label>
+                  </children>
+              </AnchorPane>
+            </children>
+        </AnchorPane>
+   </center>
+</BorderPane>

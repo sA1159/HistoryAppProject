@@ -129,6 +129,33 @@ public class SearchController {
     }
 
     @FXML
+    private void onEditConfirm() {
+        // Get the selected contact from the list view
+        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
+        if (selectedContact != null) {
+            selectedContact.setTitle(titleTextField.getText());
+            selectedContact.setType(typeTextField.getText());
+            selectedContact.setAuthor(authorTextField.getText());
+            selectedContact.setDescription(descriptionTextField.getText());
+            selectedContact.setLocation(locationTextField.getText());
+            selectedContact.setDate(dateTextField.getText());
+            selectedContact.setLink(linkTextField.getText());
+            contactDAO.updateContact(selectedContact);
+            syncContacts();
+        }
+    }
+
+    @FXML
+    private void onDelete() {
+        // Get the selected contact from the list view
+        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
+        if (selectedContact != null) {
+            contactDAO.deleteContact(selectedContact);
+            syncContacts();
+        }
+    }
+
+    @FXML
     private void onSearch() {
         // Get the selected contact from the list view
         String search = searchTextField.getText();
@@ -143,11 +170,41 @@ public class SearchController {
     }
 
     @FXML
+    private void onAdd() {
+        // Default values for a new contact
+        final String DEFAULT_title = "New Document";
+        final String DEFAULT_type = "Document";
+        final String DEFAULT_author = "John Doe";
+        final String DEFAULT_description = "Abc";
+        final String DEFAULT_location = "Abc";
+        final String DEFAULT_date = "1998";
+        final String DEFAULT_link = "abc";
+        Contact newContact = new Contact(DEFAULT_title, DEFAULT_type, DEFAULT_author, DEFAULT_description, DEFAULT_location, DEFAULT_date, DEFAULT_link, 1);
+        // Add the new contact to the database
+        contactDAO.addContact(newContact);
+        syncContacts();
+        // Select the new contact in the list view
+        // and focus the first name text field
+        selectContact(newContact);
+        titleTextField.requestFocus();
+    }
+
+    @FXML
+    private void onCancel() {
+        // Find the selected contact
+        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
+        if (selectedContact != null) {
+            // Since the contact hasn't been modified,
+            // we can just re-select it to refresh the text fields
+            selectContact(selectedContact);
+        }
+    }
+
+    @FXML
     protected void onReturnButtonClick() throws IOException {
         Stage stage = (Stage) returnButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
     }
 
