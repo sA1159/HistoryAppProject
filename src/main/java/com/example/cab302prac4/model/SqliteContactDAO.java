@@ -165,8 +165,19 @@ public class SqliteContactDAO implements IContactDAO {
     public List<Contact> getAllContactsSearch(String search) {
         List<Contact> contacts = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM contacts WHERE title LIKE ?");
-            statement.setString(1, '%' + search + '%');
+            // Use a PreparedStatement to prevent SQL injection
+            String query = "SELECT * FROM contacts WHERE title LIKE ? OR type LIKE ? OR author LIKE ? OR description LIKE ? OR location LIKE ? OR date LIKE ? OR link LIKE ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            // Format the search term with wildcards for partial matching
+            String filterSearch = "%" + search + "%";
+
+            // Set the search term for each field
+            for (int i = 1; i <= 7; i++) {
+                statement.setString(i, filterSearch);
+            }
+
+            // Execute the query and iterate through the result set
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -178,15 +189,15 @@ public class SqliteContactDAO implements IContactDAO {
                 String date = resultSet.getString("date");
                 String link = resultSet.getString("link");
                 int userid = resultSet.getInt("userid");
+
+                // Create a Contact object and populate it with data
                 Contact contact = new Contact(title, type, author, description, location, date, link, userid);
                 contact.setId(id);
-                contacts.add(contact);
+                contacts.add(contact);  // Add the contact to the list
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return contacts;
+        return contacts;  // Return the list of matching contacts
     }
-
-
 }
