@@ -116,9 +116,17 @@ public class LoginController {
     }
 
     @FXML
-    public void signupAction() {
+    public void signupAction() throws IOException {
         // Logic for the "Sign Up" hyperlink
-        loginMessageLabel.setText("Sign up link clicked.");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cab302prac4/createaccount-view.fxml"));
+        Scene homeScene = new Scene(loader.load(),HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        homeScene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+
+        // Get the current stage and set the new scene
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        stage.setScene(homeScene);
+        stage.setTitle("Home - The Vault");
+        stage.show();
         // You can navigate to a sign-up page here
     }
 
