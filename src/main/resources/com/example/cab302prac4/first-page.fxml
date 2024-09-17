@@ -6,5 +6,5 @@
 
 <VBox xmlns="http://javafx.com/javafx" style="-fx-background-color: #FFFFFF;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cab302prac4.controller.FirstPageController" fx:id="mainVBox" spacing="20" alignment="CENTER">
     <!-- Your Logo -->
-    <ImageView fx:id="logoView" fitHeight="763" fitWidth="632"/>
+    <ImageView fx:id="logoView" fitHeight="534" fitWidth="442"/>
 </VBox>
