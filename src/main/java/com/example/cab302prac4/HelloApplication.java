@@ -15,6 +15,7 @@ public class HelloApplication extends Application {
     public static final int HEIGHT = 500;
     public static int currentcollectionid;
     public static boolean collectionedit;
+    public static int userid;
 
     @Override
     public void start(Stage stage) throws IOException {

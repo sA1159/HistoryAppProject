@@ -200,4 +200,32 @@ public class SqliteContactDAO implements IContactDAO {
         }
         return contacts;  // Return the list of matching contacts
     }
+
+    @Override
+    public List<Contact> getAllContactsByID(int currentuserid) {
+        List<Contact> contacts = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM contacts WHERE userid = ?");
+            statement.setInt(1, currentuserid);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String type = resultSet.getString("type");
+                String author = resultSet.getString("author");
+                String description = resultSet.getString("description");
+                String location = resultSet.getString("location");
+                String date = resultSet.getString("date");
+                String link = resultSet.getString("link");
+                int userid = resultSet.getInt("userid");
+
+                Contact contact = new Contact(title, type, author, description, location, date, link, userid);
+                contact.setId(id);
+                contacts.add(contact);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return contacts;
+    }
 }

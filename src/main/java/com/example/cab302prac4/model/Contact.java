@@ -1,5 +1,7 @@
 package com.example.cab302prac4.model;
 
+import com.example.cab302prac4.HelloApplication;
+
 public class Contact {
     private int id;
     private String title;
@@ -87,11 +89,11 @@ public class Contact {
     }
 
     public int getUserid() {
-        return 1;
+        return userid;
     }
 
     public void setUserid(int id) {
-        this.userid = 1;
+        this.userid = id;
     }
 
     public String getFullName() {

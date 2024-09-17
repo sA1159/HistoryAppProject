@@ -56,11 +56,11 @@ public class Collection {
     }
 
     public int getUserid() {
-        return 1;
+        return userid;
     }
 
     public void setUserid(int id) {
-        this.userid = 1;
+        this.userid = id;
     }
 
     public String getFullName() {

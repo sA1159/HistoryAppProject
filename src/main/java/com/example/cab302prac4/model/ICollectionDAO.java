@@ -34,5 +34,5 @@ public interface ICollectionDAO {
      */
     public List<Collection> getAllCollections();
 
-    public List<Collection> getAllCollectionsSearch(String search);
+    public List<Collection> getAllCollectionsByID(int id);
 }

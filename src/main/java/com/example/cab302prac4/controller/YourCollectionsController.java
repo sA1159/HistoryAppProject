@@ -24,6 +24,7 @@ public class YourCollectionsController {
     private ListView<Collection> collectionsListView;
     private ICollectionDAO collectionDAO;
     private ICollectionItemDAO collectionItemDAO;
+    private IUserDAO userDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -41,6 +42,7 @@ public class YourCollectionsController {
     public YourCollectionsController() {
         collectionDAO = new SqliteCollectionDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
+        userDAO = new UserDAO();
     }
 
     /**
@@ -98,7 +100,7 @@ public class YourCollectionsController {
      */
     private void syncContacts() {
         collectionsListView.getItems().clear();
-        List<Collection> collections = collectionDAO.getAllCollections();
+        List<Collection> collections = collectionDAO.getAllCollectionsByID(HelloApplication.userid);
         boolean hasCollections = !collections.isEmpty();
         if (hasCollections) {
             collectionsListView.getItems().addAll(collections);
@@ -148,10 +150,11 @@ public class YourCollectionsController {
     private void onAdd() {
         // Default values for a new contact
         final String DEFAULT_title = "New Collection";
-        final String DEFAULT_maker = "John Doe";
         final String DEFAULT_description = "Abc";
         final String DEFAULT_date = "2024";
-        Collection newCollection = new Collection(DEFAULT_title, DEFAULT_description, DEFAULT_maker, DEFAULT_date, 1);
+        User currentuser = userDAO.getUser(HelloApplication.userid);
+        String currentname = currentuser.getFirstName() + ' ' + currentuser.getLastName();
+        Collection newCollection = new Collection(DEFAULT_title, DEFAULT_description, currentname, DEFAULT_date, HelloApplication.userid);
         // Add the new contact to the database
         collectionDAO.addCollection(newCollection);
         syncContacts();

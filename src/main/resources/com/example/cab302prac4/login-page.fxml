@@ -50,7 +50,7 @@
 
 
                 <!-- Login Button -->
-                <Button fx:id="loginButton" layoutX="417.0" layoutY="544.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #908001;" text="Login" textFill="WHITE">
+                <Button fx:id="loginButton" layoutX="417.0" layoutY="544.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #A1812E;" text="Login" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="18.0" />
                     </font>
@@ -70,7 +70,7 @@
 
                 <!-- Cancel Button -->
                 <Button fx:id="cancelButton" layoutX="712.0" layoutY="554.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="30.0" prefWidth="100.0" text="Cancel" />
-              <AnchorPane prefHeight="131.0" prefWidth="1080.0" style="-fx-background-color: #908001;">
+              <AnchorPane prefHeight="131.0" prefWidth="1080.0" style="-fx-background-color: #A1812E;">
                   <children>
                       <Label layoutX="227.0" layoutY="4.0" prefHeight="130.0" prefWidth="626.0" text="Unlock the Past, Preserve the Future." textFill="WHITE" wrapText="true">
                           <font>

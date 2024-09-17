@@ -99,7 +99,7 @@ public class MainController {
      */
     private void syncContacts() {
         contactsListView.getItems().clear();
-        List<Contact> contacts = contactDAO.getAllContacts();
+        List<Contact> contacts = contactDAO.getAllContactsByID(HelloApplication.userid);
         boolean hasContact = !contacts.isEmpty();
         if (hasContact) {
             contactsListView.getItems().addAll(contacts);
@@ -158,7 +158,7 @@ public class MainController {
         final String DEFAULT_location = "Abc";
         final String DEFAULT_date = "1998";
         final String DEFAULT_link = "abc";
-        Contact newContact = new Contact(DEFAULT_title, DEFAULT_type, DEFAULT_author, DEFAULT_description, DEFAULT_location, DEFAULT_date, DEFAULT_link, 1);
+        Contact newContact = new Contact(DEFAULT_title, DEFAULT_type, DEFAULT_author, DEFAULT_description, DEFAULT_location, DEFAULT_date, DEFAULT_link,HelloApplication.userid);
         // Add the new contact to the database
         contactDAO.addContact(newContact);
         syncContacts();

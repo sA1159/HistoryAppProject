@@ -69,6 +69,7 @@ public class LoginController {
 
         if (user != null && user.getPassword().equals(password)) {
             // If the credentials match, load the home page
+            HelloApplication.userid = user.getUserID();
             loadHomePage();
         } else {
             // Display an error message if the login fails

@@ -35,4 +35,6 @@ public interface IContactDAO {
     public List<Contact> getAllContacts();
 
     public List<Contact> getAllContactsSearch(String search);
+
+    public List<Contact> getAllContactsByID(int ID);
 }

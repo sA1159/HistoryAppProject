@@ -133,7 +133,27 @@ public class SqliteCollectionDAO implements ICollectionDAO{
     }
 
     @Override
-    public List<Collection> getAllCollectionsSearch(String search) {
-        return List.of();
+    public List<Collection> getAllCollectionsByID(int currentuserid) {
+        List<Collection> collections = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM collections WHERE userid = ?");
+            statement.setInt(1, currentuserid);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String maker = resultSet.getString("maker");
+                String description = resultSet.getString("description");
+                String date = resultSet.getString("date");
+                int userid = resultSet.getInt("userid");
+
+                Collection collection = new Collection(title, maker, description, date, userid);
+                collection.setId(id);
+                collections.add(collection);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return collections;
     }
 }
