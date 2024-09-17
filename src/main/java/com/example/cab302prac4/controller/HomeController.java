@@ -21,6 +21,8 @@ public class HomeController {
     private Button yourCollectionsPageButton;
     @FXML
     private Button collectionsPageButton;
+    @FXML
+    private Button logoutButton;
 
     @FXML
     protected void onUploadPageButtonClick() throws IOException {
@@ -53,6 +55,16 @@ public class HomeController {
     protected void onCollectionsPageButtonClick() throws IOException {
         Stage stage = (Stage) collectionsPageButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collections-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+        stage.setScene(scene);
+    }
+
+    @FXML
+    protected void onLogoutButtonClick() throws IOException {
+        Stage stage = (Stage) collectionsPageButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-page.fxml"));
+        HelloApplication.userid = -1;
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);

@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="merge search">
+    <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contacts.db" beforeDir="false" afterPath="$PROJECT_DIR$/contacts.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CreateAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CreateAccountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/FirstPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/FirstPageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/createaccount-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/createaccount-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/signup-page.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/signup-page.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,20 +30,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;sA1159&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sA1159"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/sA1159/CAB302-project&quot;,
-    &quot;accountId&quot;: &quot;7d930e97-46d4-46c7-b057-8439862c0eb6&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/sA1159/CAB302-project",
+    "accountId": "7d930e97-46d4-46c7-b057-8439862c0eb6"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -66,7 +76,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/createNewAccountPage&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/amara/IdeaProjects/CAB302 project/src/main/resources/com/example/cab302prac4&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -106,6 +116,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.HelloApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -118,28 +130,6 @@
       <option name="presentableId" value="Default" />
       <updated>1723787974521</updated>
     </task>
-    <task id="LOCAL-00001" summary="merge collections &amp; log in">
-      <option name="closed" value="true" />
-      <created>1726495156712</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1726495156712</updated>
-    </task>
-    <task id="LOCAL-00002" summary="merge search">
-      <option name="closed" value="true" />
-      <created>1726495193009</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1726495193009</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="merge collections &amp; log in" />
-    <MESSAGE value="merge search" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge search" />
   </component>
 </project>

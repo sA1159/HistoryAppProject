@@ -5,13 +5,32 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cab302prac4.controller.SignupController" spacing="10" alignment="CENTER">
     <children>
+        <HBox>
         <Label text="Sign Up" style="-fx-font-size: 24px;" />
+        </HBox>
+
+        <HBox>
         <TextField fx:id="firstNameField" promptText="First Name" />
+        </HBox>
+
+        <HBox>
         <TextField fx:id="lastNameField" promptText="Last Name" />
+        </HBox>
+
+        <HBox>
         <TextField fx:id="emailField" promptText="Email" />
+        </HBox>
+
+        <HBox>
         <TextField fx:id="passwordField" promptText="Password" />
+        </HBox>
+
+        <HBox>
         <Button text="Sign Up" onAction="#signupAction" />
+        </HBox>
+
     </children>
 </VBox>

@@ -1,12 +1,21 @@
 package com.example.cab302prac4.controller;
 
+import com.example.cab302prac4.HelloApplication;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -32,19 +41,16 @@ public class CreateAccountController {
     private TextField emailField;
 
     @FXML
-    private TextField mobileEntry;
+    private PasswordField passEntry;
 
     @FXML
-    private TextField genderEntry;
-
-    @FXML
-    private TextField passEntry;
-
-    @FXML
-    private TextField confirmPassEntry;
+    private PasswordField confirmPassEntry;
 
     @FXML
     private Button signUpButton;
+
+    @FXML
+    private Button returnButton;
 
     @FXML
     private Label errorLabel;
@@ -62,34 +68,7 @@ public class CreateAccountController {
             return(false);
         }
     }
-    public Boolean validatePhoneNum(String phone)
-    {
-        try {
-            int pn = Integer.parseInt(phone);
-        }
-        catch (NumberFormatException e) {
-            return(false);
-        }
-        int len = phone.length();
-        if (len == 10)
-        {
-            return(true);
-        }
-        else {
-            return(false);
-        }
-    }
 
-    public Boolean validateGender(String gender)
-    {
-        if (gender.equalsIgnoreCase("male") | gender.equalsIgnoreCase("female"))
-        {
-            return(true);
-        }
-        else {
-            return(false);
-        }
-    }
     private void insertData(String name, String lastName, String email, String password) {
         Connection connection = null;
         PreparedStatement stat = null;
@@ -130,38 +109,48 @@ public class CreateAccountController {
         }
     }
     @FXML
-    private void onHelloButtonClick() {
+    private void onSignUpButtonClick() {
         // Handle button click event
         String first_name = firstNameField.getText();
         String last_name = lastNameField.getText();
         String email = emailField.getText();
-        String mobile = mobileEntry.getText();
-        String gender = genderEntry.getText();
         String pass = passEntry.getText();
         String confirm = confirmPassEntry.getText();
 
 
-        if (first_name.equals("")||last_name.equals("")||email.equals("")||mobile.equals("")||gender.equals("")||pass.equals("")||confirm.equals(""))
+        if (first_name.equals("")||last_name.equals("")||email.equals("")||pass.equals("")||confirm.equals(""))
         {
             errorLabel.setText("ALL FIELDS ARE MANDATORY");
+            errorLabel.setTextFill(Color.color(0.75, 0, 0));
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(b -> errorLabel.setText(null));
+            pause.play();
         }
 
         else if(checkPassMatches(pass,confirm) == false)
         {
             errorLabel.setText("Passwords do not match");
-        }
-        else if(validatePhoneNum(mobile) == false)
-        {
-            errorLabel.setText("invalid phone number");
-        }
-        else if (validateGender(gender) == false) {
-
-            errorLabel.setText("invalid gender entry");
+            errorLabel.setTextFill(Color.color(0.75, 0, 0));
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(b -> errorLabel.setText(null));
+            pause.play();
         }
         else {
             insertData(first_name, last_name, email, pass);
+            errorLabel.setText("Account creation success");
+            errorLabel.setTextFill(Color.color(0, 0.75, 0));
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(b -> errorLabel.setText(null));
+            pause.play();
         }
+    }
 
-
+    @FXML
+    protected void onReturnButtonClick() throws IOException {
+        Stage stage = (Stage) returnButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-page.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+        stage.setScene(scene);
     }
 }

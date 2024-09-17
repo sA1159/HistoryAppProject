@@ -1,5 +1,6 @@
 package com.example.cab302prac4.controller;
 
+import com.example.cab302prac4.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -31,17 +32,11 @@ public class FirstPageController {
 
     private void openLoginPage() {
         try {
-            // Load the login-page.fxml
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cab302prac4/login-page.fxml"));
-            BorderPane loginPage = loader.load();  // Change VBox to BorderPane
-
-            // Get the current stage
             Stage stage = (Stage) mainVBox.getScene().getWindow();
-
-            // Set the scene with the login page
-            Scene scene = new Scene(loginPage);
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-page.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+            scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
             stage.setScene(scene);
-            stage.show();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -11,8 +11,8 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     // Constants defining the window title and size
     public static final String TITLE = "The Vault";
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 500;
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 800;
     public static int currentcollectionid;
     public static boolean collectionedit;
     public static int userid;
