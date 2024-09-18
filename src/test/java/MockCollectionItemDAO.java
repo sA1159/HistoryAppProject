@@ -12,9 +12,15 @@ public class MockCollectionItemDAO implements ICollectionItemDAO {
      */
     public final ArrayList<CollectionItem> collectiontems = new ArrayList<>();
     public int currentCollectionID;
+
     @Override
     public void addCollectionItem(int collectionid, int documentid) {
         CollectionItem collectionItem = new CollectionItem("Example Item","Book","John Doe","Example Description","USA","10/10/2024","link",collectionid);
+        collectionItem.setId(documentid);
+        collectiontems.add(collectionItem);
+    }
+
+    public void addCollectionItemMock(CollectionItem collectionItem, int documentid) {
         collectionItem.setId(documentid);
         collectiontems.add(collectionItem);
     }

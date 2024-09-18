@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="unit tests for collectionDAO added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CollectionItemDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CollectionItemDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MockCollectionItemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockCollectionItemDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,9 +64,12 @@
     "Application.HelloApplication.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.CollectionDAOTest.executor": "Run",
+    "JUnit.CollectionItemDAOTest.executor": "Run",
     "JUnit.CollectionItemTest.executor": "Run",
     "JUnit.CollectionTest.executor": "Run",
     "JUnit.ContactTest.executor": "Run",
+    "JUnit.UserDAOTest.executor": "Run",
+    "JUnit.UserTest.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -142,5 +147,17 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="unit tests for collectionDAO added" />
     <option name="LAST_COMMIT_MESSAGE" value="unit tests for collectionDAO added" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/test/java/CollectionDAOTest.java</url>
+          <line>11</line>
+          <properties field="collectionDAO" class="CollectionDAOTest" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
