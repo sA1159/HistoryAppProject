@@ -1,15 +1,13 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
-import com.example.cab302prac4.model.Contact;
-import com.example.cab302prac4.model.IContactDAO;
+import com.example.cab302prac4.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import com.example.cab302prac4.model.SqliteContactDAO;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +17,8 @@ public class MainController {
     @FXML
     private ListView<Contact> contactsListView;
     private IContactDAO contactDAO;
+
+    private TagInterface tagDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -39,7 +39,9 @@ public class MainController {
     private Button returnButton;
     public MainController() {
         contactDAO = new SqliteContactDAO();
+        tagDAO = new SqliteTagDAO();
     }
+
 
     /**
      * Programmatically selects a contact in the list view and
@@ -149,20 +151,37 @@ public class MainController {
 
     @FXML
     private void onAdd() {
-        // Default values for a new contact
-        final String DEFAULT_title = "New Document";
-        final String DEFAULT_type = "Document";
-        final String DEFAULT_author = "John Doe";
-        final String DEFAULT_description = "Abc";
-        final String DEFAULT_location = "Abc";
-        final String DEFAULT_date = "1998";
-        final String DEFAULT_link = "abc";
-        Contact newContact = new Contact(DEFAULT_title, DEFAULT_type, DEFAULT_author, DEFAULT_description, DEFAULT_location, DEFAULT_date, DEFAULT_link, 1);
+        // Retrieve user input from text fields
+        String title = titleTextField.getText();
+        String type = typeTextField.getText();
+        String author = authorTextField.getText();
+        String description = descriptionTextField.getText();
+        String location = locationTextField.getText();
+        String date = dateTextField.getText();
+        String link = linkTextField.getText();
+
+        // Create a new Contact object with user input
+        Contact newContact = new Contact(title, type, author, description, location, date, link, 1);
+
         // Add the new contact to the database
         contactDAO.addContact(newContact);
+
+        // Get the newly generated contact ID
+        int contactId = newContact.getId();
+
+        // Create a combined input string from user input fields
+        String combinedInput = title + " " + type + " " + author + " " + description + " " + location + " " + date;
+
+        // Split the combined input into individual tags
+        String[] tags = combinedInput.split("\\s+"); // Split by spaces
+        for (String tag : tags) {
+            Tag newTag = new Tag(tag, contactId); // Use the contactId as the documentId
+            tagDAO.addTag(newTag);
+        }
+
+        // Update the UI
         syncContacts();
         // Select the new contact in the list view
-        // and focus the first name text field
         selectContact(newContact);
         titleTextField.requestFocus();
     }

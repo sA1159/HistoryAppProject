@@ -1,4 +1,7 @@
-package com.example.cab302prac4.model;
+package Tests;
+
+import com.example.cab302prac4.model.Contact;
+import com.example.cab302prac4.model.IContactDAO;
 
 import java.util.ArrayList;
 import java.util.List;
