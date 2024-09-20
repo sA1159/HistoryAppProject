@@ -33,9 +33,7 @@ public class UserDAO implements IUserDAO {
         firstName TEXT NOT NULL,
         lastName TEXT NOT NULL,
         email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL,
-        occupation TEXT NOT NULL,
-        phoneNumber INTEGER
+        password TEXT NOT NULL
     );
 """;
         try (Statement stmt = connection.createStatement()) {
@@ -47,14 +45,12 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void addUser(User user) {
-        String sql = "INSERT INTO users (firstName, lastName, email, password, occupation, phoneNumber) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, user.getFirstName());
             pstmt.setString(2, user.getLastName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getPassword());
-            pstmt.setString(5, user.getOccupation());
-            pstmt.setString(6, user.getPhoneNumber());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,14 +59,12 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public void updateUser(User user) {
-        String sql = "UPDATE users SET firstName = ?, lastName = ?, email = ?, password = ?, occupation = ?, phoneNumber = ? WHERE userID = ?";
+        String sql = "UPDATE users SET firstName = ?, lastName = ?, email = ?, password = ? WHERE userID = ?";
         try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, user.getFirstName());
             pstmt.setString(2, user.getLastName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getPassword());
-            pstmt.setString(5, user.getOccupation());
-            pstmt.setString(6, user.getPhoneNumber());
             pstmt.setInt(7, user.getUserID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -101,9 +95,7 @@ public class UserDAO implements IUserDAO {
                         resultSet.getString("firstName"),
                         resultSet.getString("lastName"),
                         resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("occupation"),
-                        resultSet.getString("phoneNumber")
+                        resultSet.getString("password")
                 );
                 user.setUserID(resultSet.getInt("userID"));
                 return user;
@@ -126,9 +118,7 @@ public class UserDAO implements IUserDAO {
                         resultSet.getString("firstName"),
                         resultSet.getString("lastName"),
                         resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("occupation"),
-                        resultSet.getString("phoneNumber")
+                        resultSet.getString("password")
                 );
                 user.setUserID(resultSet.getInt("userID"));
                 return user;
@@ -151,9 +141,7 @@ public class UserDAO implements IUserDAO {
                         resultSet.getString("firstName"),
                         resultSet.getString("lastName"),
                         resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("occupation"),
-                        resultSet.getString("phoneNumber")
+                        resultSet.getString("password")
                 );
                 user.setUserID(resultSet.getInt("userID"));
                 users.add(user);

@@ -6,16 +6,12 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private String occupation;
-    private String phoneNumber;
 
-    public User(String firstName, String lastName, String email, String password, String occupation, String phoneNumber) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.occupation = occupation;
-        this.phoneNumber = phoneNumber;
     }
 
     // Getters and setters
@@ -33,11 +29,4 @@ public class User {
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-
-    public String getOccupation() { return occupation; }
-    public void setOccupation(String occupation) { this.occupation = occupation; }
-
-    // Added getter and setter for phoneNumber
-    public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 }

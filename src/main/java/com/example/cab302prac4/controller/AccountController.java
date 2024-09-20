@@ -1,9 +1,11 @@
 package com.example.cab302prac4.controller;
 
+import com.example.cab302prac4.HelloApplication;
 import com.example.cab302prac4.model.UserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.Scene;
@@ -32,14 +34,11 @@ public class AccountController {
     private TextField lastNameField;
     @FXML
     private TextField emailField;
-    @FXML
-    private TextField occupationField;
-    @FXML
-    private TextField phoneField;
-
     // Add a PasswordField for updating the password
     @FXML
     private TextField passwordField;
+    @FXML
+    private Button returnButton;
 
     // Constructor to initialize the UserDAO
     public AccountController() {
@@ -58,8 +57,6 @@ public class AccountController {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String email = emailField.getText();
-        String occupation = occupationField.getText();
-        String phone = phoneField.getText();
         String password = passwordField.getText();  // Get password input
 
         // SQL query to update the user details
@@ -79,8 +76,6 @@ public class AccountController {
             // Set parameters for the query
             pstmt.setString(1, firstName);
             pstmt.setString(2, lastName);
-            pstmt.setString(3, occupation);
-            pstmt.setString(4, phone);
 
             if (password.isEmpty()) {
                 // If password is not updated, set the email in the 5th position
@@ -146,8 +141,6 @@ public class AccountController {
                 firstNameField.clear();
                 lastNameField.clear();
                 emailField.clear();
-                occupationField.clear();
-                phoneField.clear();
                 passwordField.clear(); // Also clear the password field
 
                 // Show success alert
@@ -180,13 +173,11 @@ public class AccountController {
     public void handleBackButtonClick() {
         try {
             // Load the home page FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/cab302prac4/home-view.fxml"));
-            Scene homeScene = new Scene(loader.load());
-
-            Stage stage = (Stage) firstNameField.getScene().getWindow(); // Assuming firstNameField exists in this screen
-            stage.setScene(homeScene);
-            stage.setTitle("Home - The Vault");
-            stage.show();
+            Stage stage = (Stage) returnButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+            scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+            stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }

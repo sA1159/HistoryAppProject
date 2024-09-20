@@ -33,6 +33,9 @@
         <Button fx:id="yourCollectionsPageButton" text="Your Collections" onAction="#onYourCollectionsPageButtonClick"/>
     </HBox>
         <HBox alignment="BASELINE_CENTER">
+            <Button fx:id="accountPageButton" text="Account" onAction="#onAccountButtonClick"/>
+        </HBox>
+        <HBox alignment="BASELINE_CENTER">
             <Button fx:id="logoutButton" text="Logout" onAction="#onLogoutButtonClick"/>
         </HBox>
     </VBox>
