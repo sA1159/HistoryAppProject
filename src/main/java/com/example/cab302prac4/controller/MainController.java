@@ -1,15 +1,13 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
-import com.example.cab302prac4.model.Contact;
-import com.example.cab302prac4.model.IContactDAO;
+import com.example.cab302prac4.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import com.example.cab302prac4.model.SqliteContactDAO;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +17,7 @@ public class MainController {
     @FXML
     private ListView<Contact> contactsListView;
     private IContactDAO contactDAO;
+    private IRatingDAO ratingDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -39,6 +38,7 @@ public class MainController {
     private Button returnButton;
     public MainController() {
         contactDAO = new SqliteContactDAO();
+        ratingDAO = new SqliteRatingDAO();
     }
 
     /**
@@ -143,6 +143,7 @@ public class MainController {
         Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
             contactDAO.deleteContact(selectedContact);
+            ratingDAO.removeAllDocumentRatings(selectedContact.getId());
             syncContacts();
         }
         initialize();

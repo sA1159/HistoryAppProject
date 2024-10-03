@@ -25,4 +25,10 @@ public interface IUserDAO {
 
     // Retrieves all users from the database
     List<User> getAllUsers();
+
+    // Retrieves all users that match the search string from the database
+    List<User> getAllUsersSearch(String search);
+
+    // Retrieves the total number of users
+    int getTotalUsers();
 }

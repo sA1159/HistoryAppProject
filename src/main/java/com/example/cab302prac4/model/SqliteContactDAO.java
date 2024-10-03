@@ -15,21 +15,6 @@ public class SqliteContactDAO implements IContactDAO {
         createTable();
     }
 
-    private void insertSampleData() {
-        try {
-            // Clear before inserting
-            Statement clearStatement = connection.createStatement();
-            String clearQuery = "DELETE FROM contacts";
-            clearStatement.execute(clearQuery);
-            Statement insertStatement = connection.createStatement();
-            String insertQuery = "INSERT INTO contacts (title, type, author, description, location, date, link, userid) VALUES "
-                    + "('John Doe Speech', 'Speech', 'John Doe', 'John Doe blah blah', 'USA', '10/10/1998','Johndoe@abc.com',1)";
-            insertStatement.execute(insertQuery);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private void createTable() {
         // Create table if not exists
         try {

@@ -3,7 +3,6 @@ package com.example.cab302prac4.model;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.cab302prac4.model.User;
 
 public class UserDAO implements IUserDAO {
     // Use contacts.db as the database
@@ -150,5 +149,59 @@ public class UserDAO implements IUserDAO {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public List<User> getAllUsersSearch(String search) {
+        List<User> users = new ArrayList<>();
+        try {
+            // Use a PreparedStatement to prevent SQL injection
+            String query = "SELECT * FROM users WHERE firstname LIKE ? OR lastname LIKE ? OR email LIKE ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            // Format the search term with wildcards for partial matching
+            String filterSearch = "%" + search + "%";
+
+            // Set the search term for each field
+            for (int i = 1; i <= 3; i++) {
+                statement.setString(i, filterSearch);
+            }
+
+            // Execute the query and iterate through the result set
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int userid = resultSet.getInt("userID");
+                String firstname = resultSet.getString("firstname");
+                String lastname = resultSet.getString("lastname");
+                String email = resultSet.getString("email");
+
+                // Create a Contact object and populate it with data
+                User user = new User(firstname, lastname, email,"password");
+                user.setUserID(userid);
+                users.add(user);  // Add the contact to the list
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return users;  // Return the list of matching contacts
+    }
+
+    @Override
+    public int getTotalUsers() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) AS total from users");
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int total = resultSet.getInt("total");
+                return total;
+            }
+            else
+            {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

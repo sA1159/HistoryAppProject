@@ -58,6 +58,12 @@
                 <TextField fx:id="dateTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Hyperlink fx:id="linkTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" onAction="#onHyperlinkCLick"/>
             </GridPane>
+            <HBox>
+                <Label text="Total score: 0" fx:id="scoreLabel"/>
+            </HBox>
+            <HBox spacing="10.0" alignment="CENTER">
+                <Button fx:id="rateButton" onAction="#onRate"/>
+            </HBox>
         </VBox>
     </HBox>
     </VBox>

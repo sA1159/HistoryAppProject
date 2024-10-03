@@ -1,17 +1,16 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
-import com.example.cab302prac4.model.Contact;
-import com.example.cab302prac4.model.IContactDAO;
+import com.example.cab302prac4.model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import com.example.cab302prac4.model.SqliteContactDAO;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -23,6 +22,7 @@ public class SearchController {
     @FXML
     private ListView<Contact> contactsListView;
     private IContactDAO contactDAO;
+    private IRatingDAO ratingDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -42,11 +42,19 @@ public class SearchController {
     @FXML
     private Button returnButton;
     @FXML
+    private Button rateButton;
+    @FXML
     private TextField searchTextField;
     @FXML
+    private Label scoreLabel;
+    @FXML
     private Button searchButton;
-    public SearchController() {
+
+    public SearchController()
+    {
+
         contactDAO = new SqliteContactDAO();
+        ratingDAO = new SqliteRatingDAO();
     }
 
     /**
@@ -81,6 +89,7 @@ public class SearchController {
                 // Get the selected contact from the list view
                 Contact selectedContact = clickedCell.getItem();
                 if (selectedContact != null) selectContact(selectedContact);
+                setRatingButton(selectedContact.getId());
             }
 
             /**
@@ -125,35 +134,10 @@ public class SearchController {
         Contact firstContact = contactsListView.getSelectionModel().getSelectedItem();
         if (firstContact != null) {
             selectContact(firstContact);
+            setRatingButton(firstContact.getId());
         }
     }
 
-    @FXML
-    private void onEditConfirm() {
-        // Get the selected contact from the list view
-        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
-        if (selectedContact != null) {
-            selectedContact.setTitle(titleTextField.getText());
-            selectedContact.setType(typeTextField.getText());
-            selectedContact.setAuthor(authorTextField.getText());
-            selectedContact.setDescription(descriptionTextField.getText());
-            selectedContact.setLocation(locationTextField.getText());
-            selectedContact.setDate(dateTextField.getText());
-            selectedContact.setLink(linkTextField.getText());
-            contactDAO.updateContact(selectedContact);
-            syncContacts();
-        }
-    }
-
-    @FXML
-    private void onDelete() {
-        // Get the selected contact from the list view
-        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
-        if (selectedContact != null) {
-            contactDAO.deleteContact(selectedContact);
-            syncContacts();
-        }
-    }
 
     @FXML
     private void onSearch() {
@@ -167,37 +151,6 @@ public class SearchController {
         }
         // Show / hide based on whether there are contacts
         contactContainer.setVisible(hasContact);
-    }
-
-    @FXML
-    private void onAdd() {
-        // Default values for a new contact
-        final String DEFAULT_title = "New Document";
-        final String DEFAULT_type = "Document";
-        final String DEFAULT_author = "John Doe";
-        final String DEFAULT_description = "Abc";
-        final String DEFAULT_location = "Abc";
-        final String DEFAULT_date = "1998";
-        final String DEFAULT_link = "abc";
-        Contact newContact = new Contact(DEFAULT_title, DEFAULT_type, DEFAULT_author, DEFAULT_description, DEFAULT_location, DEFAULT_date, DEFAULT_link, 1);
-        // Add the new contact to the database
-        contactDAO.addContact(newContact);
-        syncContacts();
-        // Select the new contact in the list view
-        // and focus the first name text field
-        selectContact(newContact);
-        titleTextField.requestFocus();
-    }
-
-    @FXML
-    private void onCancel() {
-        // Find the selected contact
-        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
-        if (selectedContact != null) {
-            // Since the contact hasn't been modified,
-            // we can just re-select it to refresh the text fields
-            selectContact(selectedContact);
-        }
     }
 
     @FXML
@@ -215,5 +168,34 @@ public class SearchController {
         try {
             Desktop.getDesktop().browse(new URL(link).toURI());
         } catch (Exception e) {}
+    }
+
+    @FXML
+    protected void onRate() throws IOException {
+        Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
+        if (ratingDAO.checkIfRated(HelloApplication.userid,selectedContact.getId()))
+        {
+            ratingDAO.removeRating(HelloApplication.userid,selectedContact.getId());
+        }
+        else
+        {
+            ratingDAO.addRating(HelloApplication.userid,selectedContact.getId());
+        }
+        setRatingButton(selectedContact.getId());
+    }
+
+    private void setRatingButton(int documentid)
+    {
+        if (ratingDAO.checkIfRated(HelloApplication.userid,documentid))
+        {
+            rateButton.setText("Remove Rating");
+        }
+        else
+        {
+            rateButton.setText("Rate");
+        }
+        String labeltext = "Total Ratings: ";
+        labeltext += String.valueOf(ratingDAO.getRatingScoreForDocument(documentid));
+        scoreLabel.setText(labeltext);
     }
 }
