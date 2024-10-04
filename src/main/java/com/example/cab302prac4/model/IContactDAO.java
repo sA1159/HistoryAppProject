@@ -36,5 +36,7 @@ public interface IContactDAO {
 
     public List<Contact> getAllContactsSearch(String search);
 
+    public List<Contact> getAllContactsSearchUserID(String search, int userid);
+
     public List<Contact> getAllContactsByID(int ID);
 }

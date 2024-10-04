@@ -21,16 +21,10 @@
     <Label text="Welcome to the Vault Application." wrapText="true"/>
     <VBox spacing="30.0">
     <HBox alignment="BASELINE_CENTER">
-        <Button fx:id="uploadPageButton" text="Upload" onAction="#onUploadPageButtonClick"/>
-    </HBox>
-    <HBox alignment="BASELINE_CENTER">
-        <Button fx:id="searchPageButton" text="Search" onAction="#onSearchPageButtonClick"/>
+        <Button fx:id="uploadPageButton" text="View Documents" onAction="#onUploadPageButtonClick"/>
     </HBox>
     <HBox alignment="BASELINE_CENTER">
         <Button fx:id="collectionsPageButton" text="View Collections" onAction="#onCollectionsPageButtonClick"/>
-    </HBox>
-    <HBox alignment="BASELINE_CENTER">
-        <Button fx:id="yourCollectionsPageButton" text="Your Collections" onAction="#onYourCollectionsPageButtonClick"/>
     </HBox>
         <HBox alignment="BASELINE_CENTER">
             <Button fx:id="accountPageButton" text="Account" onAction="#onAccountButtonClick"/>

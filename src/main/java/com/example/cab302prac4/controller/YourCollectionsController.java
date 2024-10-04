@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -39,6 +41,9 @@ public class YourCollectionsController {
     Label exportSuccessLabel;
     @FXML
     private Button returnButton;
+    @FXML
+    private ImageView logoView;
+
     public YourCollectionsController() {
         collectionDAO = new SqliteCollectionDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
@@ -111,6 +116,9 @@ public class YourCollectionsController {
 
     @FXML
     public void initialize() {
+        // Load the logo image dynamically, if needed
+        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
+        logoView.setImage(logo);
         collectionsListView.setCellFactory(this::renderCell);
         syncContacts();
         // Select the first contact and display its information
@@ -245,5 +253,14 @@ public class YourCollectionsController {
         } catch (IOException e) { // if any exception occurs it will catch
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void Switch() throws IOException {
+        Stage stage = (Stage) returnButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collections-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+        stage.setScene(scene);
     }
 }

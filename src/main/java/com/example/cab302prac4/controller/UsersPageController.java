@@ -9,6 +9,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -38,6 +40,8 @@ public class UsersPageController {
     private Label totalUsers;
     @FXML
     private Button profileButton;
+    @FXML
+    private ImageView logoView;
 
     public UsersPageController()
     {
@@ -110,6 +114,9 @@ public class UsersPageController {
 
     @FXML
     public void initialize() {
+        // Load the logo image dynamically, if needed
+        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
+        logoView.setImage(logo);
         usersListView.setCellFactory(this::renderCell);
         syncUSers();
         String totalusers = String.valueOf(userDAO.getTotalUsers());

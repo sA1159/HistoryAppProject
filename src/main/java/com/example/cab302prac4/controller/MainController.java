@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,6 +38,11 @@ public class MainController {
     private VBox contactContainer;
     @FXML
     private Button returnButton;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private ImageView logoView;
+
     public MainController() {
         contactDAO = new SqliteContactDAO();
         ratingDAO = new SqliteRatingDAO();
@@ -110,6 +117,9 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        // Load the logo image dynamically, if needed
+        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
+        logoView.setImage(logo);
         contactsListView.setCellFactory(this::renderCell);
         syncContacts();
         // Select the first contact and display its information
@@ -184,6 +194,29 @@ public class MainController {
     protected void onReturnButtonClick() throws IOException {
         Stage stage = (Stage) returnButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+        stage.setScene(scene);
+    }
+
+    @FXML
+    private void onSearch() {
+        // Get the selected contact from the list view
+        String search = searchTextField.getText();
+        contactsListView.getItems().clear();
+        List<Contact> contacts = contactDAO.getAllContactsSearchUserID(search,HelloApplication.userid);
+        boolean hasContact = !contacts.isEmpty();
+        if (hasContact) {
+            contactsListView.getItems().addAll(contacts);
+        }
+        // Show / hide based on whether there are contacts
+        contactContainer.setVisible(hasContact);
+    }
+
+    @FXML
+    private void Switch() throws IOException {
+        Stage stage = (Stage) returnButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);

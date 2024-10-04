@@ -10,19 +10,104 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
 <VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.cab302prac4.controller.CollectionsController"
 >
-    <HBox id="MainBar" alignment="TOP_RIGHT" spacing="10.0">
-        <Button alignment="TOP_LEFT" fx:id="returnButton" text="Return" onAction="#onReturnButtonClick"/>
+    <HBox id="MainBar" spacing="10.0">
+        <GridPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+            </columnConstraints>
+            <ImageView fx:id="logoView" fitHeight="218.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                <image>
+                    <Image url="@../../../../Images/VaultLogo2.jpg" /> <!-- Adjust path to your image -->
+                </image>
+            </ImageView>
+            <HBox alignment="CENTER" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                <Label text="Search" />
+                <TextField fx:id="searchTextField" maxWidth="Infinity" />
+                <Button fx:id="searchButton" text="Search">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Button>
+            </HBox>
+            <Button fx:id="returnButton" alignment="CENTER" contentDisplay="CENTER" onAction="#onReturnButtonClick" text="Return" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <padding>
+                <Insets left="5.0" right="5.0" />
+            </padding>
+        </GridPane>
     </HBox>
     <VBox>
         <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="10.0"/>
         </padding>
-    <HBox alignment="TOP_CENTER" spacing="5.0">
-        <Label text="VIEW COLLECTIONS:" />
-    </HBox>
+        <GridPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+            </columnConstraints>
+            <Label text="Collections" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="31.0" />
+                </font>
+            </Label>
+            <HBox alignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                <Button text="Your Collections" onAction="#Switch"/>
+                <Button text="All Collections" disable="true"/>
+            </HBox>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <padding>
+                <Insets bottom="20.0" left="5.0" right="5.0" top="-5.0" />
+            </padding>
+        </GridPane>
     <HBox alignment="TOP_LEFT" spacing="5.0">
         <Label text="Select a Collection to view or edit." />
     </HBox>
@@ -30,7 +115,7 @@
         <VBox spacing="10.0">
             <ListView fx:id="collectionsListView"  />
         </VBox>
-        <VBox spacing="10.0" prefWidth="400" fx:id="collectionContainer">
+        <VBox spacing="10.0" prefWidth="800" fx:id="collectionContainer">
             <Label text="Enter the collection details below." />
             <GridPane hgap="5.0" vgap="5.0" >
                 <columnConstraints>

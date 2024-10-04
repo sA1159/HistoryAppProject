@@ -14,8 +14,6 @@ public class HomeController {
     @FXML
     private Button uploadPageButton;
     @FXML
-    private Button searchPageButton;
-    @FXML
     private Button yourCollectionsPageButton;
     @FXML
     private Button collectionsPageButton;
@@ -36,27 +34,9 @@ public class HomeController {
     }
 
     @FXML
-    protected void onSearchPageButtonClick() throws IOException {
-        Stage stage = (Stage) searchPageButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("search-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
-        stage.setScene(scene);
-    }
-
-    @FXML
-    protected void onYourCollectionsPageButtonClick() throws IOException {
-        Stage stage = (Stage) yourCollectionsPageButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("yourcollections-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
-        stage.setScene(scene);
-    }
-
-    @FXML
     protected void onCollectionsPageButtonClick() throws IOException {
         Stage stage = (Stage) collectionsPageButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collections-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("yourcollections-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
@@ -76,7 +56,6 @@ public class HomeController {
     protected void onAccountButtonClick() throws IOException {
         Stage stage = (Stage) collectionsPageButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("account-view.fxml"));
-        HelloApplication.userid = -1;
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
@@ -86,7 +65,6 @@ public class HomeController {
     protected void onUsersPageButtonClick() throws IOException {
         Stage stage = (Stage) usersPageButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("users-view.fxml"));
-        HelloApplication.userid = -1;
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
