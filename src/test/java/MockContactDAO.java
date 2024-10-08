@@ -11,11 +11,6 @@ public class MockContactDAO implements IContactDAO {
     public static final ArrayList<Contact> contacts = new ArrayList<>();
     private static int autoIncrementedId = 0;
 
-    public MockContactDAO() {
-        // Add some initial contacts to the mock database
-        addContact(new Contact("a", "b", "c@example.com", "d", "a", "a", "a", 1));
-    }
-
     @Override
     public void addContact(Contact contact) {
         contact.setId(autoIncrementedId);
