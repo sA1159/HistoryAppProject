@@ -59,6 +59,11 @@ public class MockContactDAO implements IContactDAO {
     }
 
     @Override
+    public List<Contact> getAllContactsSearchUserID(String search, int userid) {
+        return List.of();
+    }
+
+    @Override
     public List<Contact> getAllContactsByID(int ID) {
         return List.of();
     }

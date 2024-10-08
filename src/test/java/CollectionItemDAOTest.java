@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CollectionItemDAOTest {
     private MockCollectionItemDAO collectionItemDAO;
+
     private CollectionItem[] collectionItems = {
             new CollectionItem("WW2 Tank", "Book", "John Doe", "WW2 Axis Tank", "Germany","10/10/1945","link",1),
             new CollectionItem("WW1 Tank", "Book", "John Doe", "WW1 Axis Tank", "Germany","10/10/1915","link",1),

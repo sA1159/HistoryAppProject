@@ -57,4 +57,14 @@ public class MockUserDAO implements IUserDAO {
     public List<User> getAllUsers() {
         return new ArrayList<>(users);
     }
+
+    @Override
+    public List<User> getAllUsersSearch(String search) {
+        return List.of();
+    }
+
+    @Override
+    public int getTotalUsers() {
+        return 0;
+    }
 }
