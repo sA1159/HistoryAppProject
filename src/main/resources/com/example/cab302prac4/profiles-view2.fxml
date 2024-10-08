@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_LEFT" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cab302prac4.controller.ProfileController2">
+    <HBox id="MainBar" spacing="10.0">
+        <GridPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+                <ColumnConstraints percentWidth="33" />
+            </columnConstraints>
+            <ImageView fx:id="logoView" fitHeight="218.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                <image>
+                    <Image url="@../../../../Images/VaultLogo2.jpg" /> <!-- Adjust path to your image -->
+                </image>
+            </ImageView>
+            <Button fx:id="returnButton" alignment="CENTER" contentDisplay="CENTER" onAction="#handleBackButtonClick" text="Return" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <padding>
+                <Insets left="5.0" right="5.0" />
+            </padding>
+        </GridPane>
+    </HBox>
+    <VBox>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+        </padding>
+        <GridPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50" />
+                <ColumnConstraints percentWidth="50" />
+            </columnConstraints>
+            <GridPane alignment="CENTER">
+                <HBox GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+                    <Label fx:id="profileName" text="Profile">
+                        <font>
+                            <Font name="System Bold" size="31.0" />
+                        </font>
+                        <padding>
+                            <Insets bottom="20.0" />
+                        </padding>
+                    </Label>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+                </HBox>
+                <HBox spacing="20.0" GridPane.columnIndex="0" GridPane.rowIndex="1" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="userContainer" prefWidth="400" spacing="10.0">
+                        <GridPane hgap="5.0" vgap="5.0">
+                            <columnConstraints>
+                                <ColumnConstraints minWidth="70" />
+                                <ColumnConstraints hgrow="ALWAYS" />
+                            </columnConstraints>
+                            <Label text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <Label text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                            <TextField fx:id="firstNameField" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            <Label text="Total Score:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                            <Label fx:id="totalscoreLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            <rowConstraints>
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                                <RowConstraints />
+                            </rowConstraints>
+                        </GridPane>
+                    </VBox>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+                </HBox>
+            <columnConstraints>
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+
+            <HBox spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="0" VBox.vgrow="ALWAYS">
+                <GridPane alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <rowConstraints>
+                        <RowConstraints percentHeight="80" />
+                        <RowConstraints percentHeight="20" />
+                    </rowConstraints>
+                    <HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <children>
+                            <ImageView fx:id="profileView" fitHeight="218.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../../../../Images/VaultLogo2.jpg" /> <!-- Adjust path to your image -->
+                                </image>
+                            </ImageView>
+                        </children>
+                    </HBox>
+                    <HBox alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <Label fx:id="profileImageName" text="Profile">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <GridPane.margin>
+                     <Insets top="-20.0" />
+                  </GridPane.margin>
+                    </HBox>
+               <columnConstraints>
+                  <ColumnConstraints />
+               </columnConstraints>
+                </GridPane>
+            </HBox>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+         <padding>
+            <Insets bottom="-20.0" left="-15.0" />
+         </padding>
+        </GridPane>
+        <GridPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="80" />
+                <ColumnConstraints percentWidth="20" />
+            </columnConstraints>
+            <HBox alignment="CENTER_LEFT" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                <Button text="Documents" onAction="#Switch" />
+                <Button text="Collections" disable="true" />
+                <GridPane.margin>
+                    <Insets left="10.0" top="10.0" />
+                </GridPane.margin>
+            </HBox>
+            <Label fx:id="collectionsTitle" text="All Documents" wrapText="true" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            <GridPane.margin>
+               <Insets left="10.0" right="10.0" top="10.0" />
+            </GridPane.margin>
+            </Label>
+            <rowConstraints>
+                <RowConstraints />
+            <RowConstraints />
+            </rowConstraints>
+            <padding>
+                <Insets bottom="20.0" left="5.0" right="5.0" />
+            </padding>
+        </GridPane>
+        <HBox spacing="20.0" VBox.vgrow="ALWAYS">
+        <VBox spacing="10.0">
+            <ListView fx:id="collectionsListView" />
+        </VBox>
+        <VBox fx:id="collectionContainer" prefWidth="600" spacing="10.0">
+            <Label text="Collection details:" />
+            <GridPane hgap="5.0" vgap="5.0">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="70" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                </columnConstraints>
+                <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Maker:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="titleTextField" GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="Infinity"/>
+                <TextField fx:id="makerTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="descriptionTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="dateTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+            <HBox>
+                <Label fx:id="scoreLabel" text="Total score: 0" />
+            </HBox>
+            <HBox spacing="10.0" alignment="CENTER">
+                <Button text="View" onAction="#onView"/>
+                <Button text="Export" onAction="#onExport"/>
+                <Button fx:id="rateButton" onAction="#onRate"/>
+            </HBox>
+            <HBox spacing="10.0" alignment="CENTER">
+                <Label fx:id="exportSuccessLabel"/>
+            </HBox>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+        </VBox>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </padding>
+        </HBox>
+    </VBox>
+</VBox>

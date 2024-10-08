@@ -136,7 +136,7 @@
                 <Hyperlink fx:id="linkTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" onAction="#onHyperlinkCLick"/>
             </GridPane>
             <HBox>
-                <Label text="Total score: 0" fx:id="scoreLabel"/>
+                <Label fx:id="scoreLabel" text="Total score: 0"/>
             </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button fx:id="rateButton" onAction="#onRate"/>

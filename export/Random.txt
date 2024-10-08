@@ -1,0 +1,61 @@
+COLLECTION DETAILS:
+Collection Title: Random
+Collection Maker: Abc
+Collection Description: j d
+Collection Date: 2024
+
+
+Collection Entry 1:
+Title: TANK
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1998
+Link: abc
+
+Collection Entry 2:
+Title: Adolf hitler diary
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1998
+Link: abc
+
+Collection Entry 3:
+Title: China 1887
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1887
+Link: abc
+
+Collection Entry 4:
+Title: B-51
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1998
+Link: abc
+
+Collection Entry 5:
+Title: JJ
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1998
+Link: abc
+
+Collection Entry 6:
+Title: LL
+Type: Document
+Author: John Doe
+Description: Abc
+Location: Abc
+Date: 1998
+Link: abc
+

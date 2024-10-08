@@ -1,5 +1,6 @@
 package com.example.cab302prac4;
 
+import com.example.cab302prac4.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ public class HelloApplication extends Application {
     public static int currentcollectionid;
     public static boolean collectionedit;
     public static int userid;
+    public static int profileid;
 
     @Override
     public void start(Stage stage) throws IOException {

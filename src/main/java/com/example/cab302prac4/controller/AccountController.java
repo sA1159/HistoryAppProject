@@ -1,33 +1,39 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
-import com.example.cab302prac4.model.UserDAO;
+import com.example.cab302prac4.model.*;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.Scene;
+
+import java.awt.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.Objects;
+import java.io.File;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.util.Duration;
 
-import javax.swing.*;
+import static java.awt.SystemColor.desktop;
 
 public class AccountController {
 
-    // Database URL (use the actual path to your existing database)
-    private static final String DB_URL = "jdbc:sqlite:contacts.db";
 
     // Declare the UserDAO object
+    private SqliteImageDAO imageDAO;
     private UserDAO userDAO;
-
+    private IRatingDAO ratingDAO;
+    private IRatingDAO cratingDAO;
     @FXML
     private TextField firstNameField;
     @FXML
@@ -36,84 +42,73 @@ public class AccountController {
     private TextField emailField;
     // Add a PasswordField for updating the password
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
+    @FXML
+    private PasswordField confirmPasswordField;
     @FXML
     private Button returnButton;
+    @FXML
+    private ImageView logoView;
+    @FXML
+    private ImageView profileView;
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private Button openButton;
+    @FXML
+    private Label totalscoreLabel;
+
+    final FileChooser fileChooser = new FileChooser();
 
     // Constructor to initialize the UserDAO
     public AccountController() {
         // Initialize the UserDAO to interact with the SQLite database
         userDAO = new UserDAO();
+        imageDAO = new SqliteImageDAO();
+        ratingDAO = new SqliteRatingDAO();
+        cratingDAO = new SqliteCollectionRatingDAO();
     }
+
     public void initialize() {
+        CalculateTotalScore(HelloApplication.userid);
+        errorLabel.setText(" ");
         // Load the logo image dynamically, if needed
-        Image logo = new Image("file:Images/THE VAULT LOGO.jpg");  // Adjust path as necessary
-
-
+        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
+        logoView.setImage(logo);
+        loadImage();
+        User user = userDAO.getUser(HelloApplication.userid);
+        firstNameField.setText(user.getFirstName());
+        lastNameField.setText(user.getLastName());
+        emailField.setText(user.getEmail());
+        passwordField.setText(user.getPassword());
     }
+
     // Handle Save Profile Button Click
     @FXML
     public void handleSaveProfile() {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String email = emailField.getText();
-        String password = passwordField.getText();  // Get password input
+        String password = passwordField.getText();
+        String confirmpassword = confirmPasswordField.getText();
 
-        // SQL query to update the user details
-        String sql;
-
-        if (password.isEmpty()) {
-            // If password is not being updated
-            sql = "UPDATE users SET firstName = ?, lastName = ?, occupation = ?, phoneNumber = ? WHERE email = ?";
-        } else {
-            // If password is also being updated
-            sql = "UPDATE users SET firstName = ?, lastName = ?, occupation = ?, phoneNumber = ?, password = ? WHERE email = ?";
+        if (!Objects.equals(password, confirmpassword))
+        {
+            displayError("Passwords do not match");
         }
-
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Set parameters for the query
-            pstmt.setString(1, firstName);
-            pstmt.setString(2, lastName);
-
-            if (password.isEmpty()) {
-                // If password is not updated, set the email in the 5th position
-                pstmt.setString(5, email);
-            } else {
-                // If password is updated, set the password and email
-                pstmt.setString(5, password);
-                pstmt.setString(6, email);
-            }
-
-            // Execute the update query
-            int rowsUpdated = pstmt.executeUpdate();
-
-            // Check if the update was successful
-            if (rowsUpdated > 0) {
-                // Show success alert
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Profile Updated");
-                alert.setHeaderText(null);
-                alert.setContentText("Profile information updated successfully.");
-                alert.showAndWait();
-            } else {
-                // If no rows were updated, the user does not exist
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Update Failed");
-                alert.setHeaderText(null);
-                alert.setContentText("No profile found with the provided email.");
-                alert.showAndWait();
-            }
-
-        } catch (SQLException e) {
-            // Handle SQL errors
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to update profile. Error: " + e.getMessage());
-            alert.showAndWait();
+        else if (!isValidEmailAddress(email))
+        {
+            displayError("Email is not valid");
+        }
+        else if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty())
+        {
+            displayError("All fields are mandatory");
+        }
+        else {
+            User user = new User(firstName,lastName,email,password);
+            user.setUserID(HelloApplication.userid);
+            userDAO.updateUser(user);
+            displaySuccess("Account Successfully Updated");
         }
     }
 
@@ -121,52 +116,7 @@ public class AccountController {
     // Handle Delete Profile Button Click
     @FXML
     public void handleDeleteProfile() {
-        String email = emailField.getText(); // Get the email entered by the user
 
-        // SQL Delete Query
-        String sql = "DELETE FROM users WHERE email = ?"; // Delete record where email matches
-
-        try (Connection conn = DriverManager.getConnection(DB_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // Set the email parameter for the query
-            pstmt.setString(1, email);
-
-            // Execute the delete query and get the number of rows affected
-            int rowsAffected = pstmt.executeUpdate();
-
-            // Clear all fields if deletion was successful
-            if (rowsAffected > 0) {
-                // Clear the input fields
-                firstNameField.clear();
-                lastNameField.clear();
-                emailField.clear();
-                passwordField.clear(); // Also clear the password field
-
-                // Show success alert
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Profile Deleted");
-                alert.setHeaderText(null);
-                alert.setContentText("Profile deleted successfully.");
-                alert.showAndWait();
-            } else {
-                // Show warning alert if no matching record was found
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Profile Not Found");
-                alert.setHeaderText(null);
-                alert.setContentText("No profile found with the given email.");
-                alert.showAndWait();
-            }
-
-        } catch (SQLException e) {
-            // Handle any SQL errors
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Failed to delete profile. Error: " + e.getMessage());
-            alert.showAndWait();
-        }
     }
 
     // Handle Back Button Click
@@ -182,4 +132,77 @@ public class AccountController {
             e.printStackTrace();
         }
     }
+
+    public void displayError(String text)
+    {
+        errorLabel.setText(text);
+        errorLabel.setTextFill(Color.color(0.75, 0, 0));
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(b -> errorLabel.setText(null));
+        pause.play();
+    }
+
+    public void displaySuccess(String text)
+    {
+        errorLabel.setText(text);
+        errorLabel.setTextFill(Color.color(0, 0.75, 0));
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
+        pause.setOnFinished(b -> errorLabel.setText(null));
+        pause.play();
+    }
+
+    public boolean isValidEmailAddress(String email) {
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
+    public void onOpen()
+    {
+        Stage stage = (Stage) openButton.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            updateImage(file);
+            loadImage();
+        }
+    }
+
+    public void loadImage()
+    {
+        if (imageDAO.getImage(HelloApplication.userid) == null)
+        {
+            javafx.scene.image.Image image = new Image("file:Images/profile.png");
+            profileView.setImage(image);
+        }
+        else
+        {
+            String profile_path = "file:";
+            profile_path += imageDAO.getImage(HelloApplication.userid);
+            javafx.scene.image.Image image = new Image(profile_path);
+            profileView.setImage(image);
+        }
+    }
+
+    public void updateImage(File file)
+    {
+        String path = file.getPath();
+        if (imageDAO.getImage(HelloApplication.userid) == null)
+        {
+            imageDAO.addImage(path,HelloApplication.userid);
+        }
+        else
+        {
+            imageDAO.updateImage(path,HelloApplication.userid);
+        }
+    }
+
+    private void CalculateTotalScore(int id)
+    {
+        int score = 0;
+        score += ratingDAO.getUserTotalRatingScore(id);
+        score += cratingDAO.getUserTotalRatingScore(id);
+        totalscoreLabel.setText("Total Score: " + score);
+    }
+
 }

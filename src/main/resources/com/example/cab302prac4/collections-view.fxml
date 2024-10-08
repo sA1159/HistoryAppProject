@@ -32,7 +32,7 @@
             <HBox alignment="CENTER" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                 <Label text="Search" />
                 <TextField fx:id="searchTextField" maxWidth="Infinity" />
-                <Button fx:id="searchButton" text="Search">
+                <Button fx:id="searchButton" onAction="#onSearch" text="Search">
                     <HBox.margin>
                         <Insets />
                     </HBox.margin>
@@ -92,7 +92,7 @@
                 <ColumnConstraints percentWidth="33" />
                 <ColumnConstraints percentWidth="33" />
             </columnConstraints>
-            <Label text="Collections" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+            <Label text="All Collections" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                 <font>
                     <Font name="System Bold" size="31.0" />
                 </font>
@@ -131,9 +131,13 @@
                 <TextField fx:id="descriptionTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="dateTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </GridPane>
+            <HBox>
+                <Label fx:id="scoreLabel" text="Total score: 0"/>
+            </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button text="View" onAction="#onView"/>
                 <Button text="Export" onAction="#onExport"/>
+                <Button fx:id="rateButton" onAction="#onRate"/>
             </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Label fx:id="exportSuccessLabel"/>

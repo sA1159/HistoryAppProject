@@ -1,5 +1,7 @@
 package com.example.cab302prac4.model;
 
+import com.example.cab302prac4.HelloApplication;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -155,5 +157,80 @@ public class SqliteCollectionDAO implements ICollectionDAO{
             e.printStackTrace();
         }
         return collections;
+    }
+
+    @Override
+    public List<Collection> getAllCollectionItemsSearch(String search) {
+        List<Collection> collections = new ArrayList<>();
+        try {
+            // Use a PreparedStatement to prevent SQL injection
+            String query = "SELECT * FROM collections WHERE title LIKE ? OR maker LIKE ? OR description LIKE ? OR date LIKE ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            // Format the search term with wildcards for partial matching
+            String filterSearch = "%" + search + "%";
+
+            // Set the search term for each field
+            for (int i = 1; i <= 4; i++) {
+                statement.setString(i, filterSearch);
+            }
+
+            // Execute the query and iterate through the result set
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String maker = resultSet.getString("maker");
+                String description = resultSet.getString("description");
+                String date = resultSet.getString("date");;
+                int userid = resultSet.getInt("userid");
+
+                // Create a Contact object and populate it with data
+                Collection collection = new Collection(title, maker, description, date, userid);
+                collection.setId(id);
+                collections.add(collection);  // Add the contact to the list
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return collections;  // Return the list of matching contacts
+    }
+
+    @Override
+    public List<Collection> getAllCollectionItemsSearchByID(String search,int currentuserid) {
+        List<Collection> collections = new ArrayList<>();
+        try {
+            // Use a PreparedStatement to prevent SQL injection
+            String query = "SELECT * FROM collections WHERE (title LIKE ? OR maker LIKE ? OR description LIKE ? OR date LIKE ?) AND userid = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            // Format the search term with wildcards for partial matching
+            String filterSearch = "%" + search + "%";
+
+            // Set the search term for each field
+            for (int i = 1; i <= 4; i++) {
+                statement.setString(i, filterSearch);
+            }
+            statement.setInt(5, currentuserid);
+
+            // Execute the query and iterate through the result set
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String maker = resultSet.getString("maker");
+                String description = resultSet.getString("description");
+                String date = resultSet.getString("date");;
+                int userid = resultSet.getInt("userid");
+
+                // Create a Contact object and populate it with data
+                Collection collection = new Collection(title, maker, description, date, userid);
+                collection.setId(id);
+                collections.add(collection);  // Add the contact to the list
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return collections;  // Return the list of matching contacts
     }
 }

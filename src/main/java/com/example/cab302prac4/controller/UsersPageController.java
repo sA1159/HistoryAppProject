@@ -23,7 +23,7 @@ import java.util.List;
 public class UsersPageController {
     @FXML
     private ListView<User> usersListView;
-    private IUserDAO userDAO;
+    public IUserDAO userDAO;
     @FXML
     private TextField firstNameTextFIeld;
     @FXML
@@ -45,7 +45,6 @@ public class UsersPageController {
 
     public UsersPageController()
     {
-
         userDAO = new UserDAO();
     }
 
@@ -155,8 +154,10 @@ public class UsersPageController {
 
     @FXML
     protected void onProfileButtonClick() throws IOException {
+        User selectedUser = usersListView.getSelectionModel().getSelectedItem();
+        HelloApplication.profileid = selectedUser.getUserID();
         Stage stage = (Stage) returnButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profiles-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);

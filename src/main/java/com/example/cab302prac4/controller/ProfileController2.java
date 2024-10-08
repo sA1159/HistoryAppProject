@@ -5,8 +5,20 @@ import com.example.cab302prac4.model.*;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.Scene;
+
+import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -15,18 +27,35 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
+public class ProfileController2 {
 
-public class YourCollectionsController {
+
+    // Declare the UserDAO object
+    private UserDAO userDAO;
+    private SqliteImageDAO imageDAO;
+    private IRatingDAO cratingDAO;
+    private IRatingDAO ratingDAO;
     @FXML
     private ListView<Collection> collectionsListView;
     private ICollectionDAO collectionDAO;
     private ICollectionItemDAO collectionItemDAO;
-    private IUserDAO userDAO;
+
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private Button returnButton;
+    @FXML
+    private ImageView logoView;
+    @FXML
+    private ImageView profileView;
+    @FXML
+    private Label profileName;
+    @FXML
+    private Label profileImageName;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -38,18 +67,27 @@ public class YourCollectionsController {
     @FXML
     private VBox collectionContainer;
     @FXML
-    Label exportSuccessLabel;
-    @FXML
-    private Button returnButton;
-    @FXML
-    private ImageView logoView;
+    private Label exportSuccessLabel;
     @FXML
     private TextField searchTextField;
+    @FXML
+    private Button rateButton;
+    @FXML
+    private Label scoreLabel;
+    @FXML
+    private Label collectionsTitle;
+    @FXML
+    private Label totalscoreLabel;
 
-    public YourCollectionsController() {
+    // Constructor to initialize the UserDAO
+    public ProfileController2() {
+        // Initialize the UserDAO to interact with the SQLite database
+        userDAO = new UserDAO();
+        imageDAO = new SqliteImageDAO();
         collectionDAO = new SqliteCollectionDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
-        userDAO = new UserDAO();
+        cratingDAO = new SqliteCollectionRatingDAO();
+        ratingDAO = new SqliteRatingDAO();
     }
 
     /**
@@ -63,6 +101,61 @@ public class YourCollectionsController {
         makerTextField.setText(collection.getMaker());
         descriptionTextField.setText(collection.getDescription());
         dateTextField.setText(collection.getDate());
+    }
+
+    public void initialize() {
+        // Load the logo image dynamically, if needed
+        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
+        logoView.setImage(logo);
+        loadImage();
+        User user = userDAO.getUser(HelloApplication.profileid);
+        profileImageName.setText(user.getFullName());
+        profileName.setText("Profile: " + user.getFullName());
+        collectionsTitle.setText("Collections by " + user.getFullName() + ":");
+        firstNameField.setText(user.getFirstName());
+        lastNameField.setText(user.getLastName());
+        emailField.setText(user.getEmail());
+
+        collectionsListView.setCellFactory(this::renderCell);
+        syncContacts();
+        // Select the first contact and display its information
+        collectionsListView.getSelectionModel().selectFirst();
+        Collection firstCollection = collectionsListView.getSelectionModel().getSelectedItem();
+        if (firstCollection != null) {
+            selectCollection(firstCollection);
+            setRatingButton(firstCollection.getId());
+        }
+    }
+
+    // Handle Back Button Click
+    public void handleBackButtonClick() {
+        try {
+            HelloApplication.profileid = -1;
+            // Load the home page FXML
+            Stage stage = (Stage) returnButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("users-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+            scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadImage()
+    {
+        if (imageDAO.getImage(HelloApplication.profileid) == null)
+        {
+            javafx.scene.image.Image image = new Image("file:Images/profile.png");
+            profileView.setImage(image);
+        }
+        else
+        {
+            String profile_path = "file:";
+            profile_path += imageDAO.getImage(HelloApplication.profileid);
+            javafx.scene.image.Image image = new Image(profile_path);
+            profileView.setImage(image);
+        }
     }
 
     /**
@@ -81,6 +174,7 @@ public class YourCollectionsController {
                 // Get the selected contact from the list view
                 Collection selectedCollection = clickedCell.getItem();
                 if (selectedCollection != null) selectCollection(selectedCollection);
+                setRatingButton(selectedCollection.getId());
             }
 
             /**
@@ -106,8 +200,9 @@ public class YourCollectionsController {
      * Synchronizes the contacts list view with the contacts in the database.
      */
     private void syncContacts() {
+        CalculateTotalScore(HelloApplication.profileid);
         collectionsListView.getItems().clear();
-        List<Collection> collections = collectionDAO.getAllCollectionsByID(HelloApplication.userid);
+        List<Collection> collections = collectionDAO.getAllCollectionsByID(HelloApplication.profileid);
         boolean hasCollections = !collections.isEmpty();
         if (hasCollections) {
             collectionsListView.getItems().addAll(collections);
@@ -116,97 +211,6 @@ public class YourCollectionsController {
         collectionContainer.setVisible(hasCollections);
     }
 
-    @FXML
-    public void initialize() {
-        // Load the logo image dynamically, if needed
-        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
-        logoView.setImage(logo);
-        collectionsListView.setCellFactory(this::renderCell);
-        syncContacts();
-        // Select the first contact and display its information
-        collectionsListView.getSelectionModel().selectFirst();
-        Collection firstCollection = collectionsListView.getSelectionModel().getSelectedItem();
-        if (firstCollection != null) {
-            selectCollection(firstCollection);
-        }
-    }
-
-    @FXML
-    private void onEditConfirm() {
-        // Get the selected contact from the list view
-        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
-        if (selectedCollection != null) {
-            selectedCollection.setTitle(titleTextField.getText());
-            selectedCollection.setMaker(makerTextField.getText());
-            selectedCollection.setDescription(descriptionTextField.getText());
-            selectedCollection.setDate(dateTextField.getText());
-            collectionDAO.updateCollection(selectedCollection);
-            syncContacts();
-        }
-    }
-
-    @FXML
-    private void onDelete() {
-        // Get the selected contact from the list view
-        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
-        if (selectedCollection != null) {
-            collectionDAO.deleteCollection(selectedCollection);
-            syncContacts();
-        }
-        initialize();
-    }
-
-    @FXML
-    private void onAdd() {
-        // Default values for a new contact
-        final String DEFAULT_title = "New Collection";
-        final String DEFAULT_description = "Abc";
-        final String DEFAULT_date = "2024";
-        User currentuser = userDAO.getUser(HelloApplication.userid);
-        String currentname = currentuser.getFirstName() + ' ' + currentuser.getLastName();
-        Collection newCollection = new Collection(DEFAULT_title, DEFAULT_description, currentname, DEFAULT_date, HelloApplication.userid);
-        // Add the new contact to the database
-        collectionDAO.addCollection(newCollection);
-        syncContacts();
-        // Select the new contact in the list view
-        // and focus the first name text field
-        selectCollection(newCollection);
-        titleTextField.requestFocus();
-    }
-
-    @FXML
-    private void onSearch() {
-        // Get the selected contact from the list view
-        String search = searchTextField.getText();
-        collectionsListView.getItems().clear();
-        List<Collection> collections = collectionDAO.getAllCollectionItemsSearch(search);
-        boolean hasContact = !collections.isEmpty();
-        if (hasContact) {
-            collectionsListView.getItems().addAll(collections);
-        }
-        // Show / hide based on whether there are contacts
-        collectionContainer.setVisible(hasContact);
-    }
-
-    @FXML
-    private void onCancel() {
-        // Find the selected contact
-        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
-        if (selectedCollection != null) {
-            // Since the contact hasn't been modified,
-            // we can just re-select it to refresh the text fields
-            selectCollection(selectedCollection);
-        }
-    }
-
-    @FXML
-    protected void onReturnButtonClick() throws IOException {
-        Stage stage = (Stage) returnButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("home-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
-        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
-        stage.setScene(scene);
-    }
 
     @FXML
     protected void onView() throws IOException {
@@ -214,7 +218,7 @@ public class YourCollectionsController {
         Stage stage = (Stage) returnButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collectionview-view.fxml"));
         HelloApplication.currentcollectionid = selectedCollection.getId();
-        HelloApplication.collectionedit = true;
+        HelloApplication.collectionedit = false;
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
@@ -272,11 +276,65 @@ public class YourCollectionsController {
     }
 
     @FXML
+    private void onSearch() {
+        // Get the selected contact from the list view
+        String search = searchTextField.getText();
+        collectionsListView.getItems().clear();
+        List<Collection> collections = collectionDAO.getAllCollectionItemsSearch(search);
+        boolean hasContact = !collections.isEmpty();
+        if (hasContact) {
+            collectionsListView.getItems().addAll(collections);
+        }
+        // Show / hide based on whether there are contacts
+        collectionContainer.setVisible(hasContact);
+    }
+
+    @FXML
     private void Switch() throws IOException {
         Stage stage = (Stage) returnButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collections-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profiles-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
     }
+
+    @FXML
+    protected void onRate() throws IOException {
+        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
+        if (cratingDAO.checkIfRated(HelloApplication.userid,selectedCollection.getId()))
+        {
+            cratingDAO.removeRating(HelloApplication.userid,selectedCollection.getId());
+        }
+        else
+        {
+            cratingDAO.addRating(HelloApplication.userid,selectedCollection.getId());
+        }
+        setRatingButton(selectedCollection.getId());
+        CalculateTotalScore(HelloApplication.profileid);
+    }
+
+    private void setRatingButton(int collectionid)
+    {
+        if (cratingDAO.checkIfRated(HelloApplication.userid,collectionid))
+        {
+            rateButton.setText("Remove Rating");
+        }
+        else
+        {
+            rateButton.setText("Rate");
+        }
+        String labeltext = "Total Ratings: ";
+        labeltext += String.valueOf(cratingDAO.getRatingScoreForDocument(collectionid));
+        scoreLabel.setText(labeltext);
+        CalculateTotalScore(HelloApplication.profileid);
+    }
+
+    private void CalculateTotalScore(int id)
+    {
+        int score = 0;
+        score += ratingDAO.getUserTotalRatingScore(id);
+        score += cratingDAO.getUserTotalRatingScore(id);
+        totalscoreLabel.setText(String.valueOf(score));
+    }
+
 }

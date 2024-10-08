@@ -84,6 +84,41 @@ public class SqliteCollectionItemDAO implements ICollectionItemDAO{
     }
 
     @Override
+    public List<CollectionItem> getAllCollectionItemsSearch(int currentid, String search) {
+        List<CollectionItem> collectionItems = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM collectionitems INNER JOIN contacts on collectionitems.documentid = contacts.id WHERE (title LIKE ? OR type LIKE ? OR author lIKE ? OR description LIKE ? OR date LIKE ? OR location like ? OR link like ?) AND collectionitems.collectionid = ?");
+            // Format the search term with wildcards for partial matching
+            String filterSearch = "%" + search + "%";
+
+            // Set the search term for each field
+            for (int i = 1; i <= 7; i++) {
+                statement.setString(i, filterSearch);
+            }
+            statement.setInt(8, currentid);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String type = resultSet.getString("type");
+                String author = resultSet.getString("author");
+                String description = resultSet.getString("description");
+                String location = resultSet.getString("location");
+                String date = resultSet.getString("date");
+                String link = resultSet.getString("link");
+                int userid = resultSet.getInt("userid");
+
+                CollectionItem collectionItem = new CollectionItem(title, type, author, description, location, date, link, userid);
+                collectionItem.setId(id);
+                collectionItems.add(collectionItem);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return collectionItems;
+    }
+
+    @Override
     public List<Contact> getContactsCollectionID(int collectionID) {
         List<Contact> collectionItems = new ArrayList<>();
         try {

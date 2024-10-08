@@ -22,4 +22,5 @@ public interface ICollectionItemDAO {
     public List<CollectionItem> getAllCollectionItems(int id);
 
     public List<Contact> getContactsCollectionID(int collectionid);
+    public List<CollectionItem> getAllCollectionItemsSearch(int currentid, String search);
 }

@@ -30,6 +30,7 @@ public class CollectionsController {
     private ListView<Collection> collectionsListView;
     private ICollectionDAO collectionDAO;
     private ICollectionItemDAO collectionItemDAO;
+    private IRatingDAO cratingDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -46,10 +47,17 @@ public class CollectionsController {
     private Button returnButton;
     @FXML
     private ImageView logoView;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private Button rateButton;
+    @FXML
+    private Label scoreLabel;
 
     public CollectionsController() {
         collectionDAO = new SqliteCollectionDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
+        cratingDAO = new SqliteCollectionRatingDAO();
     }
 
     /**
@@ -81,6 +89,7 @@ public class CollectionsController {
                 // Get the selected contact from the list view
                 Collection selectedCollection = clickedCell.getItem();
                 if (selectedCollection != null) selectCollection(selectedCollection);
+                setRatingButton(selectedCollection.getId());
             }
 
             /**
@@ -128,6 +137,7 @@ public class CollectionsController {
         Collection firstCollection = collectionsListView.getSelectionModel().getSelectedItem();
         if (firstCollection != null) {
             selectCollection(firstCollection);
+            setRatingButton(firstCollection.getId());
         }
     }
 
@@ -204,11 +214,54 @@ public class CollectionsController {
     }
 
     @FXML
+    private void onSearch() {
+        // Get the selected contact from the list view
+        String search = searchTextField.getText();
+        collectionsListView.getItems().clear();
+        List<Collection> collections = collectionDAO.getAllCollectionItemsSearch(search);
+        boolean hasContact = !collections.isEmpty();
+        if (hasContact) {
+            collectionsListView.getItems().addAll(collections);
+        }
+        // Show / hide based on whether there are contacts
+        collectionContainer.setVisible(hasContact);
+    }
+
+    @FXML
     private void Switch() throws IOException {
         Stage stage = (Stage) returnButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("yourcollections-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);
+    }
+
+    @FXML
+    protected void onRate() throws IOException {
+        Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
+        if (cratingDAO.checkIfRated(HelloApplication.userid,selectedCollection.getId()))
+        {
+            cratingDAO.removeRating(HelloApplication.userid,selectedCollection.getId());
+        }
+        else
+        {
+            cratingDAO.addRating(HelloApplication.userid,selectedCollection.getId());
+        }
+        setRatingButton(selectedCollection.getId());
+    }
+
+    private void setRatingButton(int collectionid)
+    {
+        if (cratingDAO.checkIfRated(HelloApplication.userid,collectionid))
+        {
+            rateButton.setText("Remove Rating");
+        }
+        else
+        {
+            rateButton.setText("Rate");
+        }
+        String labeltext = "Total Ratings: ";
+        labeltext += String.valueOf(cratingDAO.getRatingScoreForDocument(collectionid));
+        scoreLabel.setText(labeltext);
     }
 }

@@ -47,4 +47,9 @@ public class MockCollectionItemDAO implements ICollectionItemDAO {
     public List<Contact> getContactsCollectionID(int collectionid) {
         return null;
     }
+
+    @Override
+    public List<CollectionItem> getAllCollectionItemsSearch(int currentid, String search) {
+        return List.of();
+    }
 }

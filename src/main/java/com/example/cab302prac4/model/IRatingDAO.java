@@ -6,4 +6,5 @@ public interface IRatingDAO {
     public boolean checkIfRated(int userid, int documentid);
     public int getRatingScoreForDocument(int documentid);
     public void removeAllDocumentRatings(int documentid);
+    public int getUserTotalRatingScore(int userid);
 }

@@ -5,36 +5,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO implements IUserDAO {
-    // Use contacts.db as the database
-    private static final String DATABASE_URL = "jdbc:sqlite:contacts.db";
     private Connection connection;
 
     public UserDAO() {
-        connection = connect();
+        connection = SqliteConnection.getInstance();
         createTable();
     }
 
-    // Establish a connection to SQLite database
-    private Connection connect() {
-        Connection conn = null;
-        try {
-            conn = DriverManager.getConnection(DATABASE_URL);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return conn;
-    }
     // Create the 'users' table if it doesn't exist
     private void createTable() {
         String sql = """
-    CREATE TABLE IF NOT EXISTS users (
-        userID INTEGER PRIMARY KEY AUTOINCREMENT,
-        firstName TEXT NOT NULL,
-        lastName TEXT NOT NULL,
-        email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
-    );
-""";
+        CREATE TABLE IF NOT EXISTS users (
+            userID INTEGER PRIMARY KEY AUTOINCREMENT,
+            firstName TEXT NOT NULL,
+            lastName TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL
+                );
+            """;
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(sql);
         } catch (SQLException e) {
@@ -64,7 +52,7 @@ public class UserDAO implements IUserDAO {
             pstmt.setString(2, user.getLastName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getPassword());
-            pstmt.setInt(7, user.getUserID());
+            pstmt.setInt(5, user.getUserID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

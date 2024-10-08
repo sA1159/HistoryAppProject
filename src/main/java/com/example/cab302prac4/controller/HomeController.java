@@ -1,11 +1,14 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
+import com.example.cab302prac4.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,6 +26,29 @@ public class HomeController {
     private Button logoutButton;
     @FXML
     private Button accountButton;
+    @FXML
+    private ImageView logoView;
+    @FXML
+    private ImageView bigLogo;
+    @FXML
+    private Label welcomeLabel;
+    IUserDAO userDAO;
+
+    public HomeController(){
+        userDAO = new UserDAO();
+    }
+
+    @FXML
+    public void initialize() {
+        // Load the logo image dynamically, if needed
+        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");
+        Image logo2 = new Image("file:Images/THE VAULT LOGO.jpg");// Adjust path as necessary
+        logoView.setImage(logo);
+        bigLogo.setImage(logo2);
+        User currentUser = userDAO.getUser(HelloApplication.userid);
+        String message = "Welcome to the Vault Application, ";
+        welcomeLabel.setText(message + currentUser.getFullName());
+    }
 
     @FXML
     protected void onUploadPageButtonClick() throws IOException {

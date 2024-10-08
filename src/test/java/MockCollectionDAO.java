@@ -1,5 +1,6 @@
 import com.example.cab302prac4.model.Collection;
 import com.example.cab302prac4.model.ICollectionDAO;
+import com.example.cab302prac4.model.ICollectionItemDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,5 +59,15 @@ public class MockCollectionDAO implements ICollectionDAO {
             }
         }
         return collectionList;
+    }
+
+    @Override
+    public List<Collection> getAllCollectionItemsSearch(String search) {
+        return List.of();
+    }
+
+    @Override
+    public List<Collection> getAllCollectionItemsSearchByID(String search, int userid) {
+        return List.of();
     }
 }

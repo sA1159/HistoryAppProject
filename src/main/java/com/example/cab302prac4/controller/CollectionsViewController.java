@@ -7,7 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -21,6 +24,7 @@ public class CollectionsViewController {
     @FXML
     private ListView<CollectionItem> collectionItemListView;
     private ICollectionItemDAO collectionitemDAO;
+    private ICollectionDAO collectionDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -43,9 +47,21 @@ public class CollectionsViewController {
     private Button addButton;
     @FXML
     private Button deleteButton;
+    @FXML
+    private ImageView logoView;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private Button rateButton;
+    @FXML
+    private Label scoreLabel;
+    @FXML
+    private Label titletext;
+
     public int currentid = HelloApplication.currentcollectionid;
     public CollectionsViewController() {
         collectionitemDAO = new SqliteCollectionItemDAO();
+        collectionDAO = new SqliteCollectionDAO();
     }
 
     /**
@@ -117,6 +133,11 @@ public class CollectionsViewController {
 
     @FXML
     public void initialize() {
+        // Load the logo image dynamically, if needed
+        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
+        logoView.setImage(logo);
+        Collection collection = collectionDAO.getCollection(currentid);
+        titletext.setText("Items for Collection: " + collection.getTitle());
         addButton.setVisible(false);
         deleteButton.setVisible(false);
         if (HelloApplication.collectionedit)
@@ -167,6 +188,10 @@ public class CollectionsViewController {
         {
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("yourcollections-view.fxml"));
         }
+        else if (HelloApplication.profileid > 0)
+        {
+            fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("profiles-view2.fxml"));
+        }
         else
         {
             fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("collections-view.fxml"));
@@ -183,5 +208,19 @@ public class CollectionsViewController {
         try {
             Desktop.getDesktop().browse(new URL(link).toURI());
         } catch (Exception e) {}
+    }
+
+    @FXML
+    private void onSearch() {
+        // Get the selected contact from the list view
+        String search = searchTextField.getText();
+        collectionItemListView.getItems().clear();
+        List<CollectionItem> collectionsItems = collectionitemDAO.getAllCollectionItemsSearch(HelloApplication.currentcollectionid,search);
+        boolean hasContact = !collectionsItems.isEmpty();
+        if (hasContact) {
+            collectionItemListView.getItems().addAll(collectionsItems);
+        }
+        // Show / hide based on whether there are contacts
+        contactContainer.setVisible(hasContact);
     }
 }
