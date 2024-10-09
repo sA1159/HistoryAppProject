@@ -151,14 +151,15 @@ public class SqliteContactDAO implements IContactDAO {
         List<Contact> contacts = new ArrayList<>();
         try {
             // Use a PreparedStatement to prevent SQL injection
-            String query = "SELECT * FROM contacts WHERE title LIKE ? OR type LIKE ? OR author LIKE ? OR description LIKE ? OR location LIKE ? OR date LIKE ? OR link LIKE ?";
+            String query = "SELECT * FROM contacts INNER JOIN tags ON contacts.id = tags.documentid WHERE (title LIKE ? OR type LIKE ? OR author LIKE ? OR description LIKE ? OR location LIKE ? OR date LIKE ? OR link LIKE ? OR tags LIKE ?)";
+
             PreparedStatement statement = connection.prepareStatement(query);
 
             // Format the search term with wildcards for partial matching
             String filterSearch = "%" + search + "%";
 
             // Set the search term for each field
-            for (int i = 1; i <= 7; i++) {
+            for (int i = 1; i <= 8; i++) {
                 statement.setString(i, filterSearch);
             }
 
@@ -191,16 +192,16 @@ public class SqliteContactDAO implements IContactDAO {
         List<Contact> contacts = new ArrayList<>();
         try {
             // Use a PreparedStatement to prevent SQL injection
-            String query = "SELECT * FROM contacts WHERE (title LIKE ? OR type LIKE ? OR author LIKE ? OR description LIKE ? OR location LIKE ? OR date LIKE ? OR link LIKE ?) AND userid = ?";
+            String query = "SELECT * FROM contacts INNER JOIN tags ON contacts.id = tags.documentid WHERE (title LIKE ? OR type LIKE ? OR author LIKE ? OR description LIKE ? OR location LIKE ? OR date LIKE ? OR link LIKE ? OR tags LIKE ?) AND userid = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             // Format the search term with wildcards for partial matching
             String filterSearch = "%" + search + "%";
 
             // Set the search term for each field
-            for (int i = 1; i <= 7; i++) {
+            for (int i = 1; i <= 8; i++) {
                 statement.setString(i, filterSearch);
             }
-            statement.setInt(8, currentuserid);
+            statement.setInt(9, currentuserid);
             // Execute the query and iterate through the result set
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

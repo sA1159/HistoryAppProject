@@ -164,14 +164,14 @@ public class SqliteCollectionDAO implements ICollectionDAO{
         List<Collection> collections = new ArrayList<>();
         try {
             // Use a PreparedStatement to prevent SQL injection
-            String query = "SELECT * FROM collections WHERE title LIKE ? OR maker LIKE ? OR description LIKE ? OR date LIKE ?";
+            String query = "SELECT * FROM collections INNER JOIN ctags ON collections.id = ctags.collectionid WHERE (title LIKE ? OR maker LIKE ? OR description LIKE ? OR date LIKE ? OR tags LIKE ?)";
             PreparedStatement statement = connection.prepareStatement(query);
 
             // Format the search term with wildcards for partial matching
             String filterSearch = "%" + search + "%";
 
             // Set the search term for each field
-            for (int i = 1; i <= 4; i++) {
+            for (int i = 1; i <= 5; i++) {
                 statement.setString(i, filterSearch);
             }
 
@@ -201,17 +201,17 @@ public class SqliteCollectionDAO implements ICollectionDAO{
         List<Collection> collections = new ArrayList<>();
         try {
             // Use a PreparedStatement to prevent SQL injection
-            String query = "SELECT * FROM collections WHERE (title LIKE ? OR maker LIKE ? OR description LIKE ? OR date LIKE ?) AND userid = ?";
+            String query = "SELECT * FROM collections INNER JOIN ctags ON collections.id = ctags.collectionid  WHERE (title LIKE ? OR maker LIKE ? OR description LIKE ? OR date LIKE ? OR tags LIKE ?) AND userid = ?";
             PreparedStatement statement = connection.prepareStatement(query);
 
             // Format the search term with wildcards for partial matching
             String filterSearch = "%" + search + "%";
 
             // Set the search term for each field
-            for (int i = 1; i <= 4; i++) {
+            for (int i = 1; i <= 5; i++) {
                 statement.setString(i, filterSearch);
             }
-            statement.setInt(5, currentuserid);
+            statement.setInt(6, currentuserid);
 
             // Execute the query and iterate through the result set
             ResultSet resultSet = statement.executeQuery();

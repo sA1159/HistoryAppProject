@@ -130,6 +130,8 @@
                 <TextField fx:id="makerTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="descriptionTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="dateTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Tags:" GridPane.columnIndex="0" GridPane.rowIndex="4"></Label>
+                <HBox fx:id="tagsPane" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
             </GridPane>
             <HBox>
                 <Label fx:id="scoreLabel" text="Total score: 0"/>

@@ -133,6 +133,8 @@
                 <TextField fx:id="makerTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="descriptionTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <TextField fx:id="dateTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField promptText="Tag name - ENTER to add" fx:id="tagField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <HBox fx:id="tagsPane" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
             </GridPane>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button text="Confirm" onAction="#onEditConfirm"/>

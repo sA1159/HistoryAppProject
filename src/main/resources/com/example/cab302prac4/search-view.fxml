@@ -134,10 +134,10 @@
                 <TextField fx:id="locationTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <TextField fx:id="dateTextField" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Hyperlink fx:id="linkTextField" GridPane.columnIndex="1" GridPane.rowIndex="6" onAction="#onHyperlinkCLick"/>
+                <Label fx:id="scoreLabel" text="Total score: 0" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+                <Label text="Tags:" GridPane.columnIndex="0" GridPane.rowIndex="8"></Label>
+                <HBox fx:id="tagsPane" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
             </GridPane>
-            <HBox>
-                <Label fx:id="scoreLabel" text="Total score: 0"/>
-            </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button fx:id="rateButton" onAction="#onRate"/>
             </HBox>

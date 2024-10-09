@@ -9,7 +9,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -45,11 +47,21 @@ public class YourCollectionsController {
     private ImageView logoView;
     @FXML
     private TextField searchTextField;
+    @FXML
+    private TextField tagField;
+    @FXML
+    private HBox tagsPane;
+    private ITagDAO ctagDAO;
+    private TagSystem tagSystem;
+    private MessageSystem messageSystem;
 
     public YourCollectionsController() {
         collectionDAO = new SqliteCollectionDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
         userDAO = new UserDAO();
+        ctagDAO = new CTagDAO();
+        tagSystem = new TagSystem(ctagDAO,true);
+        messageSystem = new MessageSystem();
     }
 
     /**
@@ -58,11 +70,25 @@ public class YourCollectionsController {
      * @param collection The contact to select.
      */
     private void selectCollection(Collection collection) {
+        tagsPane.getChildren().clear();
+        tagSystem.getTags(collection.getId(),tagsPane);
         collectionsListView.getSelectionModel().select(collection);
         titleTextField.setText(collection.getTitle());
         makerTextField.setText(collection.getMaker());
         descriptionTextField.setText(collection.getDescription());
         dateTextField.setText(collection.getDate());
+        tagField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (!tagField.getText().isEmpty()) {
+                    tagSystem.tagButton(tagsPane, tagField.getText());
+                    tagSystem.tags.add(tagField.getText());
+                    tagField.clear();
+                }
+                else{
+                    messageSystem.displayMessage("Tag Field Must Not Be Empty",true,exportSuccessLabel);
+                }
+            }
+        });
     }
 
     /**
@@ -136,11 +162,13 @@ public class YourCollectionsController {
         // Get the selected contact from the list view
         Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
         if (selectedCollection != null) {
+            tagSystem.addTags(selectedCollection.getId());
             selectedCollection.setTitle(titleTextField.getText());
             selectedCollection.setMaker(makerTextField.getText());
             selectedCollection.setDescription(descriptionTextField.getText());
             selectedCollection.setDate(dateTextField.getText());
             collectionDAO.updateCollection(selectedCollection);
+            messageSystem.displayMessage("Collection Successfully Updated",false,exportSuccessLabel);
             syncContacts();
         }
     }
@@ -151,6 +179,7 @@ public class YourCollectionsController {
         Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
         if (selectedCollection != null) {
             collectionDAO.deleteCollection(selectedCollection);
+            tagSystem.removeTags(selectedCollection.getId());
             syncContacts();
         }
         initialize();
@@ -166,6 +195,7 @@ public class YourCollectionsController {
         String currentname = currentuser.getFirstName() + ' ' + currentuser.getLastName();
         Collection newCollection = new Collection(DEFAULT_title, DEFAULT_description, currentname, DEFAULT_date, HelloApplication.userid);
         // Add the new contact to the database
+        tagSystem.addTagsTemp(newCollection.getId());
         collectionDAO.addCollection(newCollection);
         syncContacts();
         // Select the new contact in the list view
@@ -260,11 +290,7 @@ public class YourCollectionsController {
             bw.write(content); // write method is used to write the given content into the file
             bw.close(); // Closes the stream, flushing it first. Once the stream has been closed, further write() or flush() invocations will cause an IOException to be thrown. Closing a previously closed stream has no effect.
 
-            exportSuccessLabel.setTextFill(Color.color(0, 0.75, 0));
-            exportSuccessLabel.setText("Export Successful");
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
-            pause.setOnFinished(b -> exportSuccessLabel.setText(null));
-            pause.play();
+            messageSystem.displayMessage("Export Success",false,exportSuccessLabel);
 
         } catch (IOException e) { // if any exception occurs it will catch
             e.printStackTrace();

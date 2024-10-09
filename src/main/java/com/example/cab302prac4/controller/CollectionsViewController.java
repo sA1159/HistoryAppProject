@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -57,11 +58,18 @@ public class CollectionsViewController {
     private Label scoreLabel;
     @FXML
     private Label titletext;
+    @FXML
+    private HBox tagsPane;
+    private TagSystem tagSystem;
+    private ITagDAO tagDAO;
 
     public int currentid = HelloApplication.currentcollectionid;
+
     public CollectionsViewController() {
         collectionitemDAO = new SqliteCollectionItemDAO();
         collectionDAO = new SqliteCollectionDAO();
+        tagDAO = new TagDAO();
+        tagSystem = new TagSystem(tagDAO,false);
     }
 
     /**
@@ -70,6 +78,8 @@ public class CollectionsViewController {
      * @param collectionItem The contact to select.
      */
     private void selectCollectionItem(CollectionItem collectionItem) {
+        tagsPane.getChildren().clear();
+        tagSystem.getTags(collectionItem.getId(),tagsPane);
         collectionItemListView.getSelectionModel().select(collectionItem);
         titleTextField.setText(collectionItem.getTitle());
         typeTextField.setText(collectionItem.getType());

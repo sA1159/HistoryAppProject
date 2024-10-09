@@ -2,24 +2,34 @@ package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
 import com.example.cab302prac4.model.*;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class MainController {
     @FXML
     private ListView<Contact> contactsListView;
     private IContactDAO contactDAO;
     private IRatingDAO ratingDAO;
+    private TagSystem tagSystem;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -39,13 +49,24 @@ public class MainController {
     @FXML
     private Button returnButton;
     @FXML
+    private TextField tagField;
+    @FXML
     private TextField searchTextField;
     @FXML
     private ImageView logoView;
+    @FXML
+    private HBox tagsPane;
+    @FXML
+    private Label messageLabel;
+    private ITagDAO tagDAO;
+    private MessageSystem messageSystem;
 
     public MainController() {
         contactDAO = new SqliteContactDAO();
         ratingDAO = new SqliteRatingDAO();
+        tagDAO = new TagDAO();
+        tagSystem = new TagSystem(tagDAO,true);
+        messageSystem = new MessageSystem();
     }
 
     /**
@@ -54,6 +75,8 @@ public class MainController {
      * @param contact The contact to select.
      */
     private void selectContact(Contact contact) {
+        tagsPane.getChildren().clear();
+        tagSystem.getTags(contact.getId(),tagsPane);
         contactsListView.getSelectionModel().select(contact);
         titleTextField.setText(contact.getTitle());
         typeTextField.setText(contact.getType());
@@ -62,6 +85,18 @@ public class MainController {
         locationTextField.setText(contact.getLocation());
         dateTextField.setText(contact.getDate());
         linkTextField.setText(contact.getLink());
+        tagField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (!tagField.getText().isEmpty()) {
+                    tagSystem.tagButton(tagsPane, tagField.getText());
+                    tagSystem.tags.add(tagField.getText());
+                    tagField.clear();
+                }
+                else{
+                    messageSystem.displayMessage("Tag Field Must Not Be Empty",true,messageLabel);
+                }
+            }
+        });
     }
 
     /**
@@ -117,6 +152,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        messageLabel.setText(null);
         // Load the logo image dynamically, if needed
         javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
         logoView.setImage(logo);
@@ -135,6 +171,7 @@ public class MainController {
         // Get the selected contact from the list view
         Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
         if (selectedContact != null) {
+            tagSystem.addTags(selectedContact.getId());
             selectedContact.setTitle(titleTextField.getText());
             selectedContact.setType(typeTextField.getText());
             selectedContact.setAuthor(authorTextField.getText());
@@ -143,6 +180,7 @@ public class MainController {
             selectedContact.setDate(dateTextField.getText());
             selectedContact.setLink(linkTextField.getText());
             contactDAO.updateContact(selectedContact);
+            messageSystem.displayMessage("Document Successfully Updated",false,messageLabel);
             syncContacts();
         }
     }
@@ -154,6 +192,7 @@ public class MainController {
         if (selectedContact != null) {
             contactDAO.deleteContact(selectedContact);
             ratingDAO.removeAllDocumentRatings(selectedContact.getId());
+            tagSystem.removeTags(selectedContact.getId());
             syncContacts();
         }
         initialize();
@@ -170,6 +209,7 @@ public class MainController {
         final String DEFAULT_date = "1998";
         final String DEFAULT_link = "abc";
         Contact newContact = new Contact(DEFAULT_title, DEFAULT_type, DEFAULT_author, DEFAULT_description, DEFAULT_location, DEFAULT_date, DEFAULT_link,HelloApplication.userid);
+        tagSystem.addTagsTemp(newContact.getId());
         // Add the new contact to the database
         contactDAO.addContact(newContact);
         syncContacts();

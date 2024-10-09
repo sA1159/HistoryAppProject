@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -21,10 +22,10 @@ import java.net.URL;
 import java.util.List;
 
 public class SearchController {
-    @FXML
-    private ListView<Contact> contactsListView;
     private IContactDAO contactDAO;
     private IRatingDAO ratingDAO;
+    @FXML
+    private ListView<Contact> contactsListView;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -53,12 +54,18 @@ public class SearchController {
     private Button searchButton;
     @FXML
     private ImageView logoView;
+    @FXML
+    private HBox tagsPane;
+    private TagSystem tagSystem;
+    private ITagDAO tagDAO;
 
     public SearchController()
     {
 
         contactDAO = new SqliteContactDAO();
         ratingDAO = new SqliteRatingDAO();
+        tagDAO = new TagDAO();
+        tagSystem = new TagSystem(tagDAO,false);
     }
 
     /**
@@ -67,6 +74,8 @@ public class SearchController {
      * @param contact The contact to select.
      */
     private void selectContact(Contact contact) {
+        tagsPane.getChildren().clear();
+        tagSystem.getTags(contact.getId(),tagsPane);
         contactsListView.getSelectionModel().select(contact);
         titleTextField.setText(contact.getTitle());
         typeTextField.setText(contact.getType());
