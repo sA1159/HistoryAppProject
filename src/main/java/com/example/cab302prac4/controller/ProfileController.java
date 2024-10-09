@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -84,6 +85,10 @@ public class ProfileController {
     private Label documentsTitle;
     @FXML
     private Label totalscoreLabel;
+    @FXML
+    private HBox tagsPane;
+    private TagSystem tagSystem;
+    private ITagDAO tagDAO;
 
     // Constructor to initialize the UserDAO
     public ProfileController() {
@@ -93,6 +98,8 @@ public class ProfileController {
         contactDAO = new SqliteContactDAO();
         ratingDAO = new SqliteRatingDAO();
         cratingDAO = new SqliteCollectionRatingDAO();
+        tagDAO = new TagDAO();
+        tagSystem = new TagSystem(tagDAO,false);
     }
 
     public void initialize() {
@@ -156,6 +163,8 @@ public class ProfileController {
      * @param contact The contact to select.
      */
     private void selectContact(Contact contact) {
+        tagsPane.getChildren().clear();
+        tagSystem.getTags(contact.getId(),tagsPane);
         contactsListView.getSelectionModel().select(contact);
         titleTextField.setText(contact.getTitle());
         typeTextField.setText(contact.getType());
