@@ -1,13 +1,11 @@
-package Tests;
+package test;
 
 import com.example.cab302prac4.model.Contact;
 import com.example.cab302prac4.model.IContactDAO;
-import com.example.cab302prac4.model.SqliteContactDAO;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ContactDAOTest {
     private IContactDAO contactDAO;

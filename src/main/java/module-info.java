@@ -12,6 +12,6 @@ module com.example.cab302prac4 {
     opens com.example.cab302prac4.controller to javafx.fxml;
     exports com.example.cab302prac4.model;
     opens com.example.cab302prac4.model to javafx.fxml;
-    exports Tests;
-    opens Tests to javafx.fxml;
+    exports test;
+    opens test to javafx.fxml;
 }

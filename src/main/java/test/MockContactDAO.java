@@ -1,4 +1,4 @@
-package Tests;
+package test;
 
 import com.example.cab302prac4.model.Contact;
 import com.example.cab302prac4.model.IContactDAO;

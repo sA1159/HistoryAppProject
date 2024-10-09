@@ -151,6 +151,13 @@ public class MainController {
 
     @FXML
     private void onAdd() {
+        final String DEFAULT_title = "New Document";
+        final String DEFAULT_type = "Document";
+        final String DEFAULT_author = "John Doe";
+        final String DEFAULT_description = "Abc";
+        final String DEFAULT_location = "Abc";
+        final String DEFAULT_date = "1998";
+        final String DEFAULT_link = "abc";
         // Retrieve user input from text fields
         String title = titleTextField.getText();
         String type = typeTextField.getText();

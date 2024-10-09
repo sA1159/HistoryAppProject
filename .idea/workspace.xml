@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Tests/TagDAOTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Tests/TagTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contacts.db" beforeDir="false" afterPath="$PROJECT_DIR$/contacts.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tests/ContactDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/ContactDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tests/MockContactDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/MockContactDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tests/MockTagDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/MockTagDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tests/TagDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TagDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tests/TagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/test/TagTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/MockContactDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tests/MockContactDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,5 +114,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalAccessError" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

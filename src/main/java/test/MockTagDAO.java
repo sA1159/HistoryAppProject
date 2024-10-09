@@ -1,4 +1,4 @@
-package Tests;
+package test;
 
 import com.example.cab302prac4.model.Tag;
 import com.example.cab302prac4.model.TagInterface;

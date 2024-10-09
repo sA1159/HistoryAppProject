@@ -1,13 +1,11 @@
-package Tests;
+package test;
 
 import com.example.cab302prac4.model.Tag;
 import com.example.cab302prac4.model.TagInterface;
-import com.example.cab302prac4.model.SqliteTagDAO;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class TagDAOTest {
     private TagInterface tagDAO;

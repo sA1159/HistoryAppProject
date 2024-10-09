@@ -1,13 +1,12 @@
-package Tests;
+package test;
 
 import com.example.cab302prac4.model.Tag;
 import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TagTest {
-    Tag tag1, tag2, tag3;
+    Tag tag1;
 
     @BeforeEach
     void setUp() {
