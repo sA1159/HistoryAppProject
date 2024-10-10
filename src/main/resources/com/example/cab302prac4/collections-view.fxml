@@ -109,14 +109,31 @@
             </padding>
         </GridPane>
     <HBox alignment="TOP_LEFT" spacing="5.0">
-        <Label text="Select a Collection to view or edit." />
+        <Label text="Select a Collection to view" />
     </HBox>
     <HBox VBox.vgrow="ALWAYS" spacing="20.0">
         <VBox spacing="10.0">
             <ListView fx:id="collectionsListView"  />
         </VBox>
         <VBox spacing="10.0" prefWidth="800" fx:id="collectionContainer">
-            <Label text="Enter the collection details below." />
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                </columnConstraints>
+                <Label text="Document details:" GridPane.columnIndex="0" />
+                <HBox GridPane.columnIndex="2" alignment="CENTER">
+                    <Label  text="Total Ratings:">
+                        <font>
+                            <Font name="System" size="16.0" />
+                        </font></Label>
+                    <Label fx:id="scoreLabel" text=" 1">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font></Label>
+                </HBox>
+            </GridPane>
             <GridPane hgap="10.0" vgap="10.0" >
                 <columnConstraints>
                     <ColumnConstraints minWidth="70" />
@@ -132,15 +149,14 @@
                 <TextField fx:id="dateTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="Tags:" GridPane.columnIndex="0" GridPane.rowIndex="4"></Label>
                 <HBox fx:id="tagsPane" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                <Label fx:id="scoreLabel" text="Total score: 0" GridPane.columnIndex="0" GridPane.rowIndex="5">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font></Label>
             </GridPane>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button text="View" onAction="#onView"/>
                 <Button text="Export" onAction="#onExport"/>
                 <Button fx:id="rateButton" onAction="#onRate"/>
+                <padding>
+                    <Insets bottom="20.0" top="20.0" />
+                </padding>
             </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Label fx:id="exportSuccessLabel"/>

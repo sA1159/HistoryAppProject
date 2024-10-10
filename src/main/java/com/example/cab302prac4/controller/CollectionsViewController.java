@@ -26,6 +26,7 @@ public class CollectionsViewController {
     private ListView<CollectionItem> collectionItemListView;
     private ICollectionItemDAO collectionitemDAO;
     private ICollectionDAO collectionDAO;
+    private IRatingDAO ratingDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -70,6 +71,7 @@ public class CollectionsViewController {
         collectionDAO = new SqliteCollectionDAO();
         tagDAO = new TagDAO();
         tagSystem = new TagSystem(tagDAO,false);
+        ratingDAO = new SqliteRatingDAO();
     }
 
     /**
@@ -78,6 +80,7 @@ public class CollectionsViewController {
      * @param collectionItem The contact to select.
      */
     private void selectCollectionItem(CollectionItem collectionItem) {
+        scoreLabel.setText(" " + ratingDAO.getRatingScoreForDocument(collectionItem.getId()));
         tagsPane.getChildren().clear();
         tagSystem.getTags(collectionItem.getId(),tagsPane);
         collectionItemListView.getSelectionModel().select(collectionItem);

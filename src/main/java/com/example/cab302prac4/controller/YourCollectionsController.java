@@ -29,6 +29,7 @@ public class YourCollectionsController {
     private ICollectionDAO collectionDAO;
     private ICollectionItemDAO collectionItemDAO;
     private IUserDAO userDAO;
+    private IRatingDAO cratingDAO;
     @FXML
     private TextField titleTextField;
     @FXML
@@ -51,6 +52,8 @@ public class YourCollectionsController {
     private TextField tagField;
     @FXML
     private HBox tagsPane;
+    @FXML
+    private Label scoreLabel;
     private ITagDAO ctagDAO;
     private TagSystem tagSystem;
     private MessageSystem messageSystem;
@@ -62,6 +65,7 @@ public class YourCollectionsController {
         ctagDAO = new CTagDAO();
         tagSystem = new TagSystem(ctagDAO,true);
         messageSystem = new MessageSystem();
+        cratingDAO = new SqliteCollectionRatingDAO();
     }
 
     /**
@@ -70,6 +74,7 @@ public class YourCollectionsController {
      * @param collection The contact to select.
      */
     private void selectCollection(Collection collection) {
+        scoreLabel.setText(" " + cratingDAO.getRatingScoreForDocument(collection.getId()));
         tagsPane.getChildren().clear();
         tagSystem.getTags(collection.getId(),tagsPane);
         collectionsListView.getSelectionModel().select(collection);

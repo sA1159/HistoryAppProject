@@ -325,12 +325,14 @@ public class ProfileController2 {
         if (cratingDAO.checkIfRated(HelloApplication.userid,collectionid))
         {
             rateButton.setText("Remove Rating");
+            rateButton.setId("delete_button");
         }
         else
         {
             rateButton.setText("Rate");
+            rateButton.setId("confirm_button");
         }
-        String labeltext = "Total Ratings: ";
+        String labeltext = " ";
         labeltext += String.valueOf(cratingDAO.getRatingScoreForDocument(collectionid));
         scoreLabel.setText(labeltext);
         CalculateTotalScore(HelloApplication.profileid);

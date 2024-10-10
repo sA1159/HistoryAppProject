@@ -269,8 +269,6 @@ public class CollectionsController {
             rateButton.setText("Rate");
             rateButton.setId("confirm_button");
         }
-        String labeltext = "Total Ratings: ";
-        labeltext += String.valueOf(cratingDAO.getRatingScoreForDocument(collectionid));
-        scoreLabel.setText(labeltext);
+        scoreLabel.setText(" " + cratingDAO.getRatingScoreForDocument(collectionid));
     }
 }

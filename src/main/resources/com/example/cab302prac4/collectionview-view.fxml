@@ -114,8 +114,25 @@
                 <Button fx:id="addButton" text="New" onAction="#onAdd" maxWidth="Infinity"/>
             </HBox>
         </VBox>
-        <VBox spacing="10.0" prefWidth="400" fx:id="contactContainer">
-            <Label text="Document Details:." />
+        <VBox spacing="10.0" prefWidth="800" fx:id="contactContainer">
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                </columnConstraints>
+                <Label text="Document details:" GridPane.columnIndex="0" />
+                <HBox GridPane.columnIndex="2" alignment="CENTER">
+                    <Label  text="Total Ratings:">
+                        <font>
+                            <Font name="System" size="16.0" />
+                        </font></Label>
+                    <Label fx:id="scoreLabel" text=" 1">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font></Label>
+                </HBox>
+            </GridPane>
             <GridPane hgap="5.0" vgap="5.0" >
                 <columnConstraints>
                     <ColumnConstraints minWidth="70" />
@@ -140,6 +157,9 @@
             </GridPane>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button fx:id="deleteButton" id="delete_button" text="Delete" onAction="#onDelete"/>
+                <padding>
+                    <Insets bottom="20.0" top="20.0" />
+                </padding>
             </HBox>
         </VBox>
     </HBox>

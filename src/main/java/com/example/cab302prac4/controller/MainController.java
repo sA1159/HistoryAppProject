@@ -60,6 +60,8 @@ public class MainController {
     private Label messageLabel;
     private ITagDAO tagDAO;
     private MessageSystem messageSystem;
+    @FXML
+    private Label scoreLabel;
 
     public MainController() {
         contactDAO = new SqliteContactDAO();
@@ -75,6 +77,7 @@ public class MainController {
      * @param contact The contact to select.
      */
     private void selectContact(Contact contact) {
+        scoreLabel.setText(" " + ratingDAO.getRatingScoreForDocument(contact.getId()));
         tagsPane.getChildren().clear();
         tagSystem.getTags(contact.getId(),tagsPane);
         contactsListView.getSelectionModel().select(contact);

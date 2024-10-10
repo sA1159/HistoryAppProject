@@ -119,7 +119,24 @@
             </HBox>
         </VBox>
         <VBox spacing="10.0" prefWidth="800" fx:id="collectionContainer">
-            <Label text="Enter the collection details below." />
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                </columnConstraints>
+                <Label text="Document details:" GridPane.columnIndex="0" />
+                <HBox GridPane.columnIndex="2" alignment="CENTER">
+                    <Label  text="Total Ratings:">
+                        <font>
+                            <Font name="System" size="16.0" />
+                        </font></Label>
+                    <Label fx:id="scoreLabel" text=" 1">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font></Label>
+                </HBox>
+            </GridPane>
             <GridPane hgap="10.0" vgap="10.0" >
                 <columnConstraints>
                     <ColumnConstraints minWidth="70" />
@@ -142,6 +159,9 @@
                 <Button id="delete_button" text="Delete" onAction="#onDelete"/>
                 <Button text="View" onAction="#onView"/>
                 <Button text="Export" onAction="#onExport"/>
+                <padding>
+                    <Insets bottom="20.0" top="20.0" />
+                </padding>
             </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Label fx:id="exportSuccessLabel"/>

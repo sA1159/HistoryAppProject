@@ -212,9 +212,7 @@ public class SearchController {
             rateButton.setText("Rate");
             rateButton.setId("confirm_button");
         }
-        String labeltext = "Total Ratings: ";
-        labeltext += String.valueOf(ratingDAO.getRatingScoreForDocument(documentid));
-        scoreLabel.setText(labeltext);
+        scoreLabel.setText(String.valueOf(" "+ratingDAO.getRatingScoreForDocument(documentid)));
     }
 
     @FXML

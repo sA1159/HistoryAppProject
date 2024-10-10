@@ -157,7 +157,10 @@
                             <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                             <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                             <Label text="Total Score:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                            <Label fx:id="totalscoreLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                            <Label fx:id="totalscoreLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+                                <font>
+                                    <Font name="System Bold" size="12.0" />
+                                </font></Label>
                             <rowConstraints>
                                 <RowConstraints />
                                 <RowConstraints />
@@ -252,7 +255,24 @@
             <ListView fx:id="collectionsListView" />
         </VBox>
         <VBox fx:id="collectionContainer" prefWidth="600" spacing="10.0">
-            <Label text="Collection details:" />
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                </columnConstraints>
+                <Label text="Collection details:" GridPane.columnIndex="0" />
+                <HBox GridPane.columnIndex="2" alignment="CENTER">
+                    <Label  text="Total Ratings:">
+                        <font>
+                            <Font name="System" size="16.0" />
+                        </font></Label>
+                    <Label fx:id="scoreLabel" text=" 1">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font></Label>
+                </HBox>
+            </GridPane>
             <GridPane hgap="5.0" vgap="5.0">
                 <columnConstraints>
                     <ColumnConstraints minWidth="70" />
@@ -278,13 +298,13 @@
                <RowConstraints />
             </rowConstraints>
             </GridPane>
-            <HBox>
-                <Label fx:id="scoreLabel" text="Total score: 0" />
-            </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button text="View" onAction="#onView"/>
                 <Button text="Export" onAction="#onExport"/>
                 <Button fx:id="rateButton" onAction="#onRate"/>
+                <padding>
+                    <Insets bottom="20.0" top="20.0" />
+                </padding>
             </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Label fx:id="exportSuccessLabel"/>
