@@ -5,6 +5,20 @@
     -fx-text-fill: white;
 }
 
+#confirm_button {
+    -fx-font-family : "serief";
+    -fx-padding : 10;
+    -fx-background-color : #0b9e00;
+    -fx-text-fill: white;
+}
+
+#delete_button {
+    -fx-font-family : "serief";
+    -fx-padding : 10;
+    -fx-background-color : #9e0000;
+    -fx-text-fill: white;
+}
+
 #root {
     -fx-base:  #a9a9a9;
 }

@@ -287,7 +287,7 @@ public class ProfileController2 {
         // Get the selected contact from the list view
         String search = searchTextField.getText();
         collectionsListView.getItems().clear();
-        List<Collection> collections = collectionDAO.getAllCollectionItemsSearch(search);
+        List<Collection> collections = collectionDAO.getAllCollectionItemsSearchByID(search,HelloApplication.profileid);
         boolean hasContact = !collections.isEmpty();
         if (hasContact) {
             collectionsListView.getItems().addAll(collections);

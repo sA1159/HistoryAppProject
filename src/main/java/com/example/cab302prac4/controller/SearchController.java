@@ -205,10 +205,12 @@ public class SearchController {
         if (ratingDAO.checkIfRated(HelloApplication.userid,documentid))
         {
             rateButton.setText("Remove Rating");
+            rateButton.setId("delete_button");
         }
         else
         {
             rateButton.setText("Rate");
+            rateButton.setId("confirm_button");
         }
         String labeltext = "Total Ratings: ";
         labeltext += String.valueOf(ratingDAO.getRatingScoreForDocument(documentid));

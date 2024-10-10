@@ -262,10 +262,12 @@ public class CollectionsController {
         if (cratingDAO.checkIfRated(HelloApplication.userid,collectionid))
         {
             rateButton.setText("Remove Rating");
+            rateButton.setId("delete_button");
         }
         else
         {
             rateButton.setText("Rate");
+            rateButton.setId("confirm_button");
         }
         String labeltext = "Total Ratings: ";
         labeltext += String.valueOf(cratingDAO.getRatingScoreForDocument(collectionid));

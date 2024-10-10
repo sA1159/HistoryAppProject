@@ -19,6 +19,15 @@
                     <Image url="@../../../../Images/VaultLogo2.jpg" /> <!-- Adjust path to your image -->
                 </image>
             </ImageView>
+            <HBox alignment="CENTER" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="CENTER">
+                <Label text="Search" />
+                <TextField fx:id="searchTextField" maxWidth="Infinity" />
+                <Button  fx:id="searchButton" onAction="#onSearch" text="Search">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                </Button>
+            </HBox>
             <Button fx:id="returnButton" alignment="CENTER" contentDisplay="CENTER" onAction="#handleBackButtonClick" text="Return" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
             <columnConstraints>
                 <ColumnConstraints />

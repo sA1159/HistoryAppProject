@@ -283,4 +283,18 @@ public class ProfileController {
         totalscoreLabel.setText(String.valueOf(score));
     }
 
+    @FXML
+    private void onSearch() {
+        // Get the selected contact from the list view
+        String search = searchTextField.getText();
+        contactsListView.getItems().clear();
+        List<Contact> contacts = contactDAO.getAllContactsSearchUserID(search,HelloApplication.profileid);
+        boolean hasContact = !contacts.isEmpty();
+        if (hasContact) {
+            contactsListView.getItems().addAll(contacts);
+        }
+        // Show / hide based on whether there are contacts
+        contactContainer.setVisible(hasContact);
+    }
+
 }

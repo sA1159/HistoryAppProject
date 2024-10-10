@@ -87,15 +87,15 @@ public class SqliteCollectionItemDAO implements ICollectionItemDAO{
     public List<CollectionItem> getAllCollectionItemsSearch(int currentid, String search) {
         List<CollectionItem> collectionItems = new ArrayList<>();
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM collectionitems INNER JOIN contacts on collectionitems.documentid = contacts.id WHERE (title LIKE ? OR type LIKE ? OR author lIKE ? OR description LIKE ? OR date LIKE ? OR location like ? OR link like ?) AND collectionitems.collectionid = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM collectionitems INNER JOIN contacts on collectionitems.documentid = contacts.id INNER JOIN tags ON contacts.id = tags.documentid WHERE (title LIKE ? OR type LIKE ? OR author lIKE ? OR description LIKE ? OR date LIKE ? OR location like ? OR link like ? OR tags like ?) AND collectionitems.collectionid = ?");
             // Format the search term with wildcards for partial matching
             String filterSearch = "%" + search + "%";
 
             // Set the search term for each field
-            for (int i = 1; i <= 7; i++) {
+            for (int i = 1; i <= 8; i++) {
                 statement.setString(i, filterSearch);
             }
-            statement.setInt(8, currentid);
+            statement.setInt(9, currentid);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");

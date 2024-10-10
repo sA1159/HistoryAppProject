@@ -209,7 +209,7 @@ public class YourCollectionsController {
         // Get the selected contact from the list view
         String search = searchTextField.getText();
         collectionsListView.getItems().clear();
-        List<Collection> collections = collectionDAO.getAllCollectionItemsSearch(search);
+        List<Collection> collections = collectionDAO.getAllCollectionItemsSearchByID(search,HelloApplication.userid);
         boolean hasContact = !collections.isEmpty();
         if (hasContact) {
             collectionsListView.getItems().addAll(collections);

@@ -139,7 +139,7 @@
                 <HBox fx:id="tagsPane" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
             </GridPane>
             <HBox spacing="10.0" alignment="CENTER">
-                <Button fx:id="deleteButton" text="Delete" onAction="#onDelete"/>
+                <Button fx:id="deleteButton" id="delete_button" text="Delete" onAction="#onDelete"/>
             </HBox>
         </VBox>
     </HBox>

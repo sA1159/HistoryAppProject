@@ -145,7 +145,7 @@
                     </rowConstraints>
                 </GridPane>
                 <HBox alignment="CENTER" spacing="10.0">
-                    <Button onAction="#handleSaveProfile" text="Update Details" />
+                    <Button id="confirm_button" onAction="#handleSaveProfile" text="Update Details" />
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

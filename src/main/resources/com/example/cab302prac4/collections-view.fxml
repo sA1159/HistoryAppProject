@@ -117,7 +117,7 @@
         </VBox>
         <VBox spacing="10.0" prefWidth="800" fx:id="collectionContainer">
             <Label text="Enter the collection details below." />
-            <GridPane hgap="5.0" vgap="5.0" >
+            <GridPane hgap="10.0" vgap="10.0" >
                 <columnConstraints>
                     <ColumnConstraints minWidth="70" />
                     <ColumnConstraints hgrow="ALWAYS"/>
@@ -132,10 +132,11 @@
                 <TextField fx:id="dateTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Label text="Tags:" GridPane.columnIndex="0" GridPane.rowIndex="4"></Label>
                 <HBox fx:id="tagsPane" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label fx:id="scoreLabel" text="Total score: 0" GridPane.columnIndex="0" GridPane.rowIndex="5">
+                    <font>
+                        <Font name="System Bold" size="16.0" />
+                    </font></Label>
             </GridPane>
-            <HBox>
-                <Label fx:id="scoreLabel" text="Total score: 0"/>
-            </HBox>
             <HBox spacing="10.0" alignment="CENTER">
                 <Button text="View" onAction="#onView"/>
                 <Button text="Export" onAction="#onExport"/>
