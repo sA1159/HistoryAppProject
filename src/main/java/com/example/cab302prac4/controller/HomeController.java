@@ -29,6 +29,8 @@ public class HomeController {
     @FXML
     private Button accountButton;
     @FXML
+    private Button settingsButton;
+    @FXML
     private ImageView logoView;
     @FXML
     private ImageView bigLogo;
@@ -93,6 +95,15 @@ public class HomeController {
     protected void onUsersPageButtonClick() throws IOException {
         Stage stage = (Stage) usersPageButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("users-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+        stage.setScene(scene);
+    }
+
+    @FXML
+    protected void onSettingsButtonClick() throws IOException {
+        Stage stage = (Stage) usersPageButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("settings-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);

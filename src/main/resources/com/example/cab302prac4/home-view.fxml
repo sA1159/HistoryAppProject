@@ -120,6 +120,9 @@
                 <HBox alignment="BASELINE_CENTER">
                     <Button fx:id="usersPageButton" onAction="#onUsersPageButtonClick" text="     Users     " />
                 </HBox>
+                <HBox alignment="BASELINE_CENTER">
+                    <Button fx:id="settingsButton" onAction="#onSettingsButtonClick" text="     Settings     " />
+                </HBox>
                 <Label />
             </VBox>
          <rowConstraints>
