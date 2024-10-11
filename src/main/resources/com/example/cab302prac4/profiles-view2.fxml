@@ -254,7 +254,7 @@
         <VBox spacing="10.0">
             <ListView fx:id="collectionsListView" />
         </VBox>
-        <VBox fx:id="collectionContainer" prefWidth="600" spacing="10.0">
+        <VBox fx:id="collectionContainer" prefHeight="400" prefWidth="600" spacing="10.0">
             <GridPane>
                 <columnConstraints>
                     <ColumnConstraints percentWidth="33" />

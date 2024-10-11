@@ -1,6 +1,7 @@
 package com.example.cab302prac4.controller;
 
 import com.example.cab302prac4.HelloApplication;
+import com.example.cab302prac4.model.SqliteConnection;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -70,12 +71,10 @@ public class CreateAccountController {
     }
 
     private void insertData(String name, String lastName, String email, String password) {
-        Connection connection = null;
+        Connection connection = SqliteConnection.getInstance();
         PreparedStatement stat = null;
 
         try {
-            // Connect to the database
-            connection = DriverManager.getConnection(Database_Link);
 
             // SQL Insert Statement
             String sq_command = "INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
@@ -101,7 +100,6 @@ public class CreateAccountController {
             // Close resources
             try {
                 if (stat != null) stat.close();
-                if (connection != null) connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
                 errorLabel.setText("Isssue with SQL please contact developer");
