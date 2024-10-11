@@ -99,8 +99,11 @@
     </HBox>
     <HBox alignment="BASELINE_CENTER">
         <Button fx:id="collectionsPageButton" onAction="#onCollectionsPageButtonClick" text="View Collections" />
-        <Label />
     </HBox>
+        <HBox alignment="BASELINE_CENTER">
+            <Button fx:id="ratedPageButton" onAction="#OnRatedPageButtonClick" text="View Rated Documents" />
+        </HBox>
+        <Label/>
     </VBox>
             <VBox alignment="CENTER" GridPane.columnIndex="1">
                 <ImageView fx:id="bigLogo" fitHeight="300.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">

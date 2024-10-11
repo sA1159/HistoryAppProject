@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.List;
 
 public class SqliteCollectionRatingDAO implements IRatingDAO{
     private Connection connection;
@@ -124,5 +125,10 @@ public class SqliteCollectionRatingDAO implements IRatingDAO{
             e.printStackTrace();
             return 0;
         }
+    }
+
+    @Override
+    public List<Contact> getAllRatedDocuments(int currentuserid) {
+        return List.of();
     }
 }
