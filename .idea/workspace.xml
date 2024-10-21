@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="unit tests for collectionDAO added">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/maven.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/CollectionDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CollectionDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ContactDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ContactDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MockCollectionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockCollectionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MockCollectionItemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockCollectionItemDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MockContactDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockContactDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MockRatingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockRatingDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MockRatingDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockRatingDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/MockTagDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockTagDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/mocksqlitecollectionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/mocksqlitecollectionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tagSystemTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tagSystemTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
