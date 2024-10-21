@@ -18,7 +18,7 @@ public class UserDAO implements IUserDAO {
         CREATE TABLE IF NOT EXISTS users (
             userID INTEGER PRIMARY KEY AUTOINCREMENT,
             firstName TEXT NOT NULL,
-            lastName TEXT NOT NULL,
+            lastName TEXT NOT NULL, 
             email TEXT NOT NULL UNIQUE,
             password TEXT NOT NULL
                 );

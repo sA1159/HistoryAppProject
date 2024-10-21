@@ -25,7 +25,7 @@
                 <TextField fx:id="emailField" promptText="Email" />
                 <PasswordField fx:id="passEntry" promptText="Password" />
                 <PasswordField fx:id="confirmPassEntry" promptText="Confirm Password" />
-                <Button text="Sign Up" onAction="#onSignUpButtonClick" />
+                <Button fx:id="signUpButton" onAction="#onSignUpButtonClick" text="Sign Up" />
                 <Label fx:id="errorLabel"/>
         </children>
 </VBox>

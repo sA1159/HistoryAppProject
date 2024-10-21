@@ -27,11 +27,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class CollectionsController {
+
     @FXML
     private ListView<Collection> collectionsListView;
     private ICollectionDAO collectionDAO;
     private ICollectionItemDAO collectionItemDAO;
     private IRatingDAO cratingDAO;
+
     @FXML
     private TextField titleTextField;
     @FXML
@@ -40,14 +42,17 @@ public class CollectionsController {
     private TextField makerTextField;
     @FXML
     private TextField dateTextField;
+
     @FXML
     private VBox collectionContainer;
     @FXML
     Label exportSuccessLabel;
+
     @FXML
     private Button returnButton;
     @FXML
     private ImageView logoView;
+
     @FXML
     private TextField searchTextField;
     @FXML
@@ -56,27 +61,30 @@ public class CollectionsController {
     private Label scoreLabel;
     @FXML
     private HBox tagsPane;
+
     private TagSystem tagSystem;
     private ITagDAO ctagDAO;
     private MessageSystem messageSystem;
 
+    /**
+     * Constructor to initialize DAOs and systems used for managing collections and ratings.
+     */
     public CollectionsController() {
         collectionDAO = new SqliteCollectionDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
         cratingDAO = new SqliteCollectionRatingDAO();
         ctagDAO = new CTagDAO();
-        tagSystem = new TagSystem(ctagDAO,false);
+        tagSystem = new TagSystem(ctagDAO, false);
         messageSystem = new MessageSystem();
     }
 
     /**
-     * Programmatically selects a contact in the list view and
-     * updates the text fields with the contact's information.
-     * @param collection The contact to select.
+     * Selects a collection and updates the UI fields with the collection's details.
+     * @param collection The collection to select.
      */
     private void selectCollection(Collection collection) {
         tagsPane.getChildren().clear();
-        tagSystem.getTags(collection.getId(),tagsPane);
+        tagSystem.getTags(collection.getId(), tagsPane);
         collectionsListView.getSelectionModel().select(collection);
         titleTextField.setText(collection.getTitle());
         makerTextField.setText(collection.getMaker());
@@ -85,33 +93,31 @@ public class CollectionsController {
     }
 
     /**
-     * Renders a cell in the contacts list view by setting the text to the contact's full name.
+     * Renders a cell in the collection list view by setting the text to the collection's full name.
      * @param collectionsListView The list view to render the cell for.
      * @return The rendered cell.
      */
     private ListCell<Collection> renderCell(ListView<Collection> collectionsListView) {
         return new ListCell<>() {
             /**
-             * Handles the event when a contact is selected in the list view.
+             * Handles the event when a collection is selected in the list view.
              * @param mouseEvent The event to handle.
              */
-            private void onCollectionSelected (MouseEvent mouseEvent) {
+            private void onCollectionSelected(MouseEvent mouseEvent) {
                 ListCell<Collection> clickedCell = (ListCell<Collection>) mouseEvent.getSource();
-                // Get the selected contact from the list view
                 Collection selectedCollection = clickedCell.getItem();
                 if (selectedCollection != null) selectCollection(selectedCollection);
                 setRatingButton(selectedCollection.getId());
             }
 
             /**
-             * Updates the item in the cell by setting the text to the contact's full name.
-             * @param collection The contact to update the cell with.
+             * Updates the item in the cell by setting the text to the collection's full name.
+             * @param collection The collection to update the cell with.
              * @param empty Whether the cell is empty.
              */
             @Override
             protected void updateItem(Collection collection, boolean empty) {
                 super.updateItem(collection, empty);
-                // If the cell is empty, set the text to null, otherwise set it to the contact's full name
                 if (empty || collection == null || collection.getFullName() == null) {
                     setText(null);
                     super.setOnMouseClicked(this::onCollectionSelected);
@@ -123,7 +129,7 @@ public class CollectionsController {
     }
 
     /**
-     * Synchronizes the contacts list view with the contacts in the database.
+     * Synchronizes the collection list view with the collections in the database.
      */
     private void syncContacts() {
         collectionsListView.getItems().clear();
@@ -132,18 +138,18 @@ public class CollectionsController {
         if (hasCollections) {
             collectionsListView.getItems().addAll(collections);
         }
-        // Show / hide based on whether there are contacts
         collectionContainer.setVisible(hasCollections);
     }
 
+    /**
+     * Initializes the controller, loading the first collection and rendering the collections list.
+     */
     @FXML
     public void initialize() {
-        // Load the logo image dynamically, if needed
-        javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
+        Image logo = new Image("file:Images/vaultlogo2.png");  // Adjust path as necessary
         logoView.setImage(logo);
         collectionsListView.setCellFactory(this::renderCell);
         syncContacts();
-        // Select the first contact and display its information
         collectionsListView.getSelectionModel().selectFirst();
         Collection firstCollection = collectionsListView.getSelectionModel().getSelectedItem();
         if (firstCollection != null) {
@@ -152,6 +158,10 @@ public class CollectionsController {
         }
     }
 
+    /**
+     * Handles the return button click and switches back to the home view.
+     * @throws IOException If the home view FXML fails to load.
+     */
     @FXML
     protected void onReturnButtonClick() throws IOException {
         Stage stage = (Stage) returnButton.getScene().getWindow();
@@ -161,6 +171,10 @@ public class CollectionsController {
         stage.setScene(scene);
     }
 
+    /**
+     * Opens the selected collection's detailed view.
+     * @throws IOException If the collection view FXML fails to load.
+     */
     @FXML
     protected void onView() throws IOException {
         Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
@@ -173,56 +187,57 @@ public class CollectionsController {
         stage.setScene(scene);
     }
 
+    /**
+     * Exports the selected collection's details to a text file.
+     * @throws IOException If there is an error creating the file.
+     */
     @FXML
     protected void onExport() throws IOException {
         try {
-            // this is for monitoring runtime Exception within the block
-            // content to write into the file
             Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
             int currentId = selectedCollection.getId();
             String content = "COLLECTION DETAILS:\n"
-                    + "Collection Title: " + selectedCollection.getTitle()  +"\n"
-                    + "Collection Maker: " + selectedCollection.getMaker()  +"\n"
-                    + "Collection Description: " + selectedCollection.getDescription()  +"\n"
-                    + "Collection Date: " + selectedCollection.getDate()  +"\n"+"\n"+"\n";
+                    + "Collection Title: " + selectedCollection.getTitle()  + "\n"
+                    + "Collection Maker: " + selectedCollection.getMaker()  + "\n"
+                    + "Collection Description: " + selectedCollection.getDescription()  + "\n"
+                    + "Collection Date: " + selectedCollection.getDate()  + "\n\n\n";
             List<CollectionItem> collectionItems = collectionItemDAO.getAllCollectionItems(currentId);
             int idcount = 1;
-            for (CollectionItem collectionItem : collectionItems)
-            {
-                content += "Collection Entry " + idcount + ":" + "\n" +
+            for (CollectionItem collectionItem : collectionItems) {
+                content += "Collection Entry " + idcount + ":\n" +
                         "Title: " + collectionItem.getTitle() + "\n" +
                         "Type: " + collectionItem.getType() + "\n" +
                         "Author: " + collectionItem.getAuthor() + "\n" +
                         "Description: " + collectionItem.getDescription() + "\n" +
                         "Location: " + collectionItem.getLocation() + "\n" +
                         "Date: " + collectionItem.getDate() + "\n" +
-                        "Link: " + collectionItem.getLink() + "\n"
-                        + "" + "\n";
-                idcount ++;
+                        "Link: " + collectionItem.getLink() + "\n\n";
+                idcount++;
             }
             String name = selectedCollection.getTitle();
-            File file = new  File("export/" + name + ".txt"); // here file not created here
+            File file = new File("export/" + name + ".txt");
 
-            // if file doesnt exists, then create it
-            if (!file.exists()) {   // checks whether the file is Exist or not
-                file.createNewFile();   // here if file not exist new file created
+            if (!file.exists()) {
+                file.createNewFile();
             }
 
-            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true); // creating fileWriter object with the file
-            BufferedWriter bw = new BufferedWriter(fw); // creating bufferWriter which is used to write the content into the file
-            bw.write(content); // write method is used to write the given content into the file
-            bw.close(); // Closes the stream, flushing it first. Once the stream has been closed, further write() or flush() invocations will cause an IOException to be thrown. Closing a previously closed stream has no effect.
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(content);
+            bw.close();
 
-            messageSystem.displayMessage("Export Success",false,exportSuccessLabel);
+            messageSystem.displayMessage("Export Success", false, exportSuccessLabel);
 
-        } catch (IOException e) { // if any exception occurs it will catch
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Searches for collections based on the search text and filters the displayed collections.
+     */
     @FXML
     private void onSearch() {
-        // Get the selected contact from the list view
         String search = searchTextField.getText();
         collectionsListView.getItems().clear();
         List<Collection> collections = collectionDAO.getAllCollectionItemsSearch(search);
@@ -230,10 +245,13 @@ public class CollectionsController {
         if (hasContact) {
             collectionsListView.getItems().addAll(collections);
         }
-        // Show / hide based on whether there are contacts
         collectionContainer.setVisible(hasContact);
     }
 
+    /**
+     * Switches the view to the user's collections.
+     * @throws IOException If the FXML fails to load.
+     */
     @FXML
     private void Switch() throws IOException {
         Stage stage = (Stage) returnButton.getScene().getWindow();
@@ -243,29 +261,30 @@ public class CollectionsController {
         stage.setScene(scene);
     }
 
+    /**
+     * Handles the rating button click, adding or removing the user's rating for the collection.
+     * @throws IOException If there is an error during the rating process.
+     */
     @FXML
     protected void onRate() throws IOException {
         Collection selectedCollection = collectionsListView.getSelectionModel().getSelectedItem();
-        if (cratingDAO.checkIfRated(HelloApplication.userid,selectedCollection.getId()))
-        {
-            cratingDAO.removeRating(HelloApplication.userid,selectedCollection.getId());
-        }
-        else
-        {
-            cratingDAO.addRating(HelloApplication.userid,selectedCollection.getId());
+        if (cratingDAO.checkIfRated(HelloApplication.userid, selectedCollection.getId())) {
+            cratingDAO.removeRating(HelloApplication.userid, selectedCollection.getId());
+        } else {
+            cratingDAO.addRating(HelloApplication.userid, selectedCollection.getId());
         }
         setRatingButton(selectedCollection.getId());
     }
 
-    private void setRatingButton(int collectionid)
-    {
-        if (cratingDAO.checkIfRated(HelloApplication.userid,collectionid))
-        {
+    /**
+     * Sets the rating button text based on whether the user has rated the collection.
+     * @param collectionid The ID of the collection being rated.
+     */
+    private void setRatingButton(int collectionid) {
+        if (cratingDAO.checkIfRated(HelloApplication.userid, collectionid)) {
             rateButton.setText("Remove Rating");
             rateButton.setId("delete_button");
-        }
-        else
-        {
+        } else {
             rateButton.setText("Rate");
             rateButton.setId("confirm_button");
         }

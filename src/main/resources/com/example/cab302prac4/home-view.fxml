@@ -1,127 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+    <?import javafx.scene.control.*?>
+    <?import javafx.scene.image.*?>
+    <?import javafx.scene.layout.*?>
+    <?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_LEFT" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cab302prac4.controller.HomeController">
-    <HBox id="MainBar" spacing="10.0">
-        <GridPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
-            <columnConstraints>
-                <ColumnConstraints percentWidth="33" />
-                <ColumnConstraints percentWidth="33" />
-                <ColumnConstraints percentWidth="33" />
-            </columnConstraints>
-            <ImageView fx:id="logoView" fitHeight="218.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="TOP">
-                <image>
-                    <Image url="@../../../../Images/VaultLogo2.jpg" /> <!-- Adjust path to your image -->
-                </image>
-            </ImageView>
-            <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
-                <Button fx:id="logoutButton" onAction="#onLogoutButtonClick" text="Logout" />
-            </HBox>
-            <columnConstraints>
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-                <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints />
-            </rowConstraints>
-            <padding>
-                <Insets left="5.0" right="5.0" />
-            </padding>
-        </GridPane>
-    </HBox>
-    <VBox>
-        <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
-        </padding>
-
-    <Label fx:id="welcomeLabel" text="Welcome to the Vault Application." wrapText="true">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-         <padding>
-            <Insets bottom="20.0" />
-         </padding></Label>
-        <GridPane>
-            <columnConstraints>
-                <ColumnConstraints percentWidth="33" />
-                <ColumnConstraints percentWidth="33" />
-                <ColumnConstraints percentWidth="33" />
-            </columnConstraints>
-    <VBox spacing="40.0" GridPane.columnIndex="0">
-        <Label />
-    <HBox alignment="BASELINE_CENTER">
-        <Button fx:id="uploadPageButton" onAction="#onUploadPageButtonClick" text="View Documents" />
-    </HBox>
-    <HBox alignment="BASELINE_CENTER">
-        <Button fx:id="collectionsPageButton" onAction="#onCollectionsPageButtonClick" text="View Collections" />
-        <Label />
-    </HBox>
-    </VBox>
-            <VBox alignment="CENTER" GridPane.columnIndex="1">
-                <ImageView fx:id="bigLogo" fitHeight="300.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
+    <VBox alignment="TOP_LEFT" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cab302prac4.controller.HomeController">
+        <HBox id="MainBar" spacing="10.0">
+            <GridPane alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                </columnConstraints>
+                <ImageView fx:id="logoView" fitHeight="218.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="TOP">
                     <image>
-                        <Image url="@../../../../Images/THE VAULT LOGO.jpg" /> <!-- Adjust path to your image -->
+                        <Image url="@../../../../Images/VaultLogo2.jpg" /> <!-- Adjust path to your image -->
                     </image>
                 </ImageView>
-            </VBox>
-            <VBox spacing="40" GridPane.columnIndex="2">
-                <Label />
-                <HBox alignment="BASELINE_CENTER">
-                    <Button fx:id="accountPageButton" onAction="#onAccountButtonClick" text="    Account    " />
+                <HBox alignment="CENTER_RIGHT" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+                    <Button fx:id="logoutButton" onAction="#onLogoutButtonClick" text="Logout" />
                 </HBox>
-                <HBox alignment="BASELINE_CENTER">
-                    <Button fx:id="usersPageButton" onAction="#onUsersPageButtonClick" text="     Users     " />
-                </HBox>
+                <columnConstraints>
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                    <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                <ColumnConstraints />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                </rowConstraints>
+                <padding>
+                    <Insets left="5.0" right="5.0" />
+                </padding>
+            </GridPane>
+        </HBox>
+        <VBox>
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+
+        <Label fx:id="welcomeLabel" text="Welcome to the Vault Application." wrapText="true">
+             <font>
+                <Font name="System Bold" size="15.0" />
+             </font>
+             <padding>
+                <Insets bottom="20.0" />
+             </padding></Label>
+            <GridPane>
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                </columnConstraints>
+        <VBox spacing="40.0" GridPane.columnIndex="0">
+            <Label />
+        <HBox alignment="BASELINE_CENTER">
+            <Button fx:id="uploadPageButton" onAction="#onUploadPageButtonClick" text="View Documents" />
+        </HBox>
+        <HBox alignment="BASELINE_CENTER">
+            <Button fx:id="collectionsPageButton" onAction="#onCollectionsPageButtonClick" text="View Collections" />
+            <Label />
+        </HBox>
+            <HBox alignment="BASELINE_CENTER">
+                <Button fx:id="settingsPageButton" onAction="#settingsPageButtonClick" text="Settings" />
                 <Label />
-            </VBox>
-         <rowConstraints>
-            <RowConstraints />
-         </rowConstraints>
-        </GridPane>
+            </HBox>
+        </VBox>
+                <VBox alignment="CENTER" GridPane.columnIndex="1">
+                    <ImageView fx:id="bigLogo" fitHeight="300.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                        <image>
+                            <Image url="@../../../../Images/unnamed.png" /> <!-- Adjust path to your image -->
+                        </image>
+                    </ImageView>
+                </VBox>
+                <VBox spacing="40" GridPane.columnIndex="2">
+                    <Label />
+                    <HBox alignment="BASELINE_CENTER">
+                        <Button fx:id="accountPageButton" onAction="#onAccountButtonClick" text="    Account    " />
+                    </HBox>
+                    <HBox alignment="BASELINE_CENTER">
+                        <Button fx:id="usersPageButton" onAction="#onUsersPageButtonClick" text="     Users     " />
+                    </HBox>
+                    <Label />
+                </VBox>
+             <rowConstraints>
+                <RowConstraints />
+             </rowConstraints>
+            </GridPane>
+        </VBox>
     </VBox>
-</VBox>

@@ -29,6 +29,8 @@ public class HomeController {
     @FXML
     private ImageView logoView;
     @FXML
+    public Button settingsPageButton;
+    @FXML
     private ImageView bigLogo;
     @FXML
     private Label welcomeLabel;
@@ -42,7 +44,7 @@ public class HomeController {
     public void initialize() {
         // Load the logo image dynamically, if needed
         javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");
-        Image logo2 = new Image("file:Images/THE VAULT LOGO.jpg");// Adjust path as necessary
+        Image logo2 = new Image("file:Images/unnamed.png");// Adjust path as necessary
         logoView.setImage(logo);
         bigLogo.setImage(logo2);
         User currentUser = userDAO.getUser(HelloApplication.userid);
@@ -54,6 +56,15 @@ public class HomeController {
     protected void onUploadPageButtonClick() throws IOException {
         Stage stage = (Stage) uploadPageButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
+        scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
+        stage.setScene(scene);
+    }
+
+    @FXML
+    protected void settingsPageButtonClick() throws IOException {
+        Stage stage = (Stage) settingsPageButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("settings-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), HelloApplication.WIDTH, HelloApplication.HEIGHT);
         scene.getStylesheets().add(HelloApplication.class.getResource("style.css").toExternalForm());
         stage.setScene(scene);

@@ -19,10 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AddCollectionsController {
+
     @FXML
     private ListView<Contact> contactsListView;
     private IContactDAO contactDAO;
     private ICollectionItemDAO collectionItemDAO;
+
     @FXML
     private TextField titleTextField;
     @FXML
@@ -45,15 +47,19 @@ public class AddCollectionsController {
     private TextField searchTextField;
     @FXML
     private Button searchButton;
+
+    /**
+     * Constructor to initialize DAO objects for contact and collection item interactions.
+     */
     public AddCollectionsController() {
         contactDAO = new SqliteContactDAO();
         collectionItemDAO = new SqliteCollectionItemDAO();
     }
 
     /**
-     * Programmatically selects a contact in the list view and
-     * updates the text fields with the contact's information.
-     * @param contact The contact to select.
+     * Selects a contact from the list and updates the fields in the form with the contact's details.
+     *
+     * @param contact The contact to be selected.
      */
     private void selectContact(Contact contact) {
         contactsListView.getSelectionModel().select(contact);
@@ -67,32 +73,33 @@ public class AddCollectionsController {
     }
 
     /**
-     * Renders a cell in the contacts list view by setting the text to the contact's full name.
-     * @param contactListView The list view to render the cell for.
-     * @return The rendered cell.
+     * Renders the contact cell in the list view with the full name of the contact.
+     *
+     * @param contactListView The list view to render.
+     * @return A ListCell object with the contact's name.
      */
     private ListCell<Contact> renderCell(ListView<Contact> contactListView) {
         return new ListCell<>() {
             /**
-             * Handles the event when a contact is selected in the list view.
-             * @param mouseEvent The event to handle.
+             * Handles the mouse click event when a contact is selected.
+             *
+             * @param mouseEvent The event triggered by selecting a contact.
              */
             private void onContactSelected(MouseEvent mouseEvent) {
                 ListCell<Contact> clickedCell = (ListCell<Contact>) mouseEvent.getSource();
-                // Get the selected contact from the list view
                 Contact selectedContact = clickedCell.getItem();
                 if (selectedContact != null) selectContact(selectedContact);
             }
 
             /**
-             * Updates the item in the cell by setting the text to the contact's full name.
+             * Updates the cell with the contact's full name or clears the cell if it's empty.
+             *
              * @param contact The contact to update the cell with.
              * @param empty Whether the cell is empty.
              */
             @Override
             protected void updateItem(Contact contact, boolean empty) {
                 super.updateItem(contact, empty);
-                // If the cell is empty, set the text to null, otherwise set it to the contact's full name
                 if (empty || contact == null || contact.getFullName() == null) {
                     setText(null);
                     super.setOnMouseClicked(this::onContactSelected);
@@ -104,7 +111,8 @@ public class AddCollectionsController {
     }
 
     /**
-     * Synchronizes the contacts list view with the contacts in the database.
+     * Synchronizes the contacts list view with the contacts in the database, excluding already
+     * selected contacts in the current collection.
      */
     private void syncContacts() {
         contactsListView.getItems().clear();
@@ -112,15 +120,12 @@ public class AddCollectionsController {
         List<Contact> contactscollection = collectionItemDAO.getContactsCollectionID(HelloApplication.currentcollectionid);
         List<Integer> contactscollectionsids = new ArrayList<Integer>();
         List<Contact> filtercontacts = new ArrayList<Contact>();
-        for (Contact contact : contactscollection)
-        {
+        for (Contact contact : contactscollection) {
             contactscollectionsids.add(contact.getId());
         }
-        for (Contact contact : contacts)
-        {
+        for (Contact contact : contacts) {
             int id = contact.getId();
-            if (!contactscollectionsids.contains(id))
-            {
+            if (!contactscollectionsids.contains(id)) {
                 filtercontacts.add(contact);
             }
         }
@@ -128,15 +133,16 @@ public class AddCollectionsController {
         if (hasContact) {
             contactsListView.getItems().addAll(filtercontacts);
         }
-        // Show / hide based on whether there are contacts
         contactContainer.setVisible(hasContact);
     }
 
+    /**
+     * Initializes the controller, rendering contacts in the list view and selecting the first contact.
+     */
     @FXML
     public void initialize() {
         contactsListView.setCellFactory(this::renderCell);
         syncContacts();
-        // Select the first contact and display its information
         contactsListView.getSelectionModel().selectFirst();
         Contact firstContact = contactsListView.getSelectionModel().getSelectedItem();
         if (firstContact != null) {
@@ -144,9 +150,11 @@ public class AddCollectionsController {
         }
     }
 
+    /**
+     * Searches the contacts based on the search text input and filters the displayed contacts.
+     */
     @FXML
     private void onSearch() {
-        // Get the selected contact from the list view
         String search = searchTextField.getText();
         contactsListView.getItems().clear();
         List<Contact> contacts = contactDAO.getAllContactsSearch(search);
@@ -154,25 +162,32 @@ public class AddCollectionsController {
         if (hasContact) {
             contactsListView.getItems().addAll(contacts);
         }
-        // Show / hide based on whether there are contacts
         contactContainer.setVisible(hasContact);
     }
 
+    /**
+     * Adds the selected contact to the current collection and updates the contacts list view.
+     */
     @FXML
     private void onAdd() {
         Contact selectedContact = contactsListView.getSelectionModel().getSelectedItem();
         int documentid = selectedContact.getId();
-        collectionItemDAO.addCollectionItem(HelloApplication.currentcollectionid,documentid);
+        collectionItemDAO.addCollectionItem(HelloApplication.currentcollectionid, documentid);
         syncContacts();
         titleTextField.requestFocus();
         initialize();
     }
 
+    /**
+     * Handles the action of opening a hyperlink in the system's default web browser.
+     */
     @FXML
-    private void onHyperlinkCLick(){
+    private void onHyperlinkCLick() {
         String link = linkTextField.getText();
         try {
             Desktop.getDesktop().browse(new URL(link).toURI());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            // Handle exceptions for invalid or unreachable links.
+        }
     }
 }
