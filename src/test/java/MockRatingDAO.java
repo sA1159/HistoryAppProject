@@ -67,17 +67,4 @@ public class MockRatingDAO implements IRatingDAO {
         }
         return 0;
     }
-
-    @Override
-    public List<Contact> getAllRatedDocuments(int currentuserid) {
-        List<Contact> contacts = new ArrayList<>();
-        if (userRatings.containsKey(currentuserid)) {
-            for (int documentid : userRatings.get(currentuserid)) {
-                Contact contact = new Contact("Title" + documentid, "Type", "Author", "Description", "Location", "Date", "Link", currentuserid);
-                contact.setId(documentid);
-                contacts.add(contact);
-            }
-        }
-        return contacts;
-    }
 }

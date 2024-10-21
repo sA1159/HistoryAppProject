@@ -3,6 +3,7 @@ import com.example.cab302prac4.model.IContactDAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MockContactDAO implements IContactDAO {
     /**
@@ -45,21 +46,36 @@ public class MockContactDAO implements IContactDAO {
 
     @Override
     public List<Contact> getAllContacts() {
-        return List.of();
+        return new ArrayList<>(contacts);
     }
 
     @Override
     public List<Contact> getAllContactsSearch(String search) {
-        return List.of();
+        String searchTerm = search.toLowerCase();
+        return contacts.stream().filter(c -> containsIgnoreCase(c, searchTerm)).collect(Collectors.toList());
+
     }
 
     @Override
     public List<Contact> getAllContactsSearchUserID(String search, int userid) {
-        return List.of();
+        String searchTerm = search.toLowerCase();
+        return contacts.stream().filter(c -> c.getUserid() == userid && containsIgnoreCase(c, searchTerm)).collect(Collectors.toList());
     }
 
     @Override
     public List<Contact> getAllContactsByID(int ID) {
-        return List.of();
+        return contacts.stream()
+                .filter(c -> c.getUserid() == ID)
+                .collect(Collectors.toList());
     }
-}
+
+    private boolean containsIgnoreCase(Contact contact, String search) {
+        return contact.getTitle().toLowerCase().contains(search) ||
+                contact.getType().toLowerCase().contains(search) ||
+                contact.getAuthor().toLowerCase().contains(search) ||
+                contact.getDescription().toLowerCase().contains(search) ||
+                contact.getLocation().toLowerCase().contains(search) ||
+                contact.getDate().toLowerCase().contains(search) ||
+                contact.getLink().toLowerCase().contains(search);
+        }
+    }

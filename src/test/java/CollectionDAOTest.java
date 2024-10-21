@@ -114,4 +114,78 @@ public class CollectionDAOTest {
         assertEquals(collectionDAO.getAllCollectionsByID(-1), collectionList);
     }
 
+    @Test
+    public void testAddDuplicateTitleOrMaker() {
+        collectionDAO.addCollection(new Collection("WW2 Collection", "John Doe", "Duplicate Title", "01/01/2023", 3));
+        collectionDAO.addCollection(new Collection("USA Collection", "Joe Doe", "Duplicate Maker", "01/01/2023", 3));
+        assertEquals(2, collectionDAO.getAllCollections().size());
+    }
+
+    @Test
+    public void testUpdateNonExistentCollection() {
+        Collection nonExistent = new Collection("Non-existent", "Unknown", "Description", "01/01/2024", 1);
+        nonExistent.setId(99);
+        collectionDAO.updateCollection(nonExistent);
+        assertEquals(0, collectionDAO.getAllCollections().size());
+    }
+
+    @Test
+    public void testDeleteAfterModification() {
+        collectionDAO.addCollection(collections[0]);
+        Collection modified = collections[0];
+        modified.setTitle("Modified Title");
+        collectionDAO.deleteCollection(modified);
+        assertNull(collectionDAO.getCollection(0));
+    }
+
+    @Test
+    public void testSearchWithCaseInsensitiveQuery() {
+        for (Collection collection : collections) {
+            collectionDAO.addCollection(collection);
+        }
+        List<Collection> result = collectionDAO.getAllCollectionItemsSearch("ww2");
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    public void testSearchWithNoMatches() {
+        for (Collection collection : collections) {
+            collectionDAO.addCollection(collection);
+        }
+        List<Collection> result = collectionDAO.getAllCollectionItemsSearch("non-existent");
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testSearchWithEmptyString() {
+        for (Collection collection : collections) {
+            collectionDAO.addCollection(collection);
+        }
+        List<Collection> result = collectionDAO.getAllCollectionItemsSearch("");
+        assertEquals(collections.length, result.size());
+    }
+
+    @Test
+    public void testSearchWithSpecialCharacters() {
+        collectionDAO.addCollection(new Collection("Special @Collection", "Maker!", "Contains #", "01/01/2024", 1));
+        List<Collection> result = collectionDAO.getAllCollectionItemsSearch("@");
+        assertEquals(1, result.size());
+    }
+
+    @Test
+    public void testGetAllCollectionsByInvalidID() {
+        for (Collection collection : collections) {
+            collectionDAO.addCollection(collection);
+        }
+        List<Collection> result = collectionDAO.getAllCollectionsByID(99);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testAutoIncrementedId() {
+        collectionDAO.addCollection(collections[0]);
+        collectionDAO.addCollection(collections[1]);
+        assertEquals(0, collections[0].getId());
+        assertEquals(1, collections[1].getId());
+    }
 }

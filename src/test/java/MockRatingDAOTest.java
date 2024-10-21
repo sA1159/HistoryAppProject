@@ -93,18 +93,4 @@ public class MockRatingDAOTest {
         assertEquals(3, ratingDAO.getUserTotalRatingScore(userId)); // After 3 ratings
     }
 
-    @Test
-    public void testGetAllRatedDocuments() //all the correct ratings documents are obtained
-    {
-        int userId = 1;
-
-        ratingDAO.addRating(userId, 100);
-        ratingDAO.addRating(userId, 101);
-
-        List<Contact> ratedDocuments = ratingDAO.getAllRatedDocuments(userId);
-
-        assertEquals(2, ratedDocuments.size());
-        assertEquals(100, ratedDocuments.get(0).getId());
-        assertEquals(101, ratedDocuments.get(1).getId());
-    }
 }

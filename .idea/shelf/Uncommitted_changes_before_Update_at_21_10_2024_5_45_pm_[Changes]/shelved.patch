@@ -1,0 +1,145 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"877fe49b-5976-451f-855f-3d2e49303b56\" name=\"Changes\" comment=\"unit tests for collectionDAO added\">\r\n      <change beforePath=\"$PROJECT_DIR$/.github/workflows/maven.yml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.github/workflows/maven.yml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/contacts.db\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/contacts.db\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AccountController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AccountController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AddCollectionsController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AddCollectionsController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CollectionsController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CollectionsController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CreateAccountController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CreateAccountController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/UserDAO.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/UserDAO.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/createaccount-view.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/createaccount-view.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/hello-view.fxml\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/signup-page.fxml\" beforeDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"JavaFXApplication\" />\r\n        <option value=\"Class\" />\r\n        <option value=\"FxmlFile\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"temporaray\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;sA1159&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\r\n  \"selectedUrlAndAccountId\": {\r\n    \"url\": \"https://github.com/sA1159/CAB302-project-MAIN.git\",\r\n    \"accountId\": \"7d930e97-46d4-46c7-b057-8439862c0eb6\"\r\n  }\r\n}]]></component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2kjDDX2HO2BknJEJcYqRSmuB72Z\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\r\n    &quot;JUnit.CollectionDAOTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.CollectionItemDAOTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.CollectionItemTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.CollectionTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.ContactDAOTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.ContactTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.UserDAOTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,\r\n    &quot;Maven.cab302prac4 [test].executor&quot;: &quot;Run&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;temporaray&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/adity/IdeaProjects/BLAHHH&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302-project-MAIN\\src\\main\\resources\\com\\example\\cab302prac4\" />\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302 project\\src\\test\" />\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302 project\\src\\main\" />\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302 project\\src\\main\\resources\\com\\example\\cab302prac4\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\adity\\IdeaProjects\\CAB302-project-MAIN\\Images\" />\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302 project\\src\\main\\resources\\com\\example\\cab302prac4\" />\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302 project\\src\" />\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302 project\\src\\main\" />\r\n      <recent name=\"C:\\Users\\amara\\IdeaProjects\\CAB302 project\\src\\main\\java\\com\\example\\cab302prac4\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.example.cab302prac4.controller\" />\r\n      <recent name=\"com.example.cab302prac4.model\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"HelloApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.cab302prac4.HelloApplication\" />\r\n      <module name=\"cab302prac4\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.example.cab302prac4.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.HelloApplication\" />\r\n        <item itemvalue=\"Application.HelloApplication\" />\r\n        <item itemvalue=\"Application.HelloApplication\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"877fe49b-5976-451f-855f-3d2e49303b56\" name=\"Changes\" comment=\"\" />\r\n      <created>1723787974521</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1723787974521</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"unit tests for collectionDAO added\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1726648682756</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1726648682756</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"unit tests for collectionDAO added\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"unit tests for collectionDAO added\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-field\">\r\n          <url>file://$PROJECT_DIR$/src/test/java/CollectionDAOTest.java</url>\r\n          <line>14</line>\r\n          <properties field=\"collectionDAO\" class=\"CollectionDAOTest\" />\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 245e9fd045bfaad80dbb974ad2e291f61340e070)
++++ b/.idea/workspace.xml	(date 1729496724099)
+@@ -1,23 +1,15 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AnalysisUIOptions">
++    <option name="ANALYZE_TEST_SOURCES" value="false" />
++  </component>
+   <component name="AutoImportSettings">
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="unit tests for collectionDAO added">
+-      <change beforePath="$PROJECT_DIR$/.github/workflows/maven.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/maven.yml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/contacts.db" beforeDir="false" afterPath="$PROJECT_DIR$/contacts.db" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AccountController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AddCollectionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/AddCollectionsController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CollectionsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CollectionsController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CreateAccountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/CreateAccountController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/UserDAO.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/createaccount-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/createaccount-view.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/hello-view.fxml" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/signup-page.fxml" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -48,12 +40,12 @@
+     &quot;assignee&quot;: &quot;sA1159&quot;
+   }
+ }</component>
+-  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-  "selectedUrlAndAccountId": {
+-    "url": "https://github.com/sA1159/CAB302-project-MAIN.git",
+-    "accountId": "7d930e97-46d4-46c7-b057-8439862c0eb6"
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/sA1159/CAB302-project-MAIN.git&quot;,
++    &quot;accountId&quot;: &quot;7d930e97-46d4-46c7-b057-8439862c0eb6&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="MavenImportPreferences">
+     <option name="generalSettings">
+       <MavenGeneralSettings>
+@@ -70,33 +62,33 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+-    &quot;JUnit.CollectionDAOTest.executor&quot;: &quot;Run&quot;,
+-    &quot;JUnit.CollectionItemDAOTest.executor&quot;: &quot;Run&quot;,
+-    &quot;JUnit.CollectionItemTest.executor&quot;: &quot;Run&quot;,
+-    &quot;JUnit.CollectionTest.executor&quot;: &quot;Run&quot;,
+-    &quot;JUnit.ContactDAOTest.executor&quot;: &quot;Run&quot;,
+-    &quot;JUnit.ContactTest.executor&quot;: &quot;Run&quot;,
+-    &quot;JUnit.UserDAOTest.executor&quot;: &quot;Run&quot;,
+-    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
+-    &quot;Maven.cab302prac4 [test].executor&quot;: &quot;Run&quot;,
+-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;temporaray&quot;,
+-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/adity/IdeaProjects/BLAHHH&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "Application.HelloApplication.executor": "Run",
++    "Downloaded.Files.Path.Enabled": "false",
++    "JUnit.CollectionDAOTest.executor": "Run",
++    "JUnit.CollectionItemDAOTest.executor": "Run",
++    "JUnit.CollectionItemTest.executor": "Run",
++    "JUnit.CollectionTest.executor": "Run",
++    "JUnit.ContactDAOTest.executor": "Run",
++    "JUnit.ContactTest.executor": "Run",
++    "JUnit.UserDAOTest.executor": "Run",
++    "JUnit.UserTest.executor": "Run",
++    "Maven.cab302prac4 [test].executor": "Run",
++    "Repository.Attach.Annotations": "false",
++    "Repository.Attach.JavaDocs": "false",
++    "Repository.Attach.Sources": "false",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "integration",
++    "kotlin-language-version-configured": "true",
++    "last_opened_file_path": "C:/Users/adity/IdeaProjects/BLAHHH",
++    "project.structure.last.edited": "Libraries",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2",
++    "settings.editor.selected.configurable": "preferences.lookFeel"
+   }
+-}</component>
++}]]></component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\amara\IdeaProjects\CAB302-project-MAIN\src\main\resources\com\example\cab302prac4" />
+@@ -179,7 +171,7 @@
+         <line-breakpoint enabled="true" type="java-field">
+           <url>file://$PROJECT_DIR$/src/test/java/CollectionDAOTest.java</url>
+           <line>14</line>
+-          <properties field="collectionDAO" class="CollectionDAOTest" />
++          <properties field="collections" class="CollectionDAOTest" />
+           <option name="timeStamp" value="1" />
+         </line-breakpoint>
+       </breakpoints>
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"corretto-21 (2)\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 245e9fd045bfaad80dbb974ad2e291f61340e070)
++++ b/.idea/misc.xml	(date 1729496707409)
+@@ -1,6 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="JavadocGenerationManager">
++    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/javadoc" />
++  </component>
+   <component name="MavenProjectsManager">
+     <option name="originalFiles">
+       <list>

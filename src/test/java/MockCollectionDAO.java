@@ -1,9 +1,11 @@
 import com.example.cab302prac4.model.Collection;
+import com.example.cab302prac4.model.Contact;
 import com.example.cab302prac4.model.ICollectionDAO;
 import com.example.cab302prac4.model.ICollectionItemDAO;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MockCollectionDAO implements ICollectionDAO {
     /**
@@ -63,11 +65,18 @@ public class MockCollectionDAO implements ICollectionDAO {
 
     @Override
     public List<Collection> getAllCollectionItemsSearch(String search) {
-        return List.of();
-    }
+        String searchTerm = search.toLowerCase();
+        return collections.stream().filter(c -> containsIgnoreCase(c, searchTerm)).collect(Collectors.toList());    }
 
     @Override
     public List<Collection> getAllCollectionItemsSearchByID(String search, int userid) {
-        return List.of();
+        String searchTerm = search.toLowerCase();
+        return collections.stream().filter(c -> c.getUserid() == userid && containsIgnoreCase(c, searchTerm)).collect(Collectors.toList());
+    }
+    private boolean containsIgnoreCase(Collection collection, String search) {
+        return collection.getTitle().toLowerCase().contains(search) ||
+                collection.getMaker().toLowerCase().contains(search) ||
+                collection.getDescription().toLowerCase().contains(search) ||
+                collection.getDate().toLowerCase().contains(search);
     }
 }

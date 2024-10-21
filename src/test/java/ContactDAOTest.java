@@ -21,72 +21,167 @@ public class ContactDAOTest {
     @BeforeEach
     public void setUp() {
         contactDAO = new MockContactDAO();
-    }
-
-//    @Test
-//    public void testAddContact() {
-//        contactDAO.addContact(contacts[0]);
-//        assertEquals(contactDAO.getContact(0), contacts[0]);
-//    }
-
-    @Test
-    public void testUpdateContact() {
         for (Contact contact : contacts) {
             contactDAO.addContact(contact);
         }
-        Contact updateContact = new Contact("Update TEST", "Update TEST", "Update TEST", "Update TEST", "Update TEST","19/12/2024", "https://TEST.com", 1);
-        updateContact.setId(1);
-        contactDAO.updateContact(updateContact);
-        assertEquals(contactDAO.getContact(1), updateContact);
     }
 
-//    @Test
-//    public void testDeleteContacts() {
-//        for (Contact contact : contacts) {
-//            contactDAO.addContact(contact);
-//        }
-//        Contact deleteContact = contacts[1];
-//        deleteContact.setId(1);
-//        contactDAO.deleteContact(deleteContact);
-//        assertEquals(contactDAO.getContact(1), null);
-//    }
-
-//    @Test
-//    public void testGetContact() {
-//        for (Contact contact : contacts) {
-//            contactDAO.addContact(contact);
-//        }
-//        assertEquals(contactDAO.getContact(3), contacts[3]);
-//    }
-
-    @Test
-    public void testGetContactNotExist() {
-        for (Contact contact : contacts) {
-            contactDAO.addContact(contact);
-        }
-        assertEquals(contactDAO.getContact(10), null);
+    @AfterEach
+    public void tearDown() {
+        MockContactDAO.contacts.clear();
     }
 
     @Test
-    public void testGetContactNegativeIndex() {
-        for (Contact contact : contacts) {
-            contactDAO.addContact(contact);
-        }
-        assertEquals(contactDAO.getContact(-1), null);
+    void testAddContact() {
+        Contact newContact = new Contact("New Collection", "Magazine", "New Author",
+                "A new war collection", "France",
+                "12/12/2024", "https://NEWTEST.com", 2);
+        contactDAO.addContact(newContact);
+
+        List<Contact> allContacts = contactDAO.getAllContacts();
+        assertEquals(6, allContacts.size());
+        assertEquals(newContact, allContacts.get(5));
     }
 
-//    @Test
-//    public void testGetAllContacts() {
-//        ArrayList<Contact> contactList = new ArrayList<>(Arrays.asList(contacts));
-//        for (Contact contact : contacts) {
-//            contactDAO.addContact(contact);
-//        }
-//        assertEquals(contactDAO.getAllContacts(), contactList);
-//    }
+    @Test
+    void testUpdateContact() {
+        Contact contactToUpdate = contacts[0];  // WW2 Collection
+        contactToUpdate.setTitle("Updated WW2 Collection");
+        contactDAO.updateContact(contactToUpdate);
+
+        Contact updatedContact = contactDAO.getContact(contactToUpdate.getId());
+        assertEquals("Updated WW2 Collection", updatedContact.getTitle());
+    }
 
     @Test
-    public void testGetAllContactsIfNoneExist() {
-        ArrayList<Contact> emptyContactList = new ArrayList<>();
-        assertEquals(contactDAO.getAllContacts(),emptyContactList);
+    void testDeleteContact() {
+        Contact contactToDelete = contacts[1];  // WW1 Collection
+        contactDAO.deleteContact(contactToDelete);
+
+        assertNull(contactDAO.getContact(contactToDelete.getId()));
+        assertEquals(4, contactDAO.getAllContacts().size());
+    }
+
+    @Test
+    void testGetContactById() {
+        Contact foundContact = contactDAO.getContact(contacts[2].getId());  // US Army Collection
+        assertNotNull(foundContact);
+        assertEquals("US Army Collection", foundContact.getTitle());
+
+        // Edge Case: Non-existent contact ID
+        assertNull(contactDAO.getContact(999));
+    }
+
+    @Test
+    void testGetAllContacts() {
+        List<Contact> allContacts = contactDAO.getAllContacts();
+        assertEquals(5, allContacts.size());
+        assertTrue(allContacts.contains(contacts[0]));
+        assertTrue(allContacts.contains(contacts[4]));
+    }
+
+    @Test
+    void testGetAllContactsByID() {
+        List<Contact> userContacts = contactDAO.getAllContactsByID(1);
+        assertEquals(5, userContacts.size());
+
+        // Edge Case: No contacts for user ID 2
+        assertTrue(contactDAO.getAllContactsByID(2).isEmpty());
+    }
+
+    @Test
+    void testGetAllContactsSearch() {
+        List<Contact> searchResults = contactDAO.getAllContactsSearch("WW2");
+        assertEquals(1, searchResults.size());
+        assertEquals("WW2 Collection", searchResults.get(0).getTitle());
+
+        // Edge Case: No match found
+        assertTrue(contactDAO.getAllContactsSearch("NonExistent").isEmpty());
+
+        // Case-insensitive search
+        searchResults = contactDAO.getAllContactsSearch("us army");
+        assertEquals(1, searchResults.size());
+        assertEquals("US Army Collection", searchResults.get(0).getTitle());
+    }
+
+    @Test
+    void testGetAllContactsSearchUserID() {
+        List<Contact> searchResults = contactDAO.getAllContactsSearchUserID("Collection", 1);
+        assertEquals(5, searchResults.size());
+
+        assertTrue(contactDAO.getAllContactsSearchUserID("Collection", 2).isEmpty());
+
+        assertTrue(contactDAO.getAllContactsSearchUserID("NonExistent", 999).isEmpty());
+    }
+
+    @Test
+    void testAddContactWithInvalidFields() {
+        Contact invalidContact = new Contact("", "", null, "", "Germany", "32/13/2050", "invalid-url", 1);
+
+        List<Contact> allContacts = contactDAO.getAllContacts();
+        assertFalse(allContacts.contains(invalidContact), "Invalid contact should not be added.");
+    }
+
+    @Test
+    void testUpdateNonExistentContact() {
+        Contact nonExistentContact = new Contact("Non-Existent", "Book", "John Doe", "Test", "France", "01/01/2025", "https://nonexistent.com", 99);
+        List<Contact> allContacts = contactDAO.getAllContacts();
+        assertFalse(allContacts.contains(nonExistentContact), "Contact does not exist.");
+    }
+
+    @Test
+    void testDeleteAlreadyDeletedContact() {
+        contactDAO.deleteContact(contacts[0]);
+        assertDoesNotThrow(() -> contactDAO.deleteContact(contacts[0]));
+    }
+
+    @Test
+    void testGetContactWithInvalidID() {
+        assertNull(contactDAO.getContact(-1));
+        assertNull(contactDAO.getContact(0));
+        assertNull(contactDAO.getContact(Integer.MAX_VALUE));
+    }
+
+    @Test
+    void testGetAllContactsWhenEmpty() {
+        MockContactDAO.contacts.clear();
+        List<Contact> allContacts = contactDAO.getAllContacts();
+        assertTrue(allContacts.isEmpty(), "Contact list should be empty.");
+    }
+
+    @Test
+    void testGetAllContactsByInvalidUserID() {
+        List<Contact> contacts = contactDAO.getAllContactsByID(-1);
+        assertTrue(contacts.isEmpty());
+
+        contacts = contactDAO.getAllContactsByID(999);
+        assertTrue(contacts.isEmpty());
+    }
+
+    @Test
+    void testSearchWithEmptyString() {
+        List<Contact> searchResults = contactDAO.getAllContactsSearch("");
+        assertEquals(contacts.length, searchResults.size(), "Search with empty string should return all contacts.");
+    }
+
+    @Test
+    void testSearchWithDifferentCasing() {
+        List<Contact> results = contactDAO.getAllContactsSearch("ww2");
+        assertEquals(1, results.size(), "Search should be case-insensitive.");
+        assertEquals("WW2 Collection", results.get(0).getTitle());
+    }
+
+    @Test
+    void testSearchWithNonExistentEntry() {
+        List<Contact> results = contactDAO.getAllContactsSearch("Unknown");
+        assertTrue(results.isEmpty(), "Search with non-existent entry should return no results.");
+    }
+
+    @Test
+    void testSearchWithIdenticalFields() {
+        contactDAO.addContact(new Contact("WW2 Collection", "Book", "Joe Bloggs", "Duplicate entry", "Germany", "19/12/1950", "https://duplicate.com", 1));
+
+        List<Contact> results = contactDAO.getAllContactsSearch("WW2 Collection");
+        assertEquals(2, results.size(), "Search should return all contacts with matching titles.");
     }
 }

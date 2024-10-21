@@ -2,7 +2,8 @@ import com.example.cab302prac4.model.Collection;
 import com.example.cab302prac4.model.CollectionItem;
 import com.example.cab302prac4.model.Contact;
 import com.example.cab302prac4.model.ICollectionItemDAO;
-
+import com.example.cab302prac4.model.Collection;
+import com.example.cab302prac4.model.ICollectionDAO;
 import java.util.ArrayList;
 import java.util.List;
 
