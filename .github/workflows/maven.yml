@@ -35,4 +35,4 @@ jobs:
     - name: Publish Javadoc
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-          folder: target/javadoc
+          folder: javadoc
