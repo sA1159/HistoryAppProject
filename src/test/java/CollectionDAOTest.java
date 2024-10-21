@@ -1,117 +1,107 @@
-import com.example.cab302prac4.model.Collection;
-import com.example.cab302prac4.model.ICollectionDAO;
-import com.example.cab302prac4.model.SqliteCollectionDAO;
-import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.example.cab302prac4.model.Collection;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class CollectionDAOTest {
-    private ICollectionDAO collectionDAO;
-    private Collection[] collections = {
-            new Collection("WW2 Collection", "Joe Doe", "WW2 Collection of documents", "10/10/2024", 1),
-            new Collection("USA Collection", "John Doe", "USA history collection", "11/11/2024", 1 ),
-            new Collection("Vietnam War Collection", "Peter Dough", "Vietnam war collection", "9/9/2024", 2),
-            new Collection("WW1 Tank Collection", "Graystone", "WW1 tanks", "12/12/2024", 2),
-            new Collection("WW2 Tank Collection", "Graystone", "WW2 tanks", "12/12/2024", 1)
-    };
+
+    private mocksqlitecollectionDAO dao;
+    private Collection collection1;
+    private Collection collection2;
 
     @BeforeEach
-    public void setUp() {
-        collectionDAO = new MockCollectionDAO();
+    public void setUp() //initialising variables for testing
+    {
+        dao = new mocksqlitecollectionDAO();
+        collection1 = new Collection("Title1", "Maker1", "Description1", "2024-10-17", 1);
+        collection2 = new Collection("Title2", "Maker2", "Description2", "2024-10-17", 2);
     }
 
     @Test
-    public void testAddCollection() {
-        collectionDAO.addCollection(collections[0]);
-        assertEquals(collectionDAO.getCollection(0), collections[0]);
+    public void testAddCollection() //ensuring we can append correctly
+    {
+        dao.addCollection(collection1);
+        assertEquals(1, collection1.getId()); // Auto-increment ID should be set
+        assertEquals(1, dao.getAllCollections().size());
     }
 
     @Test
-    public void testUpdateCollection() {
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        Collection updateCollection = new Collection("WW2 Tank Collection", "Graystone", "WW2 tanks", "12/12/2024", 1);
-        updateCollection.setId(1);
-        collectionDAO.updateCollection(updateCollection);
-        assertEquals(collectionDAO.getCollection(1), updateCollection);
+    public void testUpdateCollection() //ensuring we can update correctly
+    {
+        dao.addCollection(collection1);
+        collection1.setTitle("UpdatedTitle");
+        dao.updateCollection(collection1);
+
+        Collection updatedCollection = dao.getCollection(collection1.getId());
+        assertEquals("UpdatedTitle", updatedCollection.getTitle());
     }
 
     @Test
-    public void testDeleteCollections() {
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        Collection deleteCollection = collections[1];
-        deleteCollection.setId(1);
-        collectionDAO.deleteCollection(deleteCollection);
-        assertEquals(collectionDAO.getCollection(1), null);
+    public void testDeleteCollection() //test that the collection deletes correctly
+    {
+        dao.addCollection(collection1);
+        dao.deleteCollection(collection1);
+
+        assertNull(dao.getCollection(collection1.getId()));
+        assertTrue(dao.getAllCollections().isEmpty());
     }
 
     @Test
-    public void testGetCollection() {
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        assertEquals(collectionDAO.getCollection(3), collections[3]);
+    public void testGetCollection() //test that we can obtain collections correctly
+    {
+        dao.addCollection(collection1);
+        Collection retrieved = dao.getCollection(collection1.getId());
+
+        assertNotNull(retrieved);
+        assertEquals("Title1", retrieved.getTitle());
     }
 
     @Test
-    public void testGetCollectionNotExist() {
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        assertEquals(collectionDAO.getCollection(10), null);
+    public void testGetAllCollections()  //test that we can obtain all collections correctly
+    {
+        dao.addCollection(collection1);
+        dao.addCollection(collection2);
+
+        List<Collection> collections = dao.getAllCollections();
+        assertEquals(2, collections.size());
     }
 
     @Test
-    public void testGetCollectionNegativeIndex() {
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        assertEquals(collectionDAO.getCollection(-1), null);
+    public void testGetAllCollectionsByID() //ensuring we can obtain all collection by their ID
+    {
+        dao.addCollection(collection1); // UserID = 1
+        dao.addCollection(collection2); // UserID = 2
+
+        List<Collection> user1Collections = dao.getAllCollectionsByID(1);
+        List<Collection> user2Collections = dao.getAllCollectionsByID(2);
+
+        assertEquals(1, user1Collections.size());
+        assertEquals(1, user2Collections.size());
+        assertEquals("Title1", user1Collections.get(0).getTitle());
+        assertEquals("Title2", user2Collections.get(0).getTitle());
     }
 
     @Test
-    public void testGetAllCollections() {
-        ArrayList<Collection> collectionList = new ArrayList<>(Arrays.asList(collections));
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        assertEquals(collectionDAO.getAllCollections(), collectionList);
+    public void testGetAllCollectionItemsSearch()
+    {
+        dao.addCollection(collection1); // Title = Title1
+        dao.addCollection(collection2); // Title = Title2
+
+        List<Collection> searchResults = dao.getAllCollectionItemsSearch("Title1");
+        assertEquals(1, searchResults.size());
+        assertEquals("Title1", searchResults.get(0).getTitle());
     }
 
     @Test
-    public void testGetAllCollectionsIfNoneExist() {
-        ArrayList<Collection> emptyCollectionList = new ArrayList<>();
-        assertEquals(collectionDAO.getAllCollections(),emptyCollectionList);
-    }
+    public void testGetAllCollectionItemsSearchByID()
+    {
+        dao.addCollection(collection1); // UserID = 1, Title = Title1
+        dao.addCollection(collection2); // UserID = 2, Title = Title2
 
-    @Test
-    public void testGetAllCollectionsByID() {
-        ArrayList<Collection> collectionList = new ArrayList<>();
-        for (Collection collection : collections) {
-            if (collection.getUserid() == 1)
-            {
-                collectionList.add(collection);
-            }
-        }
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        assertEquals(collectionDAO.getAllCollectionsByID(1), collectionList);
+        List<Collection> searchResults = dao.getAllCollectionItemsSearchByID("Title1", 1);
+        assertEquals(1, searchResults.size());
+        assertEquals("Title1", searchResults.get(0).getTitle());
     }
-
-    @Test
-    public void testGetAllCollectionsByIDThatDoesntExist() {
-        ArrayList<Collection> collectionList = new ArrayList<>();
-        for (Collection collection : collections) {
-            collectionDAO.addCollection(collection);
-        }
-        assertEquals(collectionDAO.getAllCollectionsByID(-1), collectionList);
-    }
-
 }

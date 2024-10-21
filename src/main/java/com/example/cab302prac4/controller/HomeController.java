@@ -46,7 +46,7 @@ public class HomeController {
     public void initialize() {
         // Load the logo image dynamically, if needed
         javafx.scene.image.Image logo = new Image("file:Images/vaultlogo2.png");
-        Image logo2 = new Image("file:Images/THE VAULT LOGO.jpg");// Adjust path as necessary
+        Image logo2 = new Image("file:Images/unnamed.png");// Adjust path as necessary
         logoView.setImage(logo);
         bigLogo.setImage(logo2);
         User currentUser = userDAO.getUser(HelloApplication.userid);

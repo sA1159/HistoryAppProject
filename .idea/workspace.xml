@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="unit tests for collectionDAO added">
+    <list default="true" id="877fe49b-5976-451f-855f-3d2e49303b56" name="Changes" comment="merged settings page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contacts.db" beforeDir="false" afterPath="$PROJECT_DIR$/contacts.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/controller/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/IRatingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/IRatingDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/SqliteCollectionRatingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/SqliteCollectionRatingDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/SqliteRatingDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/cab302prac4/model/SqliteRatingDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/cab302prac4/home-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/CollectionDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/CollectionDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/ContactDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ContactDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/MockCollectionItemDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/MockCollectionItemDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,15 +73,17 @@
     "JUnit.CollectionTest.executor": "Run",
     "JUnit.ContactDAOTest.executor": "Run",
     "JUnit.ContactTest.executor": "Run",
+    "JUnit.MockRatingDAOTest.executor": "Run",
     "JUnit.UserDAOTest.executor": "Run",
     "JUnit.UserTest.executor": "Run",
+    "JUnit.tagSystemTest.executor": "Run",
     "Maven.cab302prac4 [test].executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "temporaray",
+    "git-widget-placeholder": "integration",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/amara/IdeaProjects/CAB302-project-MAIN/src/main/resources/com/example/cab302prac4",
     "project.structure.last.edited": "Libraries",
@@ -150,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726648682756</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="merged settings page">
+      <option name="closed" value="true" />
+      <created>1728626453754</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1728626453754</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,18 +174,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="unit tests for collectionDAO added" />
-    <option name="LAST_COMMIT_MESSAGE" value="unit tests for collectionDAO added" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/test/java/CollectionDAOTest.java</url>
-          <line>11</line>
-          <properties field="collectionDAO" class="CollectionDAOTest" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="merged settings page" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged settings page" />
   </component>
 </project>

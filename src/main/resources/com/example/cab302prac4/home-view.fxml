@@ -108,7 +108,7 @@
             <VBox alignment="CENTER" GridPane.columnIndex="1">
                 <ImageView fx:id="bigLogo" fitHeight="300.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
                     <image>
-                        <Image url="@../../../../Images/THE VAULT LOGO.jpg" /> <!-- Adjust path to your image -->
+                        <Image url="@../../../../Images/unnamed.ppg" /> <!-- Adjust path to your image -->
                     </image>
                 </ImageView>
             </VBox>
